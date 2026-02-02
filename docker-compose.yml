@@ -1,0 +1,26 @@
+services:
+  #Nginx Service
+  web_nginx:
+    container_name: web_nginx
+    image: nginx:alpine
+    restart: unless-stopped
+    volumes:
+      - .:/var/www
+      - ./docker/nginx:/etc/nginx/conf.d
+      - ./storage/nginx/log:/var/log/nginx
+    ports:
+      - "8686:80"
+    depends_on:
+      - web_php
+  #Php Service
+  web_php:
+    container_name: web_php
+    build:
+      context: ./docker/php
+      dockerfile: ./Dockerfile
+    restart: unless-stopped
+    volumes:
+      - .:/var/www
+    working_dir: /var/www
+    extra_hosts:
+    - "host.docker.internal:host-gateway"

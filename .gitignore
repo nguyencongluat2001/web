@@ -1,0 +1,23 @@
+/.phpunit.cache
+/storage/*.key
+/node_modules
+# /public/file-image
+/public/uploads
+/public/file-image-client
+/public/build
+/public/hot
+# /public/storage
+/vendor
+.env
+.env.backup
+.env.production
+.phpunit.result.cache
+composer.lock
+Homestead.json
+Homestead.yaml
+auth.json
+npm-debug.log
+yarn-error.log
+/.fleet
+/.idea
+/.vscode
