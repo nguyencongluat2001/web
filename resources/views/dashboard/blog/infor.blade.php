@@ -5,7 +5,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content card"> 
             <div class="modal-header">
-                <h5 class="modal-title">Thông tin chi tiết bài viết</h5>
+                <h5 class="modal-title">Thông tin chi tiết dự án</h5>
                 <button type="button" class="btn btn-sm" data-bs-dismiss="modal" style="background: #f1f2f2;">
                     X
                 </button>
@@ -22,7 +22,7 @@
                   </div>
                   <div class="col-md-6">
                     <div class="form-group">
-                      <p for="example-text-input" class="form-control-label">Ngày tạo bài viết</p>
+                      <p for="example-text-input" class="form-control-label">Ngày tạo dự án</p>
                       <input class="form-control" type="text" value="{{$dataInfor['created_at']}}" disabled />
                     </div>
                   </div>
@@ -40,7 +40,7 @@
                   </div>
                   <div class="col-md-12">
                     <div class="form-group">
-                      <p for="example-text-input" class="form-control-label">Tên bài viết</p>
+                      <p for="example-text-input" class="form-control-label">Tên dự án</p>
                       <input class="form-control" type="text" value="{{$dataInfor['title']}}" disabled/>
                     </div>
                   </div>
@@ -60,7 +60,7 @@
                 <div class="row projects gx-lg-5">
                 <?php $images = $dataInfor['image'] ?>
                 <p>
-                    Ảnh bài viết
+                    Ảnh dự án
                 </p>
                 <div class="row projects gx-lg-5" style="padding-left:20%" align="center">
                     @foreach ($images as $value)

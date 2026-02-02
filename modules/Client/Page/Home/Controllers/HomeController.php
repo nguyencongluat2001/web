@@ -51,7 +51,7 @@ class HomeController extends Controller
         $objResult = DB::table('users')->where('status',1)->get()->take(3);
         $datas['datas']= [];
         $datas['Specialty']= [];
-        return view('client.home.home',$datas);
+        return view('client.home.home-start',$datas);
     }
     
      /**

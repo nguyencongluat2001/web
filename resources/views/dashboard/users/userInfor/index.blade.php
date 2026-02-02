@@ -146,9 +146,6 @@
                   <div class="h6 font-weight-300">
                     <i class="ni location_pin mr-2"></i> ID nhân sự: <span style="color:red">{{$data['id_personnel']}}</span>
                   </div>
-                  <div class="h6 font-weight-300">
-                    <i class="ni location_pin mr-2"></i> Link giới thiệu: <span style="color:red">https://fintopdata.vn/dangky/{{$data['id_personnel']}}</span>
-                  </div>
                   <!-- <div class="h6 mt-4">
                     <i class="ni business_briefcase-24 mr-2"></i>Solution Manager - Creative Tim Officer
                   </div>

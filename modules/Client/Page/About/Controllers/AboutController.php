@@ -37,9 +37,9 @@ class AboutController extends Controller
     public function index(Request $request)
     {
         // dd('1');
-        $categories = $this->categoryService->where('cate','DM_BLOG')->where('code_category', 'BAO_CAO_THTT')->where('status', 1)->get();
+        // $categories = $this->categoryService->where('cate','DM_BLOG')->where('code_category', 'BAO_CAO_THTT')->where('status', 1)->get();
         // dd($categories);
-        $data['categories'] = $categories;
+        $data['categories'] = [];
         return view('client.about.home',$data);
     }
     /**

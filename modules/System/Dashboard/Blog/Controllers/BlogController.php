@@ -40,7 +40,7 @@ class BlogController extends Controller
      */
     public function index(Request $request)
     {
-        $cate = $this->cateService->where('code_cate','DM_BLOG')->first();
+        $cate = $this->cateService->where('code_cate','product')->first();
         if(!empty($cate)){
             $category = $this->categoryService->select('code_category','name_category')->where('cate',$cate->code_cate)->get()->toArray();
         }
@@ -84,7 +84,7 @@ class BlogController extends Controller
     public function createForm(Request $request)
     {
         $input = $request->all();
-        $category = $this->categoryService->where('cate','DM_BLOG')->orderBy('order')->get()->toArray();
+        $category = $this->categoryService->where('cate','product')->orderBy('order')->get()->toArray();
         $data['category'] = $category;
         $data['code'] = $input['category'];
         return view('dashboard.blog.edit',compact('data'));

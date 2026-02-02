@@ -1,7 +1,7 @@
 <div class="modal-dialog modal-xl">
     <div class="modal-content card">
         <div class="modal-header">
-            <h5 class="modal-title">Cập nhật bài viết</h5>
+            <h5 class="modal-title">Cập nhật dự án</h5>
             <span type="button" class="btn btn-sm" data-bs-dismiss="modal" style="background: #f1f2f2;">
                 X
             </span>

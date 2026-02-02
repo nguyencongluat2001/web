@@ -15,7 +15,7 @@ use Modules\System\Dashboard\Blog\Models\BlogImagesModel;
                         onclick="checkbox_all_item_id(document.forms[0].chk_item_id);"></td>
                 <td align="center"><b>STT</b></td>
                 <td align="center"><b>Ngày thêm</b></td>
-                <td align="center"><b>Tên bài viết</b></td>
+                <td align="center"><b>Tên dự án</b></td>
                 <td align="center"><b>Ảnh</b></td>
                 <td align="center"><b>Trạng thái</b></td>
                 <td align="center"><b>#</b></td>

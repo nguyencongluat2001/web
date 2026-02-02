@@ -115,121 +115,6 @@ Route::prefix('/client')->group(function () {
             Route::get('/loadListTap1',[ClientHomeController::class,'loadListTap1']);
             Route::get('/loadListTop',[ClientHomeController::class,'loadListTop']);
         });
-        // Trang chủ cơ sở bệnh viện
-        Route::prefix('facilities')->group(function(){
-            // Route::get('/index',[FacilitiesController::class,'index']);
-            Route::get('/loadList',[FacilitiesController::class,'loadList']);
-            Route::get('/loadListBlog',[FacilitiesController::class,'loadListBlog']);
-            Route::get('/loadListTap1',[FacilitiesController::class,'loadListTap1']);
-            Route::get('/loadListTop',[FacilitiesController::class,'loadListTop']);
-            Route::get('/getHuyen',[FacilitiesController::class,'getHuyen']);
-            Route::get('/getXa',[FacilitiesController::class,'getXa']);
-
-             // Trang chủ chi tiết cơ sở bệnh viện
-            Route::prefix('detail')->group(function(){
-                Route::get('/index',[FacilitiesController::class,'detailIndex']);
-                Route::get('/loadList',[FacilitiesController::class,'loadList']);
-                Route::get('/loadListBlog',[FacilitiesController::class,'loadListBlog']);
-                Route::get('/loadListTap1',[FacilitiesController::class,'loadListTap1']);
-                Route::get('/loadListTop',[FacilitiesController::class,'loadListTop']);
-            });
-        });
-        // đặt lịch khám
-        route::prefix('schedule')->group(function(){
-            Route::get('/createForm', [FacilitiesController::class,'createForm']);
-            Route::get('/loadList', [FacilitiesController::class,'loadList']);
-            Route::get('/getHuyen',[FacilitiesController::class,'getHuyen']);
-            Route::get('/getXa',[FacilitiesController::class,'getXa']);
-            Route::post('/sendPayment',[FacilitiesController::class,'sendPayment']);
-            Route::post('/getUser',[FacilitiesController::class,'getUser']);
-            Route::get('/getMoney',[FacilitiesController::class,'getMoney']);
-        });
-        // đặt lịch xét nghiệm , truyền tại nhà
-        route::prefix('appointmentathome')->group(function(){
-            Route::get('/index',[AppointmentAtHomeController::class,'index']);
-            Route::get('/appointmentathome/{code}', [AppointmentAtHomeController::class, 'index_edit']);
-
-            Route::get('/indexApointment',[AppointmentAtHomeController::class,'indexApointment']);
-            Route::get('/tab1/{code}',[AppointmentAtHomeController::class,'tab1']);
-
-            Route::get('/createForm', [AppointmentAtHomeController::class,'createForm']);
-            Route::get('/loadList', [AppointmentAtHomeController::class,'loadList']);
-            Route::get('/getHuyen',[AppointmentAtHomeController::class,'getHuyen']);
-            Route::get('/getXa',[AppointmentAtHomeController::class,'getXa']);
-            Route::post('/sendPayment',[AppointmentAtHomeController::class,'sendPayment']);
-            Route::get('/getPrice',[AppointmentAtHomeController::class,'getPrice']);
-            Route::get('/showInfor', [AppointmentAtHomeController::class,'showInfor']);
-
-            Route::get('/getInfioPatient',[AppointmentAtHomeController::class,'getInfioPatient']);
-
-            Route::get('/showPack', [AppointmentAtHomeController::class,'showPack']);
-            Route::get('/flow', [AppointmentAtHomeController::class,'flow']);
-            //danh sách lịch chỉ định
-            Route::get('/list_Indications', [AppointmentAtHomeController::class,'list_Indications']);
-            Route::get('/loadList_Indications', [AppointmentAtHomeController::class,'loadList_Indications']);
-            Route::get('/showDetail', [AppointmentAtHomeController::class,'showDetail']);
-            Route::get('/nhapngayhen', [AppointmentAtHomeController::class,'nhapngayhen']);
-            Route::get('/pdf', [AppointmentAtHomeController::class,'pdf']);
-            Route::post('/delete', [AppointmentAtHomeController::class,'delete']);
-            Route::post('/exportExcel', [AppointmentAtHomeController::class,'exportExcel']);
-
-            Route::get('/chart',[AppointmentAtHomeController::class,'chart']);
-            Route::get('/report',[AppointmentAtHomeController::class,'report']);
-
-            //danh sách lịch chỉ định
-            Route::get('/lichhen', [AppointmentAtHomeController::class,'lichhen']);
-            Route::post('/nhapngayhen', [AppointmentAtHomeController::class,'nhapngayhen']);
-            // Route::get('/loadlichhen', [AppointmentAtHomeController::class,'loadlichhen']);
-            
-            // Truyền dịch
-            Route::get('/indexInfusion',[AppointmentAtHomeController::class,'indexInfusion']);
-            Route::get('/tab2/{code}',[AppointmentAtHomeController::class,'indexInfusion_form']);
-
-        });
-        
-        // Trang chủ cơ sở bệnh viện
-        Route::prefix('contact')->group(function(){
-            // Route::get('/index',[FacilitiesController::class,'index']);
-            Route::get('/loadList',[ContactController::class,'loadList']);
-            Route::get('/loadListBlog',[ContactController::class,'loadListBlog']);
-            Route::get('/loadListTap1',[ContactController::class,'loadListTap1']);
-            Route::get('/loadListTop',[ContactController::class,'loadListTop']);
-            Route::get('/getHuyen',[ContactController::class,'getHuyen']);
-            Route::get('/getXa',[ContactController::class,'getXa']);
-        });
-        // gói khám
-        Route::prefix('package')->group(function(){
-            // Route::get('/index',[FacilitiesController::class,'index']);
-            Route::get('/loadList',[PackageController::class,'loadList']);
-            Route::get('/loadListBlog',[PackageController::class,'loadListBlog']);
-             // Trang chủ chi tiết cơ sở bệnh viện
-            Route::prefix('detail')->group(function(){
-                Route::get('/index',[PackageController::class,'detailIndex']);
-                Route::get('/loadList',[PackageController::class,'loadList']);
-                Route::get('/loadListBlog',[PackageController::class,'loadListBlog']);
-                Route::get('/loadListTap1',[PackageController::class,'loadListTap1']);
-                Route::get('/loadListTop',[PackageController::class,'loadListTop']);
-            });
-        });
-         // chuyên khoa
-         Route::prefix('specialty')->group(function(){
-            Route::get('/loadList',[SpecialtyController::class,'loadList']);
-            Route::get('/loadListBlog',[SpecialtyController::class,'loadListBlog']);
-            Route::get('/loadListTap1',[SpecialtyController::class,'loadListTap1']);
-            Route::get('/loadListTop',[SpecialtyController::class,'loadListTop']);
-        });
-        //tra cứu gói khám
-        Route::prefix('searchschedule')->group(function(){
-            Route::get('/index',[SearchScheduleController::class,'index']);
-            Route::get('/loadList',[SearchScheduleController::class,'loadList']);
-            Route::get('/loadListBlog',[SearchScheduleController::class,'loadListBlog']);
-        });
-
-
-
-
-
-
 
         Route::prefix('infor')->group(function(){
             Route::get('/index', [InforController::class, 'index']);
@@ -239,7 +124,7 @@ Route::prefix('/client')->group(function () {
             Route::get('/changePass', [UserController::class,'changePass']);
             Route::post('/updatePass', [UserController::class,'updatePass']);
         });
-        Route::prefix('about')->group(function () {
+        Route::prefix('project')->group(function () {
             Route::get('/index', [AboutController::class, 'index']);
             Route::get('/loadListTHTT', [AboutController::class, 'loadListTHTT']);
             Route::prefix('/session')->group(function(){
