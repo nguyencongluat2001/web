@@ -44,7 +44,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         Route::prefix('/system')->group(function () {
             Route::get('/userInfo/changePass', [UserController::class,'changePass'])->name('changePass');
             Route::post('/userInfo/updatePass', [UserController::class,'updatePass'])->name('updatePass');
-    
+
             // quản trị danh mục - thể loại
             Route::prefix('/category')->group(function () {
                 //Danh mục
@@ -66,7 +66,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
                 Route::post('/updateCategoryCate',[CategoryController::class,'updateCategoryCate']);
                 Route::post('/changeStatusCategoryCate',[CategoryController::class,'changeStatusCategoryCate']);
             });
-            //bài viết 
+            //bài viết
             Route::prefix('/blog')->group(function () {
                 Route::get('/index', [BlogController::class, 'index']);
                 Route::get('/loadList',[BlogController::class,'loadList']);
@@ -75,9 +75,9 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
                 Route::post('/create', [BlogController::class,'create']);
                 Route::post('/delete', [BlogController::class,'delete']);
                 Route::get('/infor',[BlogController::class,'infor']);
-    
+
             });
-            // 
+            //
             Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
             //Cập nhật giao diện sáng tối
             Route::get('/userInfo/index', [UserController::class, 'indexUserInfo'])->name('userInfoIndex');
@@ -134,7 +134,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
                 Route::post('receive', [ChatAdminController::class, 'receive'])->name('receive');
                 Route::post('delete', [CustomerCareController::class, 'delete']);
             });
-             //Phê duyệt thanh toán đặt lịch 
+             //Phê duyệt thanh toán đặt lịch
              Route::prefix('approvepayment')->group(function(){
                 Route::get('index', [ApprovePaymentController::class, 'index']);
                 Route::post('loadList', [ApprovePaymentController::class, 'loadList']);

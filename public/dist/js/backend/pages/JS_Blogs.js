@@ -4,6 +4,7 @@ function JS_Blogs(baseUrl, module, controller) {
     this.controller = controller;
     NclLib.active('.link-blog');
     this.urlPath = baseUrl + '/' + module + '/' + controller;
+    this.selectedFiles = []
 }
 
 /**
@@ -21,24 +22,21 @@ JS_Blogs.prototype.loadIndex = function () {
     $(oForm).find('#btn_add').click(function () {
         myClass.add(oForm);
     });
-    $('form#frmAdd').find('#btn_create').click(function () {
-        myClass.store('form#frmAdd');
-    })
     $(oForm).find('#btn_edit').click(function () {
         myClass.edit(oForm);
     });
-     // form load
-     $(oForm).find('#category').change(function () {
+    // form load
+    $(oForm).find('#category').change(function () {
         var page = $(oForm).find('#limit').val();
         var perPage = $(oForm).find('#cbo_nuber_record_page').val();
         myClass.loadList(oForm, page, perPage);
     });
     $(oForm).find('#txt_search').click(function () {
-            var page = $(oForm).find('#limit').val();
-            var perPage = $(oForm).find('#cbo_nuber_record_page').val();
-            myClass.loadList(oForm, page, perPage);
-            // return false;
-        
+        var page = $(oForm).find('#limit').val();
+        var perPage = $(oForm).find('#cbo_nuber_record_page').val();
+        myClass.loadList(oForm, page, perPage);
+        // return false;
+
     });
     // Xoa doi tuong
     $(oForm).find('#btn_delete').click(function () {
@@ -56,7 +54,47 @@ JS_Blogs.prototype.loadevent = function (oForm) {
     $('form#frmChangePass').find('#btn_updatePass').click(function () {
         myClass.updatePass('form#frmChangePass');
     })
-   
+
+    $('#fileList').on('click', '.btn-remove-old', function () {
+        $(this).closest('.preview-item').remove()
+    })
+
+    $('.btn_close').click(function () {
+        myClass.selectedFiles = []
+    })
+
+    $('form#frmAdd').find('#title').on('input', function () {
+        var title = $(this).val();
+        $('#code_blog').val(title
+            .toLowerCase()
+            .normalize('NFD')
+            .replace(/[\u0300-\u036f]/g, '')
+            .replace(/đ/g, 'd')
+            .replace(/[^a-z0-9\s-]/g, '')
+            .replace(/\s+/g, '-')
+            .replace(/-+/g, '-')
+            .replace(/^-+|-+$/g, '')
+        );
+    })
+
+    $(document).find("#fileInput").on('change', (e) => {
+        const files = Array.from(e.target.files)
+
+        files.forEach(file => {
+            if (!file.type.startsWith('image/')) return
+
+            const exists = JS_Blogs.selectedFiles.some(f =>
+                f.name === file.name && f.size === file.size
+            )
+
+            if (!exists) {
+                JS_Blogs.selectedFiles.push(file)
+            }
+        })
+
+        JS_Blogs.renderPreview()
+        this.value = ''
+    })
 }
 /**
  * Hàm hiển thị modal
@@ -80,7 +118,6 @@ JS_Blogs.prototype.add = function (oForm) {
             $('#status').attr('checked', true);
             $('.chzn-select').chosen({ height: '100%', width: '100%' });
             myClass.loadevent(oForm);
-
         }
     });
 }
@@ -96,25 +133,28 @@ JS_Blogs.prototype.store = function (oFormCreate) {
     var myClass = this;
     var formdata = new FormData();
     var check = myClass.checkValidate();
-    if(check == false){
+    if (check == false) {
         return false;
     }
     var status = ''
-    $('input[name="status"]:checked').each(function() {
-        status =  $(this).val();
+    $('input[name="status"]:checked').each(function () {
+        status = $(this).val();
     });
     formdata.append('_token', $("#_token").val());
     formdata.append('id', $("#id").val());
     formdata.append('code_category', $("#code_category").val());
+    formdata.append('code_blog', $("#code_blog").val());
     formdata.append('title', $("#title").val());
     formdata.append('decision', CKEDITOR.instances.decision.getData());
     formdata.append('status', status);
-    $('form#frmAdd input[type=file]').each(function () {
-        var count = $(this)[0].files.length;
-        for (var i = 0; i < count; i++) {
-            formdata.append('file-attack-' + i, $(this)[0].files[i]);
-        }
-    });
+
+    myClass.selectedFiles.forEach(file => {
+        formdata.append('files[]', file)
+    })
+
+    $('#fileList .old-image').each(function () {
+        formdata.append('old_image[]', $(this).data('id'))
+    })
 
     $.ajax({
         url: url,
@@ -126,9 +166,10 @@ JS_Blogs.prototype.store = function (oFormCreate) {
         processData: false,
         success: function (arrResult) {
             if (arrResult['success'] == true) {
-                  NclLib.alertMessageBackend('success', 'Thông báo', 'Cập nhật thành công');
-                  $('#editmodal').modal('hide');
-                  myClass.loadList(oFormCreate);
+                NclLib.alertMessageBackend('success', 'Thông báo', 'Cập nhật thành công');
+                $('#editmodal').modal('hide');
+                myClass.selectedFiles = []
+                myClass.loadList(oFormCreate);
 
             } else {
                 var loadding = NclLib.successLoadding();
@@ -148,7 +189,7 @@ JS_Blogs.prototype.loadList = function (oForm, numberPage = 1, perPage = 15) {
     var myClass = this;
     var url = this.urlPath + '/loadList';
     var data = 'search=' + $("#search").val();
-    data += '&category=' +$("#category").val();
+    data += '&category=' + $("#category").val();
     data += '&offset=' + numberPage;
     data += '&limit=' + perPage;
     $.ajax({
@@ -200,17 +241,17 @@ JS_Blogs.prototype.edit = function (oForm) {
         }
     });
     if (listitem == '') {
-          var nameMessage = 'Bạn chưa chọn đối tượng!';
-          var icon = 'warning';
-          var color = '#344767';
-          NclLib.alerMesage(nameMessage,icon,color);
+        var nameMessage = 'Bạn chưa chọn đối tượng!';
+        var icon = 'warning';
+        var color = '#344767';
+        NclLib.alerMesage(nameMessage, icon, color);
         return false;
     }
     if (i > 1) {
-          var nameMessage = 'Bạn chỉ được chọn một đối tượng!';
-          var icon = 'warning';
-          var color = '#344767';
-          NclLib.alerMesage(nameMessage,icon,color);
+        var nameMessage = 'Bạn chỉ được chọn một đối tượng!';
+        var icon = 'warning';
+        var color = '#344767';
+        NclLib.alerMesage(nameMessage, icon, color);
         return false;
     }
     $.ajax({
@@ -240,11 +281,11 @@ JS_Blogs.prototype.delete = function (oForm) {
         }
     });
     if (listitem == '') {
-          var nameMessage = 'Bạn chưa chọn bài viết để xóa!';
-          var icon = 'warning';
-          var color = '#344767';
+        var nameMessage = 'Bạn chưa chọn bài viết để xóa!';
+        var icon = 'warning';
+        var color = '#344767';
         //   var color = '#344767';
-          NclLib.alerMesage(nameMessage,icon,color);
+        NclLib.alerMesage(nameMessage, icon, color);
         return false;
     }
     var data = $(oForm).serialize();
@@ -256,8 +297,8 @@ JS_Blogs.prototype.delete = function (oForm) {
         confirmButtonColor: '#34bd57',
         cancelButtonColor: '#d33',
         confirmButtonText: 'Xác nhận'
-      }).then((result) => {
-        if(result.isConfirmed == true){
+    }).then((result) => {
+        if (result.isConfirmed == true) {
             $.ajax({
                 url: url,
                 type: "POST",
@@ -275,9 +316,9 @@ JS_Blogs.prototype.delete = function (oForm) {
                                 title: 'Xóa thành công',
                                 showConfirmButton: false,
                                 timer: 3000
-                              })
-                              myClass.loadList(oForm);
-                          }
+                            })
+                            myClass.loadList(oForm);
+                        }
                     } else {
                         if (result.isConfirmed) {
                             Swal.fire({
@@ -286,13 +327,13 @@ JS_Blogs.prototype.delete = function (oForm) {
                                 title: 'Quá trình xóa đã xảy ra lỗi',
                                 showConfirmButton: false,
                                 timer: 3000
-                              })
-                          }
+                            })
+                        }
                     }
                 }
             });
         }
-      })
+    })
 }
 /**
  * Hàm hiển thị modal edit
@@ -329,7 +370,7 @@ JS_Blogs.prototype.changePass = function (oForm) {
     var url = this.urlPath + '/changePass';
     var myClass = this;
     var data = 'id=' + $("#id").val();
-    data += '&email=' +$("#email").val();
+    data += '&email=' + $("#email").val();
     var loadding = NclLib.successLoadding();
     $.ajax({
         url: url,
@@ -358,21 +399,21 @@ JS_Blogs.prototype.updatePass = function (oFormCreate) {
         var nameMessage = 'Mật khẩu cũ không được để trống!';
         var icon = 'warning';
         var color = '#344767';
-        NclLib.alerMesage(nameMessage,icon,color);
+        NclLib.alerMesage(nameMessage, icon, color);
         return false;
     }
     if ($("#password_new").val() == '') {
         var nameMessage = 'Mật khẩu mới không được để trống!';
         var icon = 'warning';
         var color = '#344767';
-        NclLib.alerMesage(nameMessage,icon,color);
+        NclLib.alerMesage(nameMessage, icon, color);
         return false;
     }
     if ($("#password_retype_change").val() == '') {
         var nameMessage = 'Chưa nhập lại mật khẩu mới!';
         var icon = 'warning';
         var color = '#344767';
-        NclLib.alerMesage(nameMessage,icon,color);
+        NclLib.alerMesage(nameMessage, icon, color);
         return false;
     }
     $.ajax({
@@ -382,39 +423,69 @@ JS_Blogs.prototype.updatePass = function (oFormCreate) {
         data: data,
         success: function (arrResult) {
             if (arrResult['success'] == true) {
-                  var nameMessage = arrResult['message'];
-                  var icon = 'success';
-                  var color = '#344767';
-                  NclLib.alerMesage(nameMessage,icon,color);
-                  $('#editPassmodal').modal('hide');
-                  myClass.loadList(oFormCreate);
+                var nameMessage = arrResult['message'];
+                var icon = 'success';
+                var color = '#344767';
+                NclLib.alerMesage(nameMessage, icon, color);
+                $('#editPassmodal').modal('hide');
+                myClass.loadList(oFormCreate);
             } else {
-                  var nameMessage = arrResult['message'];
-                  var icon = 'warning';
-                  var color = '#344767';
-                  NclLib.alerMesage(nameMessage,icon,color);
+                var nameMessage = arrResult['message'];
+                var icon = 'warning';
+                var color = '#344767';
+                NclLib.alerMesage(nameMessage, icon, color);
             }
         }
     });
-    
+
 }
 /**
  * Check
  */
-JS_Blogs.prototype.checkValidate = function(){
-    if($("#code_category").val() == ''){
+JS_Blogs.prototype.checkValidate = function () {
+    if ($("#code_category").val() == '') {
         NclLib.alertMessageBackend('warning', 'Cảnh báo', 'Thể loại không được để trống!');
         $("#code_category").focus();
         return false;
     }
-    if($("#title").val() == ''){
+    if ($("#title").val() == '') {
         NclLib.alertMessageBackend('warning', 'Cảnh báo', 'Tiêu đề không được để trống!');
         $("#title").focus();
         return false;
     }
-    if(CKEDITOR.instances.decision.getData() == ''){
+    if (CKEDITOR.instances.decision.getData() == '') {
         NclLib.alertMessageBackend('warning', 'Cảnh báo', 'Nội dung không được để trống!');
         $("#decision").focus();
         return false;
     }
+}
+
+JS_Blogs.prototype.renderPreview = function() {
+    var myClass = this
+    const $list = $('#fileList')
+
+    // remove preview cũ của file mới trước đó
+    $list.find('.new-image').remove()
+
+    JS_Blogs.selectedFiles.forEach((file, index) => {
+        const div = document.createElement('div')
+        div.className = 'preview-item new-image'
+
+        const img = document.createElement('img')
+        img.src = URL.createObjectURL(file)
+
+        const btn = document.createElement('button')
+        btn.innerText = '×'
+        btn.onclick = () => myClass.removeFile(index)
+
+        div.appendChild(img)
+        div.appendChild(btn)
+        $list.append(div)
+    })
+}
+
+JS_Blogs.prototype.removeFile = function(index) {
+    var myClass = this;
+    JS_Blogs.selectedFiles.splice(index, 1)
+    myClass.renderPreview()
 }

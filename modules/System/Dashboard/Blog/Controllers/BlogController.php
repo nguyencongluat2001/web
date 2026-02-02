@@ -15,7 +15,7 @@ use DB;
 use str;
 
 /**
- * Phân quyền người dùng 
+ * Phân quyền người dùng
  *
  * @author Luatnc
  */
@@ -100,7 +100,7 @@ class BlogController extends Controller
     {
         $input = $request->input();
         // dd($input,$_FILES);
-        $create = $this->blogService->store($input,$_FILES); 
+        $create = $this->blogService->store($input,$_FILES);
         return array('success' => true, 'message' => 'Cập nhật thành công');
     }
     /**
@@ -112,8 +112,8 @@ class BlogController extends Controller
      */
     public function edit(Request $request)
     {
-        $input = $request->all();        
-        $category = $this->categoryService->where('cate','DM_BLOG')->get()->toArray();
+        $input = $request->all();
+        $category = $this->categoryService->where('cate','product')->get()->toArray();
         $data = $this->blogService->editBlog($input);
         $data['category'] = $category;
         return view('dashboard.blog.edit',compact('data'));
@@ -130,7 +130,7 @@ class BlogController extends Controller
     {
         $input = $request->all();
         $this->blogService->delete($input);
-        
+
         return array('success' => true, 'message' => 'Xóa thành công');
     }
      /**
@@ -155,7 +155,7 @@ class BlogController extends Controller
      * @return json $return
      */
     public function loadList(Request $request)
-    { 
+    {
         $arrInput = $request->input();
         $data = array();
         $param = $arrInput;

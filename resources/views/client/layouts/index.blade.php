@@ -29,14 +29,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
     <!-- Load Tempalte CSS -->
     <link rel="stylesheet" href="../clients/css/templatemo.css">
-    <link rel="stylesheet" href="../clients/css/chat.css">
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="../clients/css/custom.css">
     <link rel="stylesheet" href="../assets/chosen/chosen.min.css">
     <script src="https://unpkg.com/lightweight-charts@3.4.0/dist/lightweight-charts.standalone.production.js"></script>
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
-    
+
 </head>
 
 <style>

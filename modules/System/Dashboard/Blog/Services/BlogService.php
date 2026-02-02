@@ -16,157 +16,124 @@ use Str;
 class BlogService extends Service
 {
     private $baseDis;
+    private $basePath;
     public function __construct(
-        UserService $userService,
-        CategoryService $categoryService,
-        BlogImagesService $blogImagesService,
-        BlogDetailService $blogDetailService,
-        BlogRepository $blogRepository
-        )
-    {
+        private UserService $userService,
+        private CategoryService $categoryService,
+        private BlogImagesService $blogImagesService,
+        private BlogDetailService $blogDetailService,
+        private BlogRepository $blogRepository
+    ) {
         parent::__construct();
-        $this->userService       = $userService;
-        $this->categoryService   = $categoryService;
-        $this->blogImagesService = $blogImagesService;
-        $this->blogDetailService = $blogDetailService;
-        $this->blogRepository = $blogRepository;
         $this->baseDis = public_path("file-image-client/blogs") . "/";
+        $this->basePath = url("file-image-client/blogs") . "/";
     }
 
     public function repository()
     {
         return BlogRepository::class;
     }
-     /**
+    /**
      * cập nhật bài viết
      */
-    public function store($input,$file){
-      
+    public function store($input, $file)
+    {
         DB::beginTransaction();
-        try{
-            //lấy mã bài viết
-            $random = Library::_get_randon_number();
-            $code_blog = date("Y") . '_' . date("m") . '_' . date("d") . "_" . date("H") . date("i") . date("u") . $random;
-            $image_old = null;
-            if($input['id'] != ''){
-                $blog = $this->blogRepository->where('id',$input['id'])->first();
-                $image = $this->blogImagesService->where('code_blog',$blog['code_blog'])->first();
-                $image_old = !empty($image->name_image)?$image->name_image:'';
-                $code_blog = $blog['code_blog'];
+        try {
+            $codeBlog = date("Y") . '_' . date("m") . '_' . date("d") . "_" . date("H") . date("i") . date("u") . Library::_get_randon_number();
+            if (!empty($input['id'])) {
+                $blog = $this->blogRepository->where('id', $input['id'])->first();
+                $codeBlog = $blog->code_blog;
+                $created_at = $blog->created_at;
+                $updated_at = now();
             }
-            if(isset($file) && $file != []){
-                $arrFile = $this->uploadFile($input,$file,$image_old);
-            }
-            // array data users
-            $arrBlog = [
-                'user_id' => $_SESSION['id'],
-                'code_blog' => $code_blog,
-                'code_category' => $input['code_category'],
-                'status' => isset($input['status']) ? 1 : 0,
-                'created_at' => date("Y/m/d H:i:s"),
-                'updated_at' => date("Y/m/d H:i:s")
+            $params = [
+                'id'            => $input['id'] ?? (string) Str::uuid(),
+                'user_id'       => $_SESSION['id'],
+                'code_blog'     => $codeBlog,
+                'code_category' => $input['code_category'] ?? null,
+                'title'         => $input['title'] ?? null,
+                'decision'      => $input['decision'] ?? null,
+                'rate'          => 5,
+                'status'        => isset($input['status']) ? 1 : 0,
             ];
-            $arrBlogDetails = [
-                'title'=>$input['title'],
-                'decision'=>$input['decision'],
-                'rate'=> 5
-            ];
-            if($input['id'] != ''){
-                //edit Blog
-                $createBlog = $this->where('id',$input['id'])->update($arrBlog);
-                //Create Blog details
-                $createBlogDetails = $this->blogDetailService->where('code_blog',$code_blog)->update($arrBlogDetails);
-                // create image Blog
-                if(!empty($arrFile) && $arrFile != []){
-                    $i = 1;
-                    $image = $this->blogImagesService->where('code_blog',$code_blog)->delete();
-                    foreach($arrFile as $imageValue){
-                        $imageNew = trim($imageValue, "!~!");
-                        $name = explode("!~!", $imageNew);
-                        $arrImages = [
-                            'id'=> (string)Str::uuid(),
-                            'code_blog'=> $code_blog,
-                            'name'=> $name[1],
-                            'name_image'=> $imageValue,
-                            'order_image'=> $i,
-                            'created_at' => date("Y/m/d H:i:s"),
-                            'updated_at' => date("Y/m/d H:i:s")
-                        ];
-                        $createImage = $this->blogImagesService->create($arrImages);
-                        $i++;
-                    }
-                }
-            }else{
-                //Create Blog
-                $arrBlog['id']= (string)Str::uuid();
-                $createBlog = $this->create($arrBlog);
-                //Create Blog details
-                $arrBlogDetails['id']= (string)Str::uuid();
-                $arrBlogDetails['code_blog'] = $code_blog;
-                $createBlogDetails = $this->blogDetailService->create($arrBlogDetails);
-                // create image Blog
-                if(!empty($arrFile) && $arrFile != []){
-                    $i = 1;
-                    foreach($arrFile as $imageValue){
-                        $imageNew = trim($imageValue, "!~!");
-                        $name = explode("!~!", $imageNew);
-                        $arrImages = [
-                            'id'=> (string)Str::uuid(),
-                            'code_blog'=> $code_blog,
-                            'name'=> $name[1],
-                            'name_image'=> $imageValue,
-                            'order_image'=> $i,
-                            'created_at' => date("Y/m/d H:i:s"),
-                            'updated_at' => date("Y/m/d H:i:s")
-                        ];
-                        $createImage = $this->blogImagesService->create($arrImages);
-                        $i++;
-                    }
-                }
-            }
+            $params['created_at'] = empty($input['id']) ? now() : ($created_at ?? null);
+            $params['updated_at'] = $updated_at ?? null;
+            $this->blogRepository->updateOrCreate(['id' => $input['id']], $params);
+            $this->blogDetailService->updateOrCreate(['code_blog' => $codeBlog], $params);
+            $this->updateOrCreateImages($codeBlog, $file, $input['old_image'] ?? []);
             DB::commit();
             return true;
         } catch (\Exception $e) {
-             DB::rollBack();
+            DB::rollBack();
             return array('success' => false, 'message' => (string) $e->getMessage());
         }
     }
-    // /**
-    //  * Tải ảnh vào thư mục
-    //  */
-    public function uploadFile($input,$file,$image_old)
+
+    public function updateOrCreateImages($codeBlog, $arrFiles, $imageOldIds = [])
     {
-            $path = $this->baseDis;
-            $old_path = $path.$image_old;
+        $oldImages = $this->blogImagesService
+            ->where('code_blog', $codeBlog)
+            ->whereNotIn('id', $imageOldIds);
+        foreach ($oldImages->get() as $image) {
+            $old_path = $this->baseDis . $image['name_image'];
             if (file_exists($old_path)) {
                 @unlink($old_path);
             }
-            foreach($file as $attValue){
-                $fileName = $attValue['name'];
-                $random = Library::_get_randon_number();
-                $fileName = Library::_replaceBadChar($fileName);
-                $fileName = Library::_convertVNtoEN($fileName);
-                $sFullFileName = date("Y") . '_' . date("m") . '_' . date("d") . "_" . date("H") . date("i") . date("u") . $random . "!~!" . $fileName;
-                move_uploaded_file($attValue['tmp_name'], $path . $sFullFileName);
-                $arrImage[] =  $sFullFileName;
+        }
+        $oldImages->delete();
+        if (empty($arrFiles)) {
+            return;
+        }
+        $files = $this->formatMultipleFile($arrFiles['files'] ?? []);
+        if (!empty($files)) {
+            foreach ($files as $key => $file) {
+                $upload = $this->uploadFile($file);
+                $paramsImage = [
+                    'id'            => (string) Str::uuid(),
+                    'code_blog'     => $codeBlog,
+                    'name'          => $file['name'],
+                    'name_image'    => $upload ?? null,
+                    'order_image'   => $key + 1,
+                ];
+                $this->blogImagesService->create($paramsImage);
             }
-            return $arrImage;
+        }
     }
-    public function editBlog($arrInput){
-        $getBlogInfor = $this->repository->where('id',$arrInput['chk_item_id'])->first();
-        $arrBlog = '';
-        if(isset($getBlogInfor)){
-            $blogDetail = $this->blogDetailService->where('code_blog',$getBlogInfor['code_blog'])->first();
-            $blogImage = $this->blogImagesService->where('code_blog',$getBlogInfor['code_blog'])->get();
+
+    // /**
+    //  * Tải ảnh vào thư mục
+    //  */
+    public function uploadFile($file)
+    {
+        $path = $this->baseDis;
+        $fileName = $file['name'];
+        $random = Library::_get_randon_number();
+        $fileName = Library::_replaceBadChar($fileName);
+        $fileName = Library::_convertVNtoEN($fileName);
+        $sFullFileName = date("Y") . '_' . date("m") . '_' . date("d") . "_" . date("H") . date("i") . date("u") . $random . "!~!" . $fileName;
+        move_uploaded_file($file['tmp_name'], $path . $sFullFileName);
+        return $sFullFileName;
+    }
+    public function editBlog($arrInput)
+    {
+        $getBlogInfor = $this->repository->where('id', $arrInput['chk_item_id'])->first();
+        $arrBlog = [];
+        if (isset($getBlogInfor)) {
+            $blogDetail = $this->blogDetailService->where('code_blog', $getBlogInfor['code_blog'])->first();
+            $blogImage = $this->blogImagesService->where('code_blog', $getBlogInfor['code_blog'])->get();
+            foreach ($blogImage as $key => $image) {
+                $blogImage[$key]['url_image'] = $this->basePath . $image['name_image'];
+            }
             $arrBlog = [
-                'id' => $getBlogInfor->id,
-                'code_blog' => $getBlogInfor->code_blog,
-                'code_category' => isset($getBlogInfor->code_category)?$getBlogInfor->code_category:null,
-                'status' => $getBlogInfor->status,
-                'title' => isset($blogDetail->title)?$blogDetail->title:null,
-                'decision' => isset($blogDetail->decision)?$blogDetail->decision:null,
-                'rate' => isset($blogDetail->rate)?$blogDetail->rate:5,
-                'image' => !empty($blogImage)?$blogImage:null,
+                'id'            => $getBlogInfor->id,
+                'code_blog'     => $getBlogInfor->code_blog,
+                'code_category' => isset($getBlogInfor->code_category) ? $getBlogInfor->code_category : null,
+                'status'   => $getBlogInfor->status,
+                'title'    => isset($blogDetail->title) ? $blogDetail->title : null,
+                'decision' => isset($blogDetail->decision) ? $blogDetail->decision : null,
+                'rate'     => isset($blogDetail->rate) ? $blogDetail->rate : 5,
+                'images'   => !empty($blogImage) ? $blogImage : null,
             ];
         }
         return $arrBlog;
@@ -180,25 +147,25 @@ class BlogService extends Service
      */
     public function infor($input)
     {
-        $dataInfor = $this->where('id',$input['id'])->first();
-        $category = $this->categoryService->where('code_category',$dataInfor->code_category)->first();
-        $blogDetail = $this->blogDetailService->where('code_blog',$dataInfor['code_blog'])->first();
-        $blogImage = $this->blogImagesService->where('code_blog',$dataInfor['code_blog'])->get()->toArray();
-        $users = $this->userService->where('id',$dataInfor['user_id'])->first();
-        $data = [
-            'users_name' => !empty($users->name)?$users->name:null,
-            'code_blog' => $dataInfor->code_blog,
-            'name_category' => isset($category->name_category)?$category->name_category:null,
-            'status' => !empty($dataInfor->status == '1')?'Hoạt động':'Không hoạt động',
-            'title' => isset($blogDetail->title)?$blogDetail->title:null,
-            'decision' => isset($blogDetail->decision)?$blogDetail->decision:null,
-            'rate' => isset($blogDetail->rate)?$blogDetail->rate:5,
-            'image' => !empty($blogImage)?$blogImage:null,
-            'created_at' => !empty($blogDetail->created_at)?$blogDetail->created_at:null
+        $dataInfor  = $this->where('id', $input['id'])->first();
+        $category   = $this->categoryService->where('code_category', $dataInfor->code_category)->first();
+        $blogDetail = $this->blogDetailService->where('code_blog', $dataInfor['code_blog'])->first();
+        $blogImage  = $this->blogImagesService->where('code_blog', $dataInfor['code_blog'])->get()->toArray();
+        $users      = $this->userService->where('id', $dataInfor['user_id'])->first();
+        $data       = [
+            'users_name'    => !empty($users->name) ? $users->name : null,
+            'code_blog'     => $dataInfor->code_blog,
+            'name_category' => isset($category->name_category) ? $category->name_category : null,
+            'status'        => !empty($dataInfor->status == '1') ? 'Hoạt động' : 'Không hoạt động',
+            'title'         => isset($blogDetail->title) ? $blogDetail->title : null,
+            'decision'      => isset($blogDetail->decision) ? $blogDetail->decision : null,
+            'rate'          => isset($blogDetail->rate) ? $blogDetail->rate : 5,
+            'image'         => !empty($blogImage) ? $blogImage : null,
+            'created_at'    => !empty($blogDetail->created_at) ? $blogDetail->created_at : null
         ];
         return $data;
     }
-     /**
+    /**
      * xóa bài viết
      *
      * @param Request $request
@@ -211,11 +178,34 @@ class BlogService extends Service
         $ids = explode(",", $listids);
         foreach ($ids as $id) {
             if ($id) {
-                $getBlogInfor = $this->repository->where('id',$id)->first();
-                $this->repository->where('id',$id)->delete();
-                $this->blogDetailService->where('code_blog',$getBlogInfor->code_blog)->delete();
-                $this->blogImagesService->where('code_blog',$getBlogInfor->code_blog)->delete();
+                $getBlogInfor = $this->repository->where('id', $id)->first();
+                $this->repository->where('id', $id)->delete();
+                $this->blogDetailService->where('code_blog', $getBlogInfor->code_blog)->delete();
+                $blogImages = $this->blogImagesService
+                    ->where('code_blog', $getBlogInfor->code_blog)->get();
+                foreach ($blogImages as $image) {
+                    $old_path = $this->baseDis . $image['name_image'];
+                    if (file_exists($old_path)) {
+                        @unlink($old_path);
+                    }
+                }
+                $this->blogImagesService->where('code_blog', $getBlogInfor->code_blog)->delete();
             }
         }
+    }
+
+    public function formatMultipleFile($files)
+    {
+        $arrFiles = [];
+        foreach ($files['name'] as $key => $name) {
+            $arrFiles[] = [
+                'name' => $name,
+                'type' => $files['type'][$key],
+                'tmp_name' => $files['tmp_name'][$key],
+                'error' => $files['error'][$key],
+                'size' => $files['size'][$key],
+            ];
+        }
+        return $arrFiles;
     }
 }

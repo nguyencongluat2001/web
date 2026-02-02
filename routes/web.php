@@ -112,14 +112,14 @@ Route::prefix('/client')->group(function () {
                 Route::get('', [AboutController::class, 'stock']);
                 Route::get('/loadListPTCP', [AboutController::class, 'loadListPTCP']);
             });
-            Route::get('/reader/{id}', [AboutController::class, 'reader']);
+            Route::get('/reader/{id}', [AboutController::class, 'reader'])->name('project.reader');
         });
 
-    
+
     Route::prefix('des')->group(function () {
         Route::get('index', [DesController::class, 'index']);
     });
-    
+
     // Route::prefix('about')->group(function () {
     //     Route::get('/reader/{id}', [AboutController::class, 'reader']);
     // });

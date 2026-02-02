@@ -197,7 +197,6 @@
     }
 
 </style>
-<span id="menu-toggle"><i class="fas fa-bars"></i></span>
 <nav id="main_nav" class="navbar navbar-expand-lg navbar-light bg-white" style="top:0;padding-top:0px !important;padding-bottom: 0px !important;background:#ffffff!important;width: 100%;z-index: 1000;">
     <div class="container d-flex justify-content-between align-items-center">
         <div class="nav-inner w-100 d-flex justify-content-between align-items-start">
@@ -232,45 +231,6 @@
 
     </div>
 </nav>
-
-<div id="menu-list" class="closed" style="position: fixed;top: 0;right: 0;left: 0;bottom: 0;background: rgba(0,0,0,0.7);z-index: 1000;">
-    <div class="" id="navbar-toggler">
-        <div class="flex-fill mx-xl-2 menu-navigate">
-            <div style="text-align: right; padding: .5rem">
-                <span type="button" class="menu-close"><i class="fas fa-times"></i></span>
-            </div>
-            <ul class="nav navbar-nav justify-content-between mx-xl-2 text-dark menu-sidebar">
-                <li class="nav-item">
-                    <a class="nav-link link-home btn-outline-info" href="{{ url('/') }}"> <span class="text-menu-header"> <i class="fas fa-home"></i> Trang chủ </span> <br> <span class="text-12">Hạng mục nổi bật</span> </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link link-bloodtest btn-outline-info" href="{{ url('/client/appointmentathome/indexApointment') }}"> <span class="text-menu-header"><i class="fas fa-tint"></i> Xét nghiệm </span> <br> <span class="text-12">Lấy máu tại nhà</span> </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link link-infusion btn-outline-info" href="{{ url('/client/appointmentathome/indexInfusion') }}"> <span class="text-menu-header"><i class="fas fa-thermometer"></i> Truyền dịch </span> <br> <span class="text-12">Truyền dịch tại nhà</span> </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link link-searchschedule btn-outline-info" href="{{ url('/searchschedule') }}"> <span class="text-menu-header"><i class="fas fa-search-plus"></i> Tra cứu </span> <br> <span class="text-12">Tra cứu kết quả</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link link-contact btn-outline-info" href="{{ url('/contact') }}"> <span class="text-menu-header"><i class="fas fa-comment-medical"></i> Đánh giá </span> <br> <span class="text-12">Đánh giá dịch vụ</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link link-patients btn-outline-info" href="{{ url('/patients') }}"> <span class="text-menu-header"><i class="fas fa-procedures"></i> Dành cho bệnh nhân </span> <br> <span class="text-12">Dành cho bệnh nhân</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link link-package btn-outline-info" href="{{ url('/vai-tro') }}"> <span class="text-menu-header"><i class="fas fa-dice-d6"></i> Vai trò </span> <br> <span class="text-12">Vai trò của medhanoi</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link link-package btn-outline-info" href="{{ url('/lien-he') }}"> <span class="text-menu-header"><i class="fas fa-phone"></i> Liên hệ </span> <br> <span class="text-12">Liên hệ</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link link-package btn-outline-info" href="{{ url('/faq') }}"> <span class="text-menu-header"><i class="fas fa-question-circle"></i> Câu hỏi thường gặp </span> <br> <span class="text-12">Câu hỏi thường gặp</span></a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</div>
 <!-- Close Header -->
 @section('js')
 <script>

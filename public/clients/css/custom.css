@@ -5,4 +5,88 @@ https://templatemo.com/tm-561-purple-buzz
 
 */
 
+.product-item {
+    position: relative;
+    overflow: hidden;
+}
 
+.product-item .inner-image {
+    position: relative;
+    margin-bottom: 0;
+    overflow: hidden;
+    display: block;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+}
+
+.product-item .inner-image img {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.product-item:hover a {
+    color: black;
+}
+
+.product-item .inner-content {
+    background: #fff;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    align-items: flex-end;
+    padding: 10px;
+    opacity: 0;
+    transition: opacity .3s ease-in-out;
+}
+
+.product-item:hover .inner-content {
+    opacity: 1;
+}
+
+.product-item .inner-content .product-title {
+    margin-bottom: 0;
+    white-space: pre-wrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    display: -webkit-box;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.3;
+}
+
+@media (max-width: 450px) {
+    .nav-right{
+        display: grid !important;
+        grid-template-columns: 3fr 1fr;
+    }
+
+    .nav-logo{
+        text-align: center;
+    }
+    .product-item .image-link{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        text-decoration: none;
+    }
+
+    .product-item .inner-content {
+        opacity: 1;
+        position: relative;
+        color: black;
+    }
+
+    .product-item .inner-content .product-title {
+        font-size: 15px;
+    }
+}

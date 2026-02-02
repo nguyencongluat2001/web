@@ -18,15 +18,11 @@ class AboutController extends Controller
 {
 
     public function __construct(
-        CategoryService $categoryService,
-        BlogService $blogService,
-        BlogDetailService $blogDetailService,
-        BlogImagesService $blogImagesService
-    ){
-        $this->categoryService = $categoryService;
-        $this->blogService = $blogService;
-        $this->blogDetailService = $blogDetailService;
-        $this->blogImagesService = $blogImagesService;
+        private CategoryService $categoryService,
+        private BlogService $blogService,
+        private BlogDetailService $blogDetailService,
+        private BlogImagesService $blogImagesService
+    ) {
     }
 
     /**
@@ -36,11 +32,9 @@ class AboutController extends Controller
      */
     public function index(Request $request)
     {
-        // dd('1');
-        // $categories = $this->categoryService->where('cate','DM_BLOG')->where('code_category', 'BAO_CAO_THTT')->where('status', 1)->get();
-        // dd($categories);
         $data['categories'] = [];
-        return view('client.about.home',$data);
+        $data['blogs'] = $this->blogService->select('*')->where('status', 1)->with(['detailBlog', 'imageBlog'])->get();
+        return view('client.about.home', $data);
     }
     /**
      * Danh sách Tổng hợp thị trường
@@ -50,7 +44,7 @@ class AboutController extends Controller
      * @return json $return
      */
     public function loadListTHTT(Request $request)
-    { 
+    {
         $arrInput = $request->input();
         $data = array();
         $param = $arrInput;
@@ -78,7 +72,7 @@ class AboutController extends Controller
      * @return json $return
      */
     public function loadListTKP(Request $request)
-    { 
+    {
         $arrInput = $request->input();
         $data = array();
         $param = $arrInput;
@@ -106,7 +100,7 @@ class AboutController extends Controller
      * @return json $return
      */
     public function loadListPTN(Request $request)
-    { 
+    {
         $arrInput = $request->input();
         $data = array();
         $param = $arrInput;
@@ -134,7 +128,7 @@ class AboutController extends Controller
      * @return json $return
      */
     public function loadListPTCP(Request $request)
-    { 
+    {
         $arrInput = $request->input();
         $data = array();
         $param = $arrInput;
@@ -150,14 +144,8 @@ class AboutController extends Controller
      */
     public function reader(Request $request, $id)
     {
-        $blog = $this->blogService->where('id', $id)->first();
-        $blogDetail = $this->blogDetailService->where('code_blog', $blog->code_blog)->first();
-        $blogImage = $this->blogImagesService->where('code_blog', $blog->code_blog)->first();
-        $data['datas']['blog'] = $blog;
-        $data['datas']['blogDetail'] = $blogDetail;
-        $data['datas']['blogImage'] = $blogImage;
-        $data['datas']['type'] = $blog->code_category;
+        $blogs = $this->blogService->where('id', $id)->with(['detailBlog', 'imageBlog'])->first();
+        $data['datas'] = $blogs;
         return view("client.about.reader", $data)->render();
     }
-    
 }
