@@ -60,38 +60,10 @@ Route::prefix('register')->group(function () {
     Route::get('checkEmail', [RegisterController::class, 'checkEmail']);
 });
 
-// Auth::routes();
-Route::post('client/searchschedule/getFile', [SearchScheduleController::class, 'getFile']);
-Route::get('/api/login', [SearchScheduleController::class, 'login']);
-Route::get('/api/getTKQ', [SearchScheduleController::class, 'getTKQ']);
-Route::get('kq',  [SearchScheduleController::class,'ketquaxetnghiem']);
-
 // Trang chủ
 Route::get('/', [ClientHomeController::class, 'index']);
-// Route::get('/', [AppointmentAtHomeController::class,'indexApointment']);
-// Trang chủ cơ sở bệnh viện
-Route::get('/facilities', [FacilitiesController::class, 'index']);
-Route::get('/facilities/{code}', [FacilitiesController::class, 'detailIndex']);
-Route::get('/schedule/{code}', [FacilitiesController::class, 'schedule']);
-Route::get('/schedule/{code}/{idstaff}', [FacilitiesController::class, 'schedule']);
-// lịch khám có bác sĩ theo chuyên khoa
-Route::get('/scheduleStage/{code}/{physician}', [FacilitiesController::class, 'scheduleStage']);
 
-// dịch vụ tại nhà
-Route::get('/appointmentathome/{code}', [AppointmentAtHomeController::class, 'index']);
 
-// Trang chủ cơ sở bệnh viện
-Route::get('/package', [PackageController::class, 'index']);
-
-// chuyên khoa
-Route::get('/specialty', [SpecialtyController::class, 'index']);
-Route::get('/specialty/{code}', [SpecialtyController::class, 'specialty']);
-
-Route::prefix('chat')->group(function () {
-    Route::get('/broadcast', [ChatClientController::class, 'broadcast'])->name('broadcast');
-    Route::get('/receive', [ChatClientController::class, 'receive'])->name('receive');
-    Route::post('/showMessage', [ChatClientController::class, 'showMessage'])->name('showMessage');
-});
 // Trang chủ contact
 Route::get('/contact', [ContactController::class, 'index']);
 // trang chủ tra cứu
@@ -110,6 +82,7 @@ Route::prefix('/client')->group(function () {
         });
         // Trang chủ client
         Route::prefix('home')->group(function(){
+            Route::get('/about', [ClientHomeController::class, 'about']);
             Route::get('/loadList',[ClientHomeController::class,'loadList']);
             Route::get('/loadListBlog',[ClientHomeController::class,'loadListBlog']);
             Route::get('/loadListTap1',[ClientHomeController::class,'loadListTap1']);
@@ -141,8 +114,6 @@ Route::prefix('/client')->group(function () {
             });
             Route::get('/reader/{id}', [AboutController::class, 'reader']);
         });
-        // Đọc thông báo
-        Route::get('readNotification', [ReadNotificationController::class, 'readNotification']);
 
     
     Route::prefix('des')->group(function () {

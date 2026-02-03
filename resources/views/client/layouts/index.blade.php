@@ -154,7 +154,7 @@
     </div>
     @include('client.layouts.menu')
     @yield('body-client')
-    @include('client.layouts.chatZalo')
+    <!-- @include('client.layouts.chatZalo') -->
     @include('client.layouts.footer')
     <!-- End Footer -->
     <!-- Bootstrap -->

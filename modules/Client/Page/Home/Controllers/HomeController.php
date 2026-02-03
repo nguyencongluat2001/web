@@ -53,6 +53,19 @@ class HomeController extends Controller
         $datas['Specialty']= [];
         return view('client.home.home-start',$datas);
     }
+    /**
+     * khởi tạo dữ liệu, Load các file js, css của đối tượng
+     *
+     * @return view
+     */
+    public function about(Request $request)
+    {
+        $dataSearch = '';
+        $objResult = DB::table('users')->where('status',1)->get()->take(3);
+        $datas['datas']= $objResult;
+        $datas['Specialty']= [];
+        return view('client.home.about',$datas);
+    }
     
      /**
      * load màn hình biểu đồ nến

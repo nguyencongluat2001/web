@@ -214,9 +214,9 @@
                 </div>
                 <!-- MENU -->
                 <ul class="nav-menu list-unstyled mb-0">
-                    <li><a href="#">ABOUT</a></li>
+                    <li><a href="/client/home/about">ABOUT</a></li>
                     <li><a href="/client/project/index">PROJECTS</a></li>
-                    <li><a href="#">CONTACT</a></li>
+                    <li><a href="/client/">CONTACT</a></li>
                 </ul>
 
                 <!-- SEARCH / FILTER -->
