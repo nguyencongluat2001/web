@@ -61,7 +61,7 @@ class HomeController extends Controller
     public function about(Request $request)
     {
         $dataSearch = '';
-        $objResult = DB::table('users')->where('status',1)->get()->take(3);
+        $objResult = DB::table('users')->where('status',1)->where('role','CTV')->get()->take(6);
         $datas['datas']= $objResult;
         $datas['Specialty']= [];
         return view('client.home.about',$datas);

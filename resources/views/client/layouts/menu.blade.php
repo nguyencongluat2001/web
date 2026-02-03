@@ -198,15 +198,9 @@
 
 </style>
 <span id="menu-toggle"><i class="fas fa-bars"></i></span>
-<nav id="main_nav" class="navbar navbar-expand-lg navbar-light bg-white shadow" style="top:0;padding-top:0px !important;padding-bottom: 0px !important;background:#ffffff!important;width: 100%;z-index: 1000;">
+<nav id="main_nav" class="navbar navbar-expand-lg navbar-light bg-white" style="top:0;padding-top:0px !important;padding-bottom: 0px !important;background:#ffffff!important;width: 100%;z-index: 1000;">
     <div class="container d-flex justify-content-between align-items-center">
         <div class="nav-inner w-100 d-flex justify-content-between align-items-start">
-
-            <!-- LEFT: LOGO -->
-            <div class="nav-logo">
-                
-            </div>
-
             <!-- RIGHT: MENU + SEARCH -->
             <div class="nav-right d-flex">
                 <div class="nav-logo">
@@ -216,7 +210,7 @@
                 <ul class="nav-menu list-unstyled mb-0">
                     <li><a href="/client/home/about">ABOUT</a></li>
                     <li><a href="/client/project/index">PROJECTS</a></li>
-                    <li><a href="/client/">CONTACT</a></li>
+                    <li><a href="/contact">CONTACT</a></li>
                 </ul>
 
                 <!-- SEARCH / FILTER -->

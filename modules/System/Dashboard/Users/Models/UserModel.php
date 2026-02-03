@@ -20,6 +20,7 @@ class UserModel extends Model
         'avatar',
         'password',
         'dateBirth',
+        'decision',
         'role',
         'status',
         'id_personnel',

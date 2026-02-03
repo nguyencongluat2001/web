@@ -37,6 +37,12 @@
 							<input class="form-control" type="text" value="{{!empty($data['phone'])?$data['phone']:''}}" name="phone" id="phone" placeholder="Nhập số điện thoại..." />
 						</div>
 					</div>
+					<div class="col-md-12">
+                        <div class="form-group">
+                            <p for="example-text-input" class="form-control-label">Nội dung</p>
+                            <textarea class="form-control" type="text" rows="10" cols="30" name="decision" id="decision" placeholder="Nhập nội dung...">{{!empty($data['decision'])?$data['decision']:''}}</textarea>
+                        </div>
+                    </div>
 					@if(!empty($data) && $_SESSION["email"] == $data['email'] || $_SESSION["role"] == 'ADMIN')
 					<span>
 						<button class="btn btn-primary btn-sm" type="button" id='btn_changePass'>
@@ -176,4 +182,9 @@
 			reader.readAsDataURL(input.files[0]);
 		}
 	}
+	CKEDITOR.replace('decision', {
+        filebrowserBrowseUrl: 'filemanager/dialog.php?type=2&editor=ckeditor&fldr=',
+        filebrowserUploadUrl: 'filemanager/dialog.php?type=2&editor=ckeditor&fldr=',
+        filebrowserImageBrowseUrl: 'filemanager/dialog.php?type=1&editor=ckeditor&fldr=',
+    });
 </script>

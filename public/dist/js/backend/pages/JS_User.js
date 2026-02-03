@@ -118,6 +118,7 @@ JS_User.prototype.store = function (oFormCreate) {
     formdata.append('date_join', $("#date_join").val());
     formdata.append('id_personnel', $("#id_personnel").val());
     formdata.append('role', $("input[name=role]:checked").val());
+    formdata.append('decision', CKEDITOR.instances.decision.getData());
     if($("#frmAdd #status").is(':checked')){
         formdata.append('status', 1);
     }
