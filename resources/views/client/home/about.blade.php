@@ -51,7 +51,6 @@
     }
 
     .about {
-        max-width: 800px;
         /* margin: 60px auto; */
         font-family: Arial, Helvetica, sans-serif;
         color: #111;
