@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('blogs', function (Blueprint $table) {
-            if (Schema::hasColumn('blogs', 'code_category')) {
-                $table->string('year')->nullable()->after('code_category');
+        Schema::table('blogs_details', function (Blueprint $table) {
+            if (Schema::hasColumn('blogs_details', 'title')) {
+                $table->string('year')->nullable()->after('title');
             }
         });
     }
@@ -23,8 +23,10 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('blogs', function (Blueprint $table) {
-            //
+        Schema::table('blogs_details', function (Blueprint $table) {
+            if (Schema::hasColumn('blogs_details', 'year')) {
+                $table->dropColumn('year');
+            }
         });
     }
 };

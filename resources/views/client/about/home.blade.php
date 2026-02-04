@@ -32,7 +32,7 @@
     'showFilter' => true
     ])
     <!-- Start Banner Hero -->
-    <section class="w-100">
+    <section class="w-100 section-project">
         <div class="row d-flex align-items-center py-5">
             <div class="col-lg-12 text-start mt-5 px-4">
                 @if(isset($blogs) && count($blogs) > 0)
@@ -41,10 +41,10 @@
                     $basePath = url("file-image-client/blogs") . "/";
                     @endphp
                     @foreach($blogs as $blog)
-                    <div class="col-md-2 product-item mb-4" data-code_category="{{ $blog->code_category ?? '' }}"  data-year="{{ $blog->year ?? '' }}">
+                    <div class="product-item mb-4" data-code_category="{{ $blog->code_category ?? '' }}"  data-year="{{ $blog->year ?? '' }}">
                         <a href="{{ route('project.reader', ['id' => $blog->id]) }}" class="image-link">
                             <div class="inner-image">
-                                <img src="{{ $basePath . ($blog->imageBlog[0]?->name_image ?? '') }}" alt="{{ $blog->detailBlog?->title }}" class="img-fluid mb-3">
+                                <img src="{{ $basePath . ($blog->fileBlog[0]?->name_image ?? '') }}" alt="{{ $blog->detailBlog?->title }}" class="img-fluid mb-3">
                             </div>
                             <div class="inner-content">
                                 <h4 class="product-title">{{ $blog->detailBlog?->title }}</h4>

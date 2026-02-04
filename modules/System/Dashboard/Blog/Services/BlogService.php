@@ -80,7 +80,7 @@ class BlogService extends Service
                 ->whereNotIn('id', $imageOldIds)
                 ->where(function ($query) {
                     $query->where('type', 'file')
-                          ->orWhereNull('type');
+                        ->orWhereNull('type');
                 });
             foreach ($oldImages->get() as $image) {
                 $old_path = $this->baseDis . $image['name_image'];

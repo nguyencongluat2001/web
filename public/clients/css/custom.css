@@ -5,6 +5,10 @@ https://templatemo.com/tm-561-purple-buzz
 
 */
 
+*, :after, :before {
+    box-sizing: border-box;
+}
+
 .product-item {
     position: relative;
     overflow: hidden;
@@ -65,16 +69,45 @@ https://templatemo.com/tm-561-purple-buzz
     line-height: 1.3;
 }
 
+@media (min-width: 910px) {
+    .section-project .product-item {
+        flex: 0 0 33.333%;
+        max-width: 33.333%
+    }
+}
+
+@media (min-width: 1210px) {
+    .section-project .product-item {
+        flex: 0 0 25%;
+        max-width: 25%
+    }
+}
+
+@media (min-width: 1510px) {
+    .section-project .product-item {
+        flex: 0 0 20%;
+        max-width: 20%
+    }
+}
+
+@media (min-width: 1920px) {
+    .section-project .product-item {
+        flex: 0 0 16.666%;
+        max-width: 16.666%
+    }
+}
+
 @media (max-width: 450px) {
-    .nav-right{
+    .nav-right {
         display: grid !important;
         grid-template-columns: 3fr 1fr;
     }
 
-    .nav-logo{
+    .nav-logo {
         text-align: center;
     }
-    .product-item .image-link{
+
+    .product-item .image-link {
         display: grid;
         grid-template-columns: 1fr 1fr;
         text-decoration: none;

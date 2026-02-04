@@ -192,9 +192,9 @@
 
     </script>
     <!-- End Service -->
+    <script src='{{ @asset("clients/js/jquery.min.js") }}'></script>
     <script type="text/javascript" src="{{ URL::asset('dist/js/backend/client/JS_Home.js') }}"></script>
     <script type="text/javascript" src="{{ URL::asset('dist/js/backend/client/JS_Facilities.js') }}"></script>
-    <script src='../assets/js/jquery.js'></script>
 
     <script type="text/javascript">
         $(document).ready(function() {
@@ -206,7 +206,6 @@
         })
     </script>
     <script type="text/javascript" src="{{ URL::asset('dist/js/backend/client/JS_SearchSchedule.js') }}"></script>
-    <script src='../assets/js/jquery.js'></script>
 </body>
 
 </html>

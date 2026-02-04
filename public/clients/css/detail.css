@@ -443,7 +443,13 @@
 .project-detail__thumbs {
     height: calc(100vh - 4rem);
     display: grid;
-    grid-template-rows: 1fr 2fr 1fr;
+    grid-template-rows: 2fr 2fr 1fr;
+}
+
+.project-detail__thumbs .project-video {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .project-detail__thumbs .slick-list {
@@ -456,6 +462,10 @@
     display: flex !important;
 }
 
+.carousel-indicators {
+    gap: 5px;
+}
+
 .project-detail__thumbs-number {
     border: 1px solid transparent;
     width: 24px !important;
@@ -463,7 +473,8 @@
     display: flex !important;
     align-items: center;
     justify-content: center;
-    margin: 0
+    margin: 0;
+    background-color: #fff;
 }
 
 .project-detail__thumbs-number.active {

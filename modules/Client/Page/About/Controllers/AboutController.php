@@ -32,7 +32,7 @@ class AboutController extends Controller
     public function index(Request $request)
     {
         $data['categories'] = [];
-        $data['blogs'] = $this->blogService->select('*')->where('status', 1)->with(['detailBlog', 'imageBlog'])->get();
+        $data['blogs'] = $this->blogService->select('*')->where('status', 1)->with(['detailBlog', 'fileBlog'])->get();
         return view('client.about.home', $data);
     }
     /**
@@ -153,7 +153,7 @@ class AboutController extends Controller
             if(!isset($value->fileBlog[0])) {
                 continue;
             }
-            $value->url_path = url("file-image-client/blogs") . "/" . ($value->fileBlog[0]?->name_image ?? '123.jpg');
+            $value->url_path = url("file-image-client/blogs") . "/" . ($value->fileBlog[0]?->name_image ?? '');
         }
         $data['relates'] = $relates;
         return view("client.about.reader", $data)->render();

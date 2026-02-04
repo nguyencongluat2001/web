@@ -336,6 +336,7 @@ if (!empty($cate)) {
         }
         .mobile * {
             pointer-events: auto;
+            display: none !important;
         }
 
         .nav-inner {

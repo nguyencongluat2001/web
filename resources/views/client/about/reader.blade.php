@@ -75,7 +75,7 @@
                             <div class="project-detail_body">
                                 <h2 class="project-detail__title">{{ $datas->detailBlog?->title ?? '' }}</h2>
                                 <div class="project-detail__content">
-                                    <p class="date_status">{{ $datas->detailBlog?->created_at ? date('Y', strtotime($datas->detailBlog->created_at)) : '' }}</p>
+                                    <p class="date_status">{{ $datas?->year ?? '' }}</p>
                                     <div class="text">
                                         <div class="longer-text ps ps--active-y">
                                             <div class="page" title="Page 2">
@@ -91,6 +91,7 @@
                                     </div>
                                 </div>
                             </div>
+                            @if(isset($relates) && count($relates) > 0)
                             <div class="project-relate">
                                 <div id="carouselRelates" class="carousel slide" data-bs-ride="carousel">
                                     <div class="carousel-indicators">
@@ -123,6 +124,7 @@
                                     </button>
                                 </div>
                             </div>
+                            @endif
                         </div>
                     </div>
                 </div>
