@@ -10,7 +10,7 @@
                 $basePath = url("file-image-client/blogs") . "/";
                 @endphp
                 @foreach($blogs as $blog)
-                <div class="col-md-2 product-item mb-4">
+                <div class="col-md-3 product-item mb-4">
                     <a href="{{ route('project.reader', ['id' => $blog->id]) }}" class="image-link">
                         <div class="inner-image">
                             <img src="{{ $basePath . ($blog->imageBlog[0]?->name_image ?? '') }}" alt="{{ $blog->detailBlog?->title }}" class="img-fluid mb-3">
