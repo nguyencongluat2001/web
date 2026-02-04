@@ -3,7 +3,6 @@
 namespace Modules\Client\Page\Home\Controllers;
 
 use App\Http\Controllers\Controller;
-use Modules\Base\Library;
 use Illuminate\Http\Request;
 use Modules\Client\Page\Home\Services\HomeService;
 use Modules\System\Dashboard\Blog\Services\BlogService;
@@ -15,7 +14,7 @@ use Modules\System\Dashboard\Hospital\Services\HospitalService;
 use Modules\System\Dashboard\Specialty\Services\SpecialtyService;
 use Modules\System\Dashboard\UrlSearch\Services\UrlSearchService;
 /**
- * Phân quyền người dùng 
+ * Phân quyền người dùng
  *
  * @author Luatnc
  */
@@ -66,7 +65,7 @@ class HomeController extends Controller
         $datas['Specialty']= [];
         return view('client.home.about',$datas);
     }
-    
+
      /**
      * load màn hình biểu đồ nến
      *
@@ -75,7 +74,7 @@ class HomeController extends Controller
      * @return json $return
      */
     public function loadListChartNen(Request $request)
-    { 
+    {
         $arrInput = $request->input();
         $data = $this->homeService->loadListChartNen($arrInput);
         return view("client.chart.index", $data);
@@ -88,7 +87,7 @@ class HomeController extends Controller
      * @return json $return
      */
     public function loadList(Request $request)
-    { 
+    {
         $arrInput = $request->input();
         $data = $this->homeService->loadList($arrInput);
         return view("client.home.loadlist", $data);
@@ -101,7 +100,7 @@ class HomeController extends Controller
      * @return json $return
      */
     public function loadListTop(Request $request)
-    { 
+    {
         $arrInput = $request->input();
         $data = $this->homeService->loadListTop($arrInput);
         return view("client.home.loadlistTop", $data);
@@ -114,7 +113,7 @@ class HomeController extends Controller
      * @return json $return
      */
     public function loadListBlog(Request $request)
-    { 
+    {
         $arrInput = $request->input();
         $data = array();
         $param = $arrInput;
@@ -139,7 +138,7 @@ class HomeController extends Controller
      * @return json $return
      */
     public function loadListTap1(Request $request)
-    { 
+    {
         $arrInput = $request->input();
         $data = $this->homeService->loadList($arrInput);
         return view("client.home.loadlist-tap1", $data);

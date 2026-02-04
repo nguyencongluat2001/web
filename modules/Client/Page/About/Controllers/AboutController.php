@@ -22,8 +22,7 @@ class AboutController extends Controller
         private BlogService $blogService,
         private BlogDetailService $blogDetailService,
         private BlogImagesService $blogImagesService
-    ) {
-    }
+    ) {}
 
     /**
      * khởi tạo dữ liệu
@@ -146,6 +145,17 @@ class AboutController extends Controller
     {
         $blogs = $this->blogService->where('id', $id)->with(['detailBlog', 'imageBlog'])->first();
         $data['datas'] = $blogs;
+        $relates = $this->blogService->select('*')
+            ->where('id', '!=', $id)
+            ->with(['fileBlog'])
+            ->get();
+        foreach ($relates as $key => $value) {
+            if(!isset($value->fileBlog[0])) {
+                continue;
+            }
+            $value->url_path = url("file-image-client/blogs") . "/" . ($value->fileBlog[0]?->name_image ?? '123.jpg');
+        }
+        $data['relates'] = $relates;
         return view("client.about.reader", $data)->render();
     }
 }

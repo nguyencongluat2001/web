@@ -14,7 +14,8 @@ class BlogImagesModel extends Model
         'id',
         'code_blog',
         'name',
-        'name_image', 
+        'name_image',
+        'type',
         'order_image',
         'created_at',
         'updated_at'

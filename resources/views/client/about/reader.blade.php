@@ -20,12 +20,27 @@
                 <div class="row">
                     <div class="col-lg-9 pr-md-60">
                         <div id="carouselExampleControls" class="carousel slide slick-slider" data-bs-ride="carousel">
+                            <div class="carousel-indicators">
+                                @if(isset($datas->imageBlog) && !empty($datas->imageBlog))
+                                @php $k = 1; @endphp
+                                @foreach($datas->imageBlog as $value)
+                                @if($value->type !== 'video')
+                                <div class="project-detail__thumbs-number slick-slide {{ $k == 1 ? 'active' : '' }}" data-bs-target="#carouselExampleControls" data-bs-slide-to="{{ $k }}" aria-current="true">{{ $k }}</div>
+                                @php $k++; @endphp
+                                @endif
+                                @endforeach
+                                @endif
+                            </div>
                             <div class="carousel-inner project-detail__image">
                                 @if(isset($datas->imageBlog) && !empty($datas->imageBlog))
-                                @foreach($datas->imageBlog as $key => $value)
-                                <div class="project-detail__image-item carousel-item {{ $key == 0 ? 'active' : '' }}">
+                                @php $i = 1; @endphp
+                                @foreach($datas->imageBlog as $value)
+                                @if($value->type !== 'video')
+                                <div class="project-detail__image-item carousel-item {{ $i == 1 ? 'active' : '' }}">
                                     <img src="{{url('/file-image-client/blogs/')}}/{{ $value->name_image ?? '' }}" class="d-block w-100 img-fluid" alt="...">
                                 </div>
+                                @php $i++; @endphp
+                                @endif
                                 @endforeach
                                 @endif
                             </div>
@@ -38,36 +53,74 @@
                         </div>
                     </div>
                     <div class="col-lg-3 project-content">
-                        <div class="back mb-5 pb-5">
+                        <div class="back mb-2">
                             <button onclick="window.history.back()"><i class="fas fa-chevron-left fs-13 pe-2"></i> Back</button>
                         </div>
                         <div class="project-detail__thumbs">
-                            <div class="slider-thumbs mb-0 slick-initialized slick-slider mb-5" loaded="1">
-                                <div class="slick-list draggable">
-                                    <div class="carousel-indicators slick-track">
-                                        @if(isset($datas->imageBlog) && !empty($datas->imageBlog))
-                                        @foreach($datas->imageBlog as $key => $value)
-                                        <div class="project-detail__thumbs-number slick-slide {{ $key == 0 ? 'active' : '' }}" data-bs-target="#carouselExampleControls" data-bs-slide-to="{{ $key }}" aria-current="true">{{ $key + 1 }}</div>
-                                        @endforeach
-                                        @endif
-                                    </div>
-                                </div>
+                            <div class="project-video" loaded="1">
+                                @if(isset($datas->imageBlog[0]) && !empty($datas->imageBlog))
+                                @php $v = 0; @endphp
+                                @foreach($datas->imageBlog as $value)
+                                @php if($v > 0) continue; @endphp
+                                @if($value->type === 'video')
+                                <video width="100%" height="auto" controls>
+                                    <source src="{{url('/file-image-client/blogs/')}}/{{ $value->name_image ?? '' }}" type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>
+                                @php $v++; @endphp
+                                @endif
+                                @endforeach
+                                @endif
                             </div>
-                            <h2 class="project-detail__title">{{ $datas->detailBlog?->title ?? '' }}</h2>
-                            <div class="project-detail__content">
-                                <p class="date_status">{{ $datas->detailBlog?->created_at ? date('Y', strtotime($datas->detailBlog->created_at)) : '' }}</p>
-                                <div class="text">
-                                    <div class="longer-text ps ps--active-y">
-                                        <div class="page" title="Page 2">
-                                            <div class="section">
-                                                <div class="layoutArea">
-                                                    <div class="column">
-                                                        {!! $datas->detailBlog?->decision ?? '' !!}
+                            <div class="project-detail_body">
+                                <h2 class="project-detail__title">{{ $datas->detailBlog?->title ?? '' }}</h2>
+                                <div class="project-detail__content">
+                                    <p class="date_status">{{ $datas->detailBlog?->created_at ? date('Y', strtotime($datas->detailBlog->created_at)) : '' }}</p>
+                                    <div class="text">
+                                        <div class="longer-text ps ps--active-y">
+                                            <div class="page" title="Page 2">
+                                                <div class="section">
+                                                    <div class="layoutArea">
+                                                        <div class="column">
+                                                            {!! $datas->detailBlog?->decision ?? '' !!}
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+                                </div>
+                            </div>
+                            <div class="project-relate">
+                                <div id="carouselRelates" class="carousel slide" data-bs-ride="carousel">
+                                    <div class="carousel-indicators">
+                                        @if(isset($relates) && !empty($relates))
+                                        @foreach($relates as $key => $value)
+                                        <div data-bs-target="#carouselRelates" data-bs-slide-to="{{ $key }}" class="slick-slide {{ $key == 0 ? 'active' : '' }}" aria-current="{{ $key == 0 ? 'true' : 'false' }}" aria-label="Slide {{ $key + 1 }}"></div>
+                                        @endforeach
+                                        @endif
+                                    </div>
+                                    <div class="carousel-inner">
+                                        @if(isset($relates) && !empty($relates))
+                                        @foreach($relates as $key => $value)
+                                        <a href="{{ route('project.reader', ['id' => $value->id]) }}" class="carousel-item {{ $key == 0 ? 'active' : '' }}">
+                                            <img src="{{ $value?->url_path ?? '' }}" class="d-block w-100" alt="...">
+                                            <div class="carousel-caption d-none d-md-block">
+                                                <h5>{{ $value->title }}</h5>
+                                                <p>{{ $value->description }}</p>
+                                            </div>
+                                        </a>
+                                        @endforeach
+                                        @endif
+                                    </div>
+                                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselRelates" data-bs-slide="prev">
+                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                        <span class="visually-hidden">Previous</span>
+                                    </button>
+                                    <button class="carousel-control-next" type="button" data-bs-target="#carouselRelates" data-bs-slide="next">
+                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                        <span class="visually-hidden">Next</span>
+                                    </button>
                                 </div>
                             </div>
                         </div>

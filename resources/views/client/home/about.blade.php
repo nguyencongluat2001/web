@@ -1,6 +1,26 @@
-@extends('client.layouts.index')
-@section('body-client')
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ABOUT</title>
+    <link href="{{ @asset('/clients/fontawesome/css/all.min.css') }}" rel="stylesheet">
+    <link href="{{ @asset('/clients/css/bootstrap.min.css') }}" rel="stylesheet">
+</head>
+
 <style>
+    body {
+        margin: 0;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 1.6;
+        color: #000;
+        font-family: Arial, Helvetica, sans-serif;
+        letter-spacing: 1px;
+        transition: opacity 3000ms linear 0s;
+    }
+
     .team-card {
         background: #fff;
     }
@@ -84,9 +104,13 @@
         margin-bottom: 12px;
         font-family: Arial, Helvetica, sans-serif;
     }
-
-
 </style>
+
+<body>
+    @include('client.layouts.menu', [
+    'menuActive' => 'about',
+    'showFilter' => false
+    ])
     <!-- Start Banner Hero -->
     <section class="w-100">
         <div class="container">
@@ -140,23 +164,23 @@
                 </section>
                 <!-- section -->
 
-                <div class="col-lg-12 text-start" >
+                <div class="col-lg-12 text-start">
                     <div class="row g-lg-5 mb-4">
                         @foreach ($datas as $key => $data)
-                            <div class="col-md-4 mb-4">
-                                <div class="team-card">
-                                    <div class="team-image">
-                                        <img src="{{url('/clients/img/home.jpg')}}" alt="{{ $data->name }}">
-                                    </div>
-
-                                    <div class="team-info text-center">
-                                        <h4 class="team-name">{{ $data->name }}</h4>
-                                        <div class="team-role">CO-FOUNDER</div>
-                                        <div class="team-role">LEAD ARCHITECT</div>
-                                    </div>
-                                    <div>{!! $data->decision !!}</div>
+                        <div class="col-md-4 mb-4">
+                            <div class="team-card">
+                                <div class="team-image">
+                                    <img src="{{url('/clients/img/home.jpg')}}" alt="{{ $data->name }}">
                                 </div>
+
+                                <div class="team-info text-center">
+                                    <h4 class="team-name">{{ $data->name }}</h4>
+                                    <div class="team-role">CO-FOUNDER</div>
+                                    <div class="team-role">LEAD ARCHITECT</div>
+                                </div>
+                                <div>{!! $data->decision !!}</div>
                             </div>
+                        </div>
                         @endforeach
                     </div>
 
@@ -166,26 +190,23 @@
     </section>
     <!-- End Banner Hero -->
 
-</script>
-<!-- End Service -->
-<script type="text/javascript" src="{{ URL::asset('dist/js/backend/client/JS_Home.js') }}"></script>
-<script type="text/javascript" src="{{ URL::asset('dist/js/backend/client/JS_Facilities.js') }}"></script>
-<script src='../assets/js/jquery.js'></script>
+    </script>
+    <!-- End Service -->
+    <script type="text/javascript" src="{{ URL::asset('dist/js/backend/client/JS_Home.js') }}"></script>
+    <script type="text/javascript" src="{{ URL::asset('dist/js/backend/client/JS_Facilities.js') }}"></script>
+    <script src='../assets/js/jquery.js'></script>
 
-<script  type="text/javascript">
-    $(document).ready(function() {
-        var placeholderText = '<?= $dataSearch ?? "" ?>';
-        var arrData = placeholderText.split('!~!');
-        $('#myInput').placeholderTypewriter({text: arrData});  
-    })
-</script>
-<script type="text/javascript" src="{{ URL::asset('dist/js/backend/client/JS_SearchSchedule.js') }}"></script>
-<script src='../assets/js/jquery.js'></script>
-<script type="text/javascript">
-    var baseUrl = "{{ url('') }}";
-    var JS_SearchSchedule = new JS_SearchSchedule(baseUrl, 'client', 'searchschedule');
-    $(document).ready(function($) {
-        JS_SearchSchedule.loadIndex(baseUrl);
-    })
-</script>
-@endsection
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var placeholderText = '<?= $dataSearch ?? "" ?>';
+            var arrData = placeholderText.split('!~!');
+            $('#myInput').placeholderTypewriter({
+                text: arrData
+            });
+        })
+    </script>
+    <script type="text/javascript" src="{{ URL::asset('dist/js/backend/client/JS_SearchSchedule.js') }}"></script>
+    <script src='../assets/js/jquery.js'></script>
+</body>
+
+</html>

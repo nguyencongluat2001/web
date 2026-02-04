@@ -18,6 +18,7 @@ class BlogModel extends Model
         'code_blog',
         'user_id',
         'code_category',
+        'year',
         'status',
         'created_at',
         'updated_at'
@@ -30,8 +31,8 @@ class BlogModel extends Model
                 $this->value = $value;
                 // dd($this->value);
                 return $query->where(function ($query) {
-                    $query->whereRelation('detailBlog', 'title',$this->value )
-                          ->orWhere('code_blog', 'like', '%' . $this->value . '%');
+                    $query->whereRelation('detailBlog', 'title', $this->value)
+                        ->orWhere('code_blog', 'like', '%' . $this->value . '%');
                 });
             case 'category':
                 $query->where('code_category', $value);
@@ -47,5 +48,14 @@ class BlogModel extends Model
     public function imageBlog()
     {
         return $this->hasMany(BlogImagesModel::class, 'code_blog', 'code_blog');
+    }
+
+    public function fileBlog()
+    {
+        return $this->hasMany(BlogImagesModel::class, 'code_blog', 'code_blog')
+            ->where(function ($q) {
+                $q->where('type', '!=', 'video')
+                    ->orWhereNull('type');
+            });
     }
 }

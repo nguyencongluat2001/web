@@ -1,8 +1,32 @@
 <?php
+
 use Illuminate\Support\Facades\DB;
+
 $project = DB::table('blogs')->join('blogs_details', 'blogs.code_blog', '=', 'blogs_details.code_blog')->where('status', 1)->take(3)->get();
+
+$cate = DB::table('cates')->where('code_cate', 'product')->first();
+if (!empty($cate)) {
+    $typology = DB::table('categorys')->select('code_category', 'name_category')->where('cate', $cate->code_cate)->get()->toArray();
+}
 ?>
 <style>
+    #main_nav {
+        position: sticky;
+        top: 0;
+        left: 0;
+        z-index: 11;
+    }
+
+    .header-main {
+        padding: 30px 0 10px
+    }
+
+    .header-main.header-project .container,
+    .header-main .container {
+        max-width: 100%;
+        width: 100%
+    }
+
     .navbar-nav .nav-link {
         padding-right: 10px !important;
         padding-left: 10px !important;
@@ -98,51 +122,63 @@ $project = DB::table('blogs')->join('blogs_details', 'blogs.code_blog', '=', 'bl
             left: 0;
         }
     }
-    #dropdownMenu{
+
+    #dropdownMenu {
         position: absolute;
         transform-origin: top center;
         animation: rotateX .5s ease-in-out
     }
+
     @keyframes rotateX {
         0% {
             opacity: 0;
             transform: rotateX(-90deg);
         }
+
         50% {
             transform: rotateX(-20deg);
         }
+
         100% {
             opacity: 1;
             transform: rotateX(0deg);
         }
     }
-    #btn_addMenu{
+
+    #btn_addMenu {
         border-radius: 50%;
         background-color: #ffffff;
         padding: 0;
         width: 40px;
         height: 40px;
     }
-    #btn_addMenu .navbar-nav.acc_auth{
+
+    #btn_addMenu .navbar-nav.acc_auth {
         width: 100%;
     }
-    #btn_addMenu .navbar-nav.acc_auth .hover-text{
+
+    #btn_addMenu .navbar-nav.acc_auth .hover-text {
         width: 100%;
     }
-    #btn_addMenu .navbar-nav.acc_auth .hover-text a{
+
+    #btn_addMenu .navbar-nav.acc_auth .hover-text a {
         color: #fff;
     }
-    #btn_addMenu .navbar-nav.acc_auth .hover-text:hover a{
+
+    #btn_addMenu .navbar-nav.acc_auth .hover-text:hover a {
         color: #ff4d00;
     }
-    #menu_user{
+
+    #menu_user {
         background-color: #f6fffc8f;
         padding: 0.5rem 1rem;
         border-radius: 10px;
     }
-    #menu_user .navbar-nav.acc_auth .hover-text a{
+
+    #menu_user .navbar-nav.acc_auth .hover-text a {
         color: #fff;
     }
+
     /* LOGO */
     .nav-logo .logo-link {
         font-size: 48px;
@@ -158,7 +194,16 @@ $project = DB::table('blogs')->join('blogs_details', 'blogs.code_blog', '=', 'bl
     }
 
     /* MENU */
+    .nav-menu {
+        margin-top: 86px;
+        margin-right: 25px;
+        float: right;
+        display: flex;
+        flex-direction: column;
+    }
+
     .nav-menu li {
+        text-align: right;
         margin-bottom: 8px;
     }
 
@@ -167,6 +212,7 @@ $project = DB::table('blogs')->join('blogs_details', 'blogs.code_blog', '=', 'bl
         color: #000;
         font-size: 13px;
         letter-spacing: 1px;
+        font-weight: 600;
     }
 
     .nav-menu .active a {
@@ -183,6 +229,7 @@ $project = DB::table('blogs')->join('blogs_details', 'blogs.code_blog', '=', 'bl
     /* FILTER */
     .nav-filter {
         min-width: 220px;
+        margin-top: 1rem;
     }
 
     .filter-title {
@@ -191,17 +238,33 @@ $project = DB::table('blogs')->join('blogs_details', 'blogs.code_blog', '=', 'bl
         text-align: right;
     }
 
-    .nav-filter select {
+    .nav-filter .dropdown {
         width: 100%;
+    }
+
+    .nav-filter .dropdown-toggle {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
         border: 1px solid #000;
-        padding: 4px 6px;
+        padding: 3px;
         margin-bottom: 6px;
         font-size: 12px;
         background: #fff;
+        text-decoration: none;
+        color: #000;
     }
+
+    .nav-filter .dropdown-menu {
+        width: 100%;
+        max-height: 68vh;
+        padding: 0 .5rem;
+    }
+
     /* css ẩn hiện lọc */
     .filter-box {
-        display: none;          /* ẨN BAN ĐẦU */
+        display: none;
+        /* ẨN BAN ĐẦU */
         margin-top: 8px;
     }
 
@@ -226,8 +289,10 @@ $project = DB::table('blogs')->join('blogs_details', 'blogs.code_blog', '=', 'bl
     .filter-header {
         display: flex;
         align-items: center;
-        justify-content: space-between; /* đẩy + sang phải */
-        width: 95%;                    /* KÉO DÀI */
+        justify-content: space-between;
+        /* đẩy + sang phải */
+        width: 95%;
+        /* KÉO DÀI */
         padding: 10px 12px;
         border: 1px solid #000;
         box-sizing: border-box;
@@ -248,7 +313,8 @@ $project = DB::table('blogs')->join('blogs_details', 'blogs.code_blog', '=', 'bl
         font-size: 16px;
         line-height: 1;
     }
-    .mobile{
+
+    .mobile {
         display: none;
     }
 
@@ -260,7 +326,7 @@ $project = DB::table('blogs')->join('blogs_details', 'blogs.code_blog', '=', 'bl
     /* -------- Tablet & Mobile -------- */
     @media (max-width: 991px) {
 
-        .mobile{
+        .mobile {
             display: none !important;
         }
 
@@ -312,9 +378,10 @@ $project = DB::table('blogs')->join('blogs_details', 'blogs.code_blog', '=', 'bl
     /* -------- Mobile nhỏ -------- */
     @media (max-width: 768px) {
 
-        .mobile{
+        .mobile {
             display: block !important;
         }
+
         .nav-logo .logo-link {
             font-size: 35px;
             letter-spacing: 8px;
@@ -335,49 +402,76 @@ $project = DB::table('blogs')->join('blogs_details', 'blogs.code_blog', '=', 'bl
         .web {
             display: none !important;
         }
+
         /* .nav-logo-mobile{
             width: 80%%;
         } */
     }
 </style>
-<nav id="main_nav" class="navbar navbar-expand-lg navbar-light bg-white" style="top:0;padding-top:0px !important;padding-bottom: 0px !important;background:#ffffff!important;width: 100%;z-index: 1000;">
-    <div class="container d-flex justify-content-between align-items-center">
-        <div class="nav-inner w-100 d-flex justify-content-between align-items-start">
-            <!-- PC --> 
-            <div class="nav-right d-flex web">
-                <div class="nav-logo">
-                    <a href="/" class="logo-link">ZICZAC</a>
+<nav id="main_nav" class="navbar-light bg-white" style="top:0;padding-top:0px !important;padding-bottom: 0px !important;background:#ffffff!important;width: 100%;z-index: 1000;">
+    <div class="header-main header-project cts-project header-layout-project">
+        <!-- PC -->
+        <div class="container">
+            <div class="row justify-content-end">
+                <div class="col-md-2">
+                    <!-- MENU -->
+                    <ul class="nav-menu list-unstyled mb-0">
+                        <li><a href="/client/home/about">ABOUT</a></li>
+                        <li><a href="/client/project/index">PROJECTS</a></li>
+                        <li><a href="/contact">CONTACT</a></li>
+                    </ul>
                 </div>
-                <!-- MENU -->
-                <ul class="nav-menu list-unstyled mb-0">
-                    <li><a href="/client/home/about">ABOUT</a></li>
-                    <li><a href="/client/project/index">PROJECTS</a></li>
-                    <li><a href="/contact">CONTACT</a></li>
-                </ul>
+                <div class="col-md-2">
+                    <div class="nav-logo">
+                        <a href="/" class="logo-link">ZICZAC</a>
+                    </div>
+                    <!-- SEARCH / FILTER -->
+                    <div class="nav-filter" @if(!isset($showFilter) || !$showFilter) style="display: none;" @endif>
+                        <div class="filter-title">SEARCH</div>
+                        <div class="dropdown">
+                            <a class="dropdown-toggle" href="#" role="button" id="dropdownTypology" data-bs-toggle="dropdown" aria-expanded="false">
+                                typology
+                            </a>
 
-                <!-- SEARCH / FILTER -->
-                <div class="nav-filter">
-                    <div class="filter-title">SEARCH</div>
-                    <select>
-                        <option>typology</option>
-                    </select>
-                    <select>
-                        @foreach($project as $val)
-                           <option>{{ $val->title}}</option>
-                        @endforeach
-                    </select>
-                    <select>
-                        <option>year</option>
-                    </select>
+                            <ul class="dropdown-menu typology" aria-labelledby="dropdownTypology">
+                                @if(isset($typology) && !empty($typology))
+                                @foreach($typology as $val)
+                                <li data-code_category="{{ $val->code_category ?? '' }}"><a class="dropdown-item" href="#{{ $val->code_category }}">{{ $val->name_category }}</a></li>
+                                @endforeach
+                                @endif
+                            </ul>
+                        </div>
+                        <div class="dropdown">
+                            <a class="dropdown-toggle" href="#" role="button" id="dropdownProject" data-bs-toggle="dropdown" aria-expanded="false">
+                                projects
+                            </a>
+
+                            <ul class="dropdown-menu" aria-labelledby="dropdownProject">
+                                @foreach($project as $val)
+                                <li><a class="dropdown-item" href="{{ route('project.reader', ['id' => $val->id]) }}">{{ $val->title }}</a></li>
+                                @endforeach
+                            </ul>
+                        </div>
+                        <div class="dropdown">
+                            <a class="dropdown-toggle" href="#" role="button" id="dropdownYear" data-bs-toggle="dropdown" aria-expanded="false">
+                                year
+                            </a>
+
+                            <ul class="dropdown-menu year" aria-labelledby="dropdownYear">
+                                @for($year = date('Y') + 3; $year >= 2020; $year--)
+                                <li><a class="dropdown-item" href="#{{ $year }}">{{ $year }}</a></li>
+                                @endfor
+                            </ul>
+                        </div>
+                    </div>
                 </div>
-
             </div>
         </div>
     </div>
 </nav>
 
 <!-- MOBILE -->
- <div class="mobile">
+<div class="mobile">
 
     <div class="d-flex">
         <div style="width:20%;color:#6f6969;margin-left: 8px;">
@@ -387,7 +481,7 @@ $project = DB::table('blogs')->join('blogs_details', 'blogs.code_blog', '=', 'bl
             <a href="/" class="logo-link">ZICZAC</a> <br>
             <span style="font-size: 13px;font-family: monospace;">ARCHITECTURE</span>
         </div>
-        <div >
+        <div>
             <a href="/client/home/about" style="font-size: 12px;text-decoration: none;color:#6f6969">Giới thiệu</a>
         </div>
     </div>
@@ -401,18 +495,18 @@ $project = DB::table('blogs')->join('blogs_details', 'blogs.code_blog', '=', 'bl
         <!-- <select>
             <option>typology</option>
         </select> -->
-        <select  id="projectSelect">
+        <select id="projectSelect">
             <option>Dự án</option>
-             @foreach($project as $val)
-                <option value="{{ route('project.reader', ['id' => $val->id]) }}">{{ $val->title}}</option>
-             @endforeach
+            @foreach($project as $val)
+            <option value="{{ route('project.reader', ['id' => $val->id]) }}">{{ $val->title}}</option>
+            @endforeach
         </select>
         <!-- <select>
             <option>year</option>
         </select> -->
     </div>
 
- </div>
+</div>
 
 <!-- Close Header -->
 @section('js')
@@ -437,7 +531,7 @@ $project = DB::table('blogs')->join('blogs_details', 'blogs.code_blog', '=', 'bl
     }
 
 
-    // ẩn hiện lọc 
+    // ẩn hiện lọc
     const btn = document.getElementById("toggleFilter");
     const box = document.getElementById("filterBox");
 
@@ -449,11 +543,10 @@ $project = DB::table('blogs')->join('blogs_details', 'blogs.code_blog', '=', 'bl
     });
 
     // click sang dự án
-    document.getElementById('projectSelect').addEventListener('change', function () {
+    document.getElementById('projectSelect').addEventListener('change', function() {
         if (this.value) {
             window.location.href = this.value;
         }
     });
-
 </script>
 @endsection

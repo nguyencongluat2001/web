@@ -22,15 +22,11 @@ use str;
 class BlogController extends Controller
 {
     public function __construct(
-        UserService $userService,
-        CateService $cateService,
-        CategoryService $categoryService,
-        BlogService $blogService
+        private UserService $userService,
+        private CateService $cateService,
+        private CategoryService $categoryService,
+        private BlogService $blogService
     ){
-        $this->userService = $userService;
-        $this->cateService = $cateService;
-        $this->categoryService = $categoryService;
-        $this->blogService = $blogService;
     }
 
     /**

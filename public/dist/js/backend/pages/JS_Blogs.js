@@ -5,6 +5,7 @@ function JS_Blogs(baseUrl, module, controller) {
     NclLib.active('.link-blog');
     this.urlPath = baseUrl + '/' + module + '/' + controller;
     this.selectedFiles = []
+    this.selectedVideos = []
 }
 
 /**
@@ -59,6 +60,10 @@ JS_Blogs.prototype.loadevent = function (oForm) {
         $(this).closest('.preview-item').remove()
     })
 
+    $('#fileListVideo').on('click', '.btn-remove-video-old', function () {
+        $(this).closest('.preview-item-video').remove()
+    })
+
     $('.btn_close').click(function () {
         myClass.selectedFiles = []
     })
@@ -94,6 +99,37 @@ JS_Blogs.prototype.loadevent = function (oForm) {
 
         JS_Blogs.renderPreview()
         this.value = ''
+    })
+
+    $(document).find('#fileVideo').on('change', function (e) {
+        const files = Array.from(e.target.files)
+
+        files.forEach(file => {
+            // chỉ nhận video
+            if (!file.type.startsWith('video/')) return
+
+            // check trùng (name + size)
+            const exists = JS_Blogs.selectedVideos.some(v =>
+                v.name === file.name && v.size === file.size
+            )
+
+            if (!exists) {
+                JS_Blogs.selectedVideos.push(file)
+            }
+        })
+
+        JS_Blogs.renderVideoPreview()
+
+        // reset input để chọn lại cùng file vẫn trigger change
+        this.value = ''
+    })
+
+    // xoá preview video mới
+    $(document).on('click', '.btn-remove', function () {
+        const index = $(this).data('index')
+
+        JS_Blogs.selectedVideos.splice(index, 1)
+        JS_Blogs.renderVideoPreview()
     })
 }
 /**
@@ -145,6 +181,7 @@ JS_Blogs.prototype.store = function (oFormCreate) {
     formdata.append('code_category', $("#code_category").val());
     formdata.append('code_blog', $("#code_blog").val());
     formdata.append('title', $("#title").val());
+    formdata.append('year', $("#year").val());
     formdata.append('decision', CKEDITOR.instances.decision.getData());
     formdata.append('status', status);
 
@@ -154,6 +191,14 @@ JS_Blogs.prototype.store = function (oFormCreate) {
 
     $('#fileList .old-image').each(function () {
         formdata.append('old_image[]', $(this).data('id'))
+    })
+
+    myClass.selectedVideos.forEach(file => {
+        formdata.append('videos[]', file)
+    })
+
+    $('#fileListVideo .old-video').each(function () {
+        formdata.append('old_video[]', $(this).data('id'))
     })
 
     $.ajax({
@@ -169,6 +214,7 @@ JS_Blogs.prototype.store = function (oFormCreate) {
                 NclLib.alertMessageBackend('success', 'Thông báo', 'Cập nhật thành công');
                 $('#editmodal').modal('hide');
                 myClass.selectedFiles = []
+                myClass.selectedVideos = []
                 myClass.loadList(oFormCreate);
 
             } else {
@@ -261,6 +307,7 @@ JS_Blogs.prototype.edit = function (oForm) {
         success: function (arrResult) {
             $('#editmodal').html(arrResult);
             $('#editmodal').modal('show');
+            $('.chzn-select').chosen({ height: '100%', width: '100%' });
             myClass.loadevent(oForm);
 
         }
@@ -460,7 +507,7 @@ JS_Blogs.prototype.checkValidate = function () {
     }
 }
 
-JS_Blogs.prototype.renderPreview = function() {
+JS_Blogs.prototype.renderPreview = function () {
     var myClass = this
     const $list = $('#fileList')
 
@@ -484,8 +531,26 @@ JS_Blogs.prototype.renderPreview = function() {
     })
 }
 
-JS_Blogs.prototype.removeFile = function(index) {
+JS_Blogs.prototype.removeFile = function (index) {
     var myClass = this;
     JS_Blogs.selectedFiles.splice(index, 1)
     myClass.renderPreview()
+}
+
+JS_Blogs.prototype.renderVideoPreview = function () {
+    const $list = $('#fileListVideo')
+
+    // chỉ xoá preview video mới, không đụng video cũ
+    $list.find('.new-video').remove()
+
+    JS_Blogs.selectedVideos.forEach((file, index) => {
+        const url = URL.createObjectURL(file)
+
+        $list.append(`
+      <div class="preview-item-video new-video" data-index="${index}">
+        <video src="${url}" controls></video>
+        <button type="button" class="btn-remove" data-index="${index}">&times;</button>
+      </div>
+    `)
+    })
 }

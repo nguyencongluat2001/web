@@ -55,6 +55,7 @@ class BlogService extends Service
                 'title'         => $input['title'] ?? null,
                 'decision'      => $input['decision'] ?? null,
                 'rate'          => 5,
+                'year'          => $input['year'] ?? null,
                 'status'        => isset($input['status']) ? 1 : 0,
             ];
             $params['created_at'] = empty($input['id']) ? now() : ($created_at ?? null);
@@ -62,6 +63,7 @@ class BlogService extends Service
             $this->blogRepository->updateOrCreate(['id' => $input['id']], $params);
             $this->blogDetailService->updateOrCreate(['code_blog' => $codeBlog], $params);
             $this->updateOrCreateImages($codeBlog, $file, $input['old_image'] ?? []);
+            $this->updateOrCreateVideos($codeBlog, $file, $input['old_video'] ?? []);
             DB::commit();
             return true;
         } catch (\Exception $e) {
@@ -72,16 +74,22 @@ class BlogService extends Service
 
     public function updateOrCreateImages($codeBlog, $arrFiles, $imageOldIds = [])
     {
-        $oldImages = $this->blogImagesService
-            ->where('code_blog', $codeBlog)
-            ->whereNotIn('id', $imageOldIds);
-        foreach ($oldImages->get() as $image) {
-            $old_path = $this->baseDis . $image['name_image'];
-            if (file_exists($old_path)) {
-                @unlink($old_path);
+        if ($imageOldIds !== []) {
+            $oldImages = $this->blogImagesService
+                ->where('code_blog', $codeBlog)
+                ->whereNotIn('id', $imageOldIds)
+                ->where(function ($query) {
+                    $query->where('type', 'file')
+                          ->orWhereNull('type');
+                });
+            foreach ($oldImages->get() as $image) {
+                $old_path = $this->baseDis . $image['name_image'];
+                if (file_exists($old_path)) {
+                    @unlink($old_path);
+                }
             }
+            $oldImages->delete();
         }
-        $oldImages->delete();
         if (empty($arrFiles)) {
             return;
         }
@@ -94,6 +102,42 @@ class BlogService extends Service
                     'code_blog'     => $codeBlog,
                     'name'          => $file['name'],
                     'name_image'    => $upload ?? null,
+                    'type'          => 'file',
+                    'order_image'   => $key + 1,
+                ];
+                $this->blogImagesService->create($paramsImage);
+            }
+        }
+    }
+
+    public function updateOrCreateVideos($codeBlog, $arrFiles, $videoOldIds = [])
+    {
+        if ($videoOldIds !== []) {
+            $oldImages = $this->blogImagesService
+                ->where('code_blog', $codeBlog)
+                ->whereNotIn('id', $videoOldIds)
+                ->where('type', 'video');
+            foreach ($oldImages->get() as $image) {
+                $old_path = $this->baseDis . $image['name_image'];
+                if (file_exists($old_path)) {
+                    @unlink($old_path);
+                }
+            }
+            $oldImages->delete();
+        }
+        if (empty($arrFiles)) {
+            return;
+        }
+        $videos = $this->formatMultipleFile($arrFiles['videos'] ?? []);
+        if (!empty($videos)) {
+            foreach ($videos as $key => $file) {
+                $upload = $this->uploadFile($file);
+                $paramsImage = [
+                    'id'            => (string) Str::uuid(),
+                    'code_blog'     => $codeBlog,
+                    'name'          => $file['name'],
+                    'name_image'    => $upload ?? null,
+                    'type'          => 'video',
                     'order_image'   => $key + 1,
                 ];
                 $this->blogImagesService->create($paramsImage);
@@ -121,19 +165,21 @@ class BlogService extends Service
         $arrBlog = [];
         if (isset($getBlogInfor)) {
             $blogDetail = $this->blogDetailService->where('code_blog', $getBlogInfor['code_blog'])->first();
-            $blogImage = $this->blogImagesService->where('code_blog', $getBlogInfor['code_blog'])->get();
+            $blogImage = $this->blogImagesService->where('code_blog', $getBlogInfor['code_blog'])->get()?->toArray();
             foreach ($blogImage as $key => $image) {
-                $blogImage[$key]['url_image'] = $this->basePath . $image['name_image'];
+                $blogImage[$key]['url_path'] = $this->basePath . $image['name_image'];
             }
             $arrBlog = [
                 'id'            => $getBlogInfor->id,
                 'code_blog'     => $getBlogInfor->code_blog,
                 'code_category' => isset($getBlogInfor->code_category) ? $getBlogInfor->code_category : null,
+                'year'   => $getBlogInfor->year,
                 'status'   => $getBlogInfor->status,
                 'title'    => isset($blogDetail->title) ? $blogDetail->title : null,
                 'decision' => isset($blogDetail->decision) ? $blogDetail->decision : null,
                 'rate'     => isset($blogDetail->rate) ? $blogDetail->rate : 5,
-                'images'   => !empty($blogImage) ? $blogImage : null,
+                'images'   => !empty($blogImage) ? array_values(array_filter($blogImage, fn($i) => $i['type'] === 'file' || $i === null)) : null,
+                'videos'   => !empty($blogImage) ? array_values(array_filter($blogImage, fn($i) => $i['type'] === 'video')) : null
             ];
         }
         return $arrBlog;
@@ -197,14 +243,16 @@ class BlogService extends Service
     public function formatMultipleFile($files)
     {
         $arrFiles = [];
-        foreach ($files['name'] as $key => $name) {
-            $arrFiles[] = [
-                'name' => $name,
-                'type' => $files['type'][$key],
-                'tmp_name' => $files['tmp_name'][$key],
-                'error' => $files['error'][$key],
-                'size' => $files['size'][$key],
-            ];
+        if ($files) {
+            foreach ($files['name'] as $key => $name) {
+                $arrFiles[] = [
+                    'name' => $name,
+                    'type' => $files['type'][$key],
+                    'tmp_name' => $files['tmp_name'][$key],
+                    'error' => $files['error'][$key],
+                    'size' => $files['size'][$key],
+                ];
+            }
         }
         return $arrFiles;
     }

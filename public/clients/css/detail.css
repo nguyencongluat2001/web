@@ -441,7 +441,9 @@
 }
 
 .project-detail__thumbs {
-    margin-bottom: 50px
+    height: calc(100vh - 4rem);
+    display: grid;
+    grid-template-rows: 1fr 2fr 1fr;
 }
 
 .project-detail__thumbs .slick-list {
@@ -468,6 +470,15 @@
     border-color: #000
 }
 
+.project-detail__thumbs .project-video,
+.project-detail__thumbs .project-detail_body {
+    margin-bottom: 2rem;
+}
+
+.project-detail_body {
+    overflow-y: auto;
+}
+
 .project-detail__title {
     font-size: 22px;
     font-weight: 600;
@@ -485,6 +496,19 @@
 
 .project-content {
     padding-left: 60px;
+}
+
+.project-relate .carousel-inner {
+    aspect-ratio: 14.3/9;
+}
+
+.project-relate .carousel-item {
+    height: 100%;
+}
+
+.project-relate .carousel-item img {
+    height: 100%;
+    object-fit: cover;
 }
 
 @media (max-width: 450px) {
