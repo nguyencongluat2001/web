@@ -3,12 +3,11 @@
 <style>
     .team-card {
         background: #fff;
-        padding: 24px 40px;
     }
 
     .team-image {
-        width: 260px;          /* kiểm soát size */
-        height: 340px;         /* chiều cao cố định */
+        width: 100%;
+        height: 340px;
         aspect-ratio: 3 / 4;
         overflow: hidden;
         margin-bottom: 16px;
