@@ -1,3 +1,7 @@
+<?php
+use Illuminate\Support\Facades\DB;
+$project = DB::table('blogs')->join('blogs_details', 'blogs.code_blog', '=', 'blogs_details.code_blog')->where('status', 1)->take(3)->get();
+?>
 <style>
     .navbar-nav .nav-link {
         padding-right: 10px !important;
@@ -358,7 +362,9 @@
                         <option>typology</option>
                     </select>
                     <select>
-                        <option>projects</option>
+                        @foreach($project as $val)
+                           <option>{{ $val->title}}</option>
+                        @endforeach
                     </select>
                     <select>
                         <option>year</option>
@@ -392,15 +398,18 @@
     </div>
 
     <div id="filterBox" class="filter-box">
-        <select>
+        <!-- <select>
             <option>typology</option>
+        </select> -->
+        <select  id="projectSelect">
+            <option>Dự án</option>
+             @foreach($project as $val)
+                <option value="{{ route('project.reader', ['id' => $val->id]) }}">{{ $val->title}}</option>
+             @endforeach
         </select>
-        <select>
-            <option>projects</option>
-        </select>
-        <select>
+        <!-- <select>
             <option>year</option>
-        </select>
+        </select> -->
     </div>
 
  </div>
@@ -438,5 +447,13 @@
         box.style.display = isOpen ? "none" : "block";
         btn.textContent = isOpen ? "+" : "×";
     });
+
+    // click sang dự án
+    document.getElementById('projectSelect').addEventListener('change', function () {
+        if (this.value) {
+            window.location.href = this.value;
+        }
+    });
+
 </script>
 @endsection

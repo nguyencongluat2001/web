@@ -51,7 +51,7 @@ html, body {
     <img src="../clients/img/home.jpg" alt="Hero Image">
 
     <div class="hero-logo">
-        <a href="{{url('/client/project/index')}}" class="hero-logo">
+        <a href="{{url('/client/home/about')}}" class="hero-logo">
             <h1>ZICZAC</h1>
             <span>ARCHITECTURE</span>
             <!-- <img src="../clients/img/home.jpg" alt="main_logo" style="width:80%;padding-left:20%"> -->
