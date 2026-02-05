@@ -12,6 +12,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
     <link rel="shortcut icon" type="image/x-icon" href="../clients/img/home.jpg">
+    <link rel="stylesheet" href="https://unpkg.com/photoswipe@5/dist/photoswipe.css">
 
     <meta property="og:image" content="@yield('og:image', 'http://cdn0387.cdn4s.com/media/logo/logo-kite-350x.png')" />
     <meta property="og:image:secure_url" content="'@yield('og:image', 'http://cdn0387.cdn4s.com/media/logo/logo-kite-350x.png')" />
@@ -25,6 +26,7 @@
                 <div class="row">
                     <div class="col-lg-9 pr-md-60">
                         <div id="carouselExampleControls" class="carousel slide slick-slider" data-bs-ride="carousel">
+                            
                             <div class="carousel-indicators">
                                 @if(isset($datas->imageBlog) && !empty($datas->imageBlog))
                                 @php $k = 1; @endphp
@@ -36,13 +38,22 @@
                                 @endforeach
                                 @endif
                             </div>
-                            <div class="carousel-inner project-detail__image">
+                            <div class="carousel-inner project-detail__image pswp-gallery" id="gallery">
                                 @if(isset($datas->imageBlog) && !empty($datas->imageBlog))
                                 @php $i = 1; @endphp
                                 @foreach($datas->imageBlog as $value)
                                 @if($value->type !== 'video')
                                 <div class="project-detail__image-item carousel-item {{ $i == 1 ? 'active' : '' }}">
-                                    <img src="{{url('/file-image-client/blogs/')}}/{{ $value->name_image ?? '' }}" class="d-block w-100 img-fluid" alt="...">
+                                    <!-- <img src="{{url('/file-image-client/blogs/')}}/{{ $value->name_image ?? '' }}" class="d-block w-100 img-fluid" alt="..."> -->
+                                    <a href="{{ url('/file-image-client/blogs/'.$value->name_image) }}"
+                                        data-pswp-width="2400"
+                                        data-pswp-height="1600"
+                                        target="_blank">
+                                            <img src="{{ url('/file-image-client/blogs/'.$value->name_image) }}"
+                                                class="d-block w-100 img-fluid"
+                                                style="cursor: zoom-in;">
+                                    </a>
+
                                 </div>
                                 @php $i++; @endphp
                                 @endif
@@ -170,6 +181,19 @@
             })
         })
     </script>
+    <script type="module">
+        import PhotoSwipeLightbox from 'https://unpkg.com/photoswipe@5/dist/photoswipe-lightbox.esm.js';
+
+        const lightbox = new PhotoSwipeLightbox({
+            gallery: '#gallery',
+            children: 'a',
+            pswpModule: () => import('https://unpkg.com/photoswipe@5/dist/photoswipe.esm.js'),
+            showHideAnimationType: 'zoom',
+            bgOpacity: 0.95
+        });
+        lightbox.init();
+    </script>
+
 </body>
 
 </html>
