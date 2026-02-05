@@ -327,7 +327,15 @@ if (!empty($cate)) {
     @media (max-width: 991px) {
 
         .mobile {
-            display: none !important;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            pointer-events: auto;
+            display: block !important;
+            background: #ffffff;
+        }
+        .mobile * {
+            pointer-events: auto;
         }
 
         .nav-inner {
@@ -379,7 +387,15 @@ if (!empty($cate)) {
     @media (max-width: 768px) {
 
         .mobile {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            pointer-events: auto;
             display: block !important;
+            background: #ffffff;
+        }
+        .mobile * {
+            pointer-events: auto;
         }
 
         .nav-logo .logo-link {
@@ -408,7 +424,7 @@ if (!empty($cate)) {
         } */
     }
 </style>
-<nav id="main_nav" class="navbar-light bg-white" style="top:0;padding-top:0px !important;padding-bottom: 0px !important;background:#ffffff!important;width: 100%;z-index: 1000;">
+<nav id="main_nav" class="navbar-light bg-white web" style="top:0;padding-top:0px !important;padding-bottom: 0px !important;background:#ffffff!important;width: 100%;z-index: 1000;">
     <div class="header-main header-project cts-project header-layout-project">
         <!-- PC -->
         <div class="container">
@@ -492,18 +508,12 @@ if (!empty($cate)) {
     </div>
 
     <div id="filterBox" class="filter-box">
-        <!-- <select>
-            <option>typology</option>
-        </select> -->
         <select id="projectSelect">
             <option>Dự án</option>
             @foreach($project as $val)
             <option value="{{ route('project.reader', ['id' => $val->id]) }}">{{ $val->title}}</option>
             @endforeach
         </select>
-        <!-- <select>
-            <option>year</option>
-        </select> -->
     </div>
 
 </div>
