@@ -2,8 +2,8 @@
 
 use Illuminate\Support\Facades\DB;
 
-$project = DB::table('blogs')->join('blogs_details', 'blogs.code_blog', '=', 'blogs_details.code_blog')->where('status', 1)->get();
-
+$project = DB::table('blogs')->join('blogs_details', 'blogs.code_blog', '=', 'blogs_details.code_blog')->where('status', 1)->orderBy('blogs_details.year','DESC')->get();
+dd($project);
 $cate = DB::table('cates')->where('code_cate', 'product')->first();
 if (!empty($cate)) {
     $typology = DB::table('categorys')->select('code_category', 'name_category')->where('cate', $cate->code_cate)->get()->toArray();
