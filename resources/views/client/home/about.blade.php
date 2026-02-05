@@ -7,6 +7,7 @@
     <title>ABOUT</title>
     <link href="{{ @asset('/clients/fontawesome/css/all.min.css') }}" rel="stylesheet">
     <link href="{{ @asset('/clients/css/bootstrap.min.css') }}" rel="stylesheet">
+    <script src='{{ @asset("clients/js/jquery.min.js") }}'></script>
 </head>
 
 <style>
@@ -193,6 +194,7 @@
     </script>
     <!-- End Service -->
     <script src='{{ @asset("clients/js/jquery.min.js") }}'></script>
+    <script src='{{ @asset("assets/js/placeholderTypewriter.js") }}'></script>
     <script type="text/javascript" src="{{ URL::asset('dist/js/backend/client/JS_Home.js') }}"></script>
     <script type="text/javascript" src="{{ URL::asset('dist/js/backend/client/JS_Facilities.js') }}"></script>
 

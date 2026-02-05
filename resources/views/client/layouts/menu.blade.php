@@ -336,7 +336,6 @@ if (!empty($cate)) {
         }
         .mobile * {
             pointer-events: auto;
-            display: none !important;
         }
 
         .nav-inner {
@@ -520,7 +519,6 @@ if (!empty($cate)) {
 </div>
 
 <!-- Close Header -->
-@section('js')
 <script>
     $('#menu-toggle').click(function() {
         $("#navbar-toggler").toggleClass('show');
@@ -560,4 +558,3 @@ if (!empty($cate)) {
         }
     });
 </script>
-@endsection
