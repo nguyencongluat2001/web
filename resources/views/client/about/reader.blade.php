@@ -77,6 +77,7 @@
                                     preload="metadata"
                                 >
                                     <source src="{{ url('/file-image-client/blogs/'.$value->name_image) }}" type="video/mp4">
+                                    <source src="{{ url('/file-image-client/blogs/'.$value->name_image) }}" type="video/quicktime">
                                 </video>
 
                                 @php $v++; @endphp
