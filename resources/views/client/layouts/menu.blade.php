@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\DB;
 
-$project = DB::table('blogs')->join('blogs_details', 'blogs.code_blog', '=', 'blogs_details.code_blog')->where('status', 1)->take(3)->get();
+$project = DB::table('blogs')->join('blogs_details', 'blogs.code_blog', '=', 'blogs_details.code_blog')->where('status', 1)->get();
 
 $cate = DB::table('cates')->where('code_cate', 'product')->first();
 if (!empty($cate)) {
@@ -270,11 +270,35 @@ if (!empty($cate)) {
 
     .filter-box select {
         width: 95%;
-        padding: 6px 8px;
-        margin: 0px 10px 2px 10px;
+        margin: 10px 0px 0px 10px;
+        padding: 10px 36px 10px 12px;
+
+        font-size: 12px;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+
         border: 1px solid #000;
-        background: #fff;
+        border-radius: 6px;
+        background-color: #fff;
+        color: #000;
+
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+
+        background-image: url("data:image/svg+xml;utf8,<svg fill='black' height='20' viewBox='0 0 24 24' width='20' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+        background-repeat: no-repeat;
+        background-position: right 10px center;
+        background-size: 16px;
+
+        transition: border-color .2s ease;
     }
+
+    .filter-box select:focus {
+        outline: none;
+        border-color: #000;
+    }
+
 
     .toggle-btn {
         background: none;
