@@ -519,7 +519,6 @@ if (!empty($cate)) {
 </div>
 
 <!-- Close Header -->
-@section('js')
 <script>
     $('#menu-toggle').click(function() {
         $("#navbar-toggler").toggleClass('show');
@@ -559,4 +558,3 @@ if (!empty($cate)) {
         }
     });
 </script>
-@endsection

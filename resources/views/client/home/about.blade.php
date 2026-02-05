@@ -7,6 +7,7 @@
     <title>ABOUT</title>
     <link href="{{ @asset('/clients/fontawesome/css/all.min.css') }}" rel="stylesheet">
     <link href="{{ @asset('/clients/css/bootstrap.min.css') }}" rel="stylesheet">
+    <script src='{{ @asset("clients/js/jquery.min.js") }}'></script>
 </head>
 
 <style>
