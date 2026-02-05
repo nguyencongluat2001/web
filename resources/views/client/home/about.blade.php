@@ -121,7 +121,7 @@
                     <h2>ABOUT</h2>
 
                     <div class="about-info">
-                        <h3>KITE Architecture</h3>
+                        <h3>ZICZAC Architecture</h3>
                         <p>64 Ngo Quyen, Ha Dong District, Hanoi, Vietnam</p>
                         <p>(+84) 982179361</p>
                         <p>
@@ -134,16 +134,16 @@
                     <div class="about-content">
                         <h4><strong>About us</strong></h4>
                         <p>
-                            KITE Architecture was founded by four Architects with the same passion
+                            ZICZAC Architecture was founded by four Architects with the same passion
                             and architectural ideas.
                         </p>
                         <p>
-                            KITE - “The kite flying in the wind” - A symbol of softness, peace but
+                            ZICZAC - “The ZICZAC flying in the wind” - A symbol of softness, peace but
                             full of intense energy, of the aspiration to freedom but still held on
                             by the standards and standards.
                         </p>
                         <p>
-                            That balance is the spirit of KITE Architecture on the goal towards a
+                            That balance is the spirit of ZICZAC Architecture on the goal towards a
                             harmonizing people with nature in the continuous movement of life.
                         </p>
 
@@ -154,11 +154,11 @@
                             nature, including man.
                         </p>
                         <p>
-                            Design philosophy of KITE Architecture:
+                            Design philosophy of ZICZAC Architecture:
                             <em>“Balanced architecture to adapt to nature”.</em>
                         </p>
                         <p>
-                            KITE Architecture pursues energy sustainability and green standards to
+                            ZICZAC Architecture pursues energy sustainability and green standards to
                             solve the problems of Tropical Architecture.
                         </p>
                     </div>

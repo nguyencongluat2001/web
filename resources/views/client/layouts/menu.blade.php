@@ -320,7 +320,7 @@ if (!empty($cate)) {
 
 
     /* ===============================
-   RESPONSIVE HEADER – KITE
+   RESPONSIVE HEADER – ZICZAC
    =============================== */
 
     /* -------- Tablet & Mobile -------- */
