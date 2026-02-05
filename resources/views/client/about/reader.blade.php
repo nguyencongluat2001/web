@@ -92,7 +92,7 @@
                                 </div>
                             </div>
                             @if(isset($relates) && count($relates) > 0)
-                            <div class="project-relate">
+                            <div class="project-relate" style="width: 70%;margin:auto">
                                 <div id="carouselRelates" class="carousel slide" data-bs-ride="carousel">
                                     <div class="carousel-indicators">
                                         @if(isset($relates) && !empty($relates))

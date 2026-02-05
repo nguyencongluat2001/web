@@ -517,9 +517,12 @@ if (!empty($cate)) {
         <div style="width:20%;color:#6f6969;margin-left: 8px;">
             <span>en</span>
         </div>
-        <div class="nav-logo" style="width:60%">
-            <a href="/" class="logo-link">ZICZAC</a> <br>
-            <span style="font-size: 13px;font-family: monospace;">ARCHITECTURE</span>
+        <div class="nav-logo" style="width:60%;font-family: auto;">
+            <center>
+                <a href="/" class="logo-link" >ZICZAC</a> <br>
+               <span style="font-size: 13px;font-family: monospace;">ARCHITECTURE</span>
+            </center>
+            
         </div>
         <div>
             <a href="/client/home/about" style="font-size: 12px;text-decoration: none;color:#6f6969">Giới thiệu</a>
