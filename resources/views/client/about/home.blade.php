@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PROJECT</title>
+    <title>Danh sách sản phẩm</title>
     <link href="{{ @asset('/clients/fontawesome/css/all.min.css') }}" rel="stylesheet">
     <link href="{{ @asset('/clients/css/bootstrap.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ @asset('/clients/css/custom.css') }}">

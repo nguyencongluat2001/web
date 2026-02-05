@@ -1,3 +1,4 @@
+<title>Liên hệ</title>
 @extends('client.layouts.index')
 @section('body-client')
 <link rel="stylesheet" href="../clients/css/style.css">
@@ -21,12 +22,12 @@
                             <div class="split-content">
                                 <p class="small-text">Please let us know how we can help via:</p>
 
-                                <h3>KITE Architecture</h3>
+                                <h3>ZICZAC Architecture</h3>
 
                                 <p>
                                 64 Ngo Quyen, Ha Dong District, Hanoi, Vietnam<br>
                                 (+84) 982 179 361<br>
-                                <a href="mailto:hoangducanh84@gmail.com">hoangducanh84@gmail.com</a>
+                                <a href="mailto:phamhoangson@gmail.com">phamhoangson@gmail.com</a>
                                 </p>
                             </div>
                         </div>

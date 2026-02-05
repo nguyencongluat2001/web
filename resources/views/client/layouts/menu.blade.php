@@ -18,7 +18,7 @@ if (!empty($cate)) {
     }
 
     .header-main {
-        padding: 30px 0 10px
+        padding: 30px 30px 10px
     }
 
     .header-main.header-project .container,

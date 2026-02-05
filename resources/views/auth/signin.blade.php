@@ -1,6 +1,4 @@
-@extends('client.layouts.index')
 
-@section('body-client')
 <style>
     .form-wrapper,
     .checkbox {
@@ -72,4 +70,3 @@
         </div>
     </div>
 </div>
-@endsection
