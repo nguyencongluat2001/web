@@ -68,10 +68,17 @@
                                 @foreach($datas->imageBlog as $value)
                                 @php if($v > 0) continue; @endphp
                                 @if($value->type === 'video')
-                                <video width="100%" height="auto" autoplay muted playsinline loop>
-                                    <source src="{{url('/file-image-client/blogs/')}}/{{ $value->name_image ?? '' }}" type="video/mp4">
-                                    Your browser does not support the video tag.
+                                <video
+                                    width="100%"
+                                    muted
+                                    autoplay
+                                    playsinline
+                                    loop
+                                    preload="metadata"
+                                >
+                                    <source src="{{ url('/file-image-client/blogs/'.$value->name_image) }}" type="video/mp4">
                                 </video>
+
                                 @php $v++; @endphp
                                 @endif
                                 @endforeach
