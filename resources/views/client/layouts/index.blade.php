@@ -6,8 +6,10 @@
     <title>ZICZAC</title>
     <meta charset="utf-8">
     <base href="{{ asset('') }}">
-    <meta property="og:image" content="@yield('og:image', 'https://medhanoi.com/clients/img/Logo_medhanoi.png')" />
-    <meta property="og:image:secure_url" content="'@yield('og:image', 'https://medhanoi.com/clients/img/Logo_medhanoi.png')" />
+    
+    <meta property="og:image" content="@yield('og:image', 'http://cdn0387.cdn4s.com/media/logo/logo-kite-350x.png')" />
+    <meta property="og:image:secure_url" content="'@yield('og:image', 'http://cdn0387.cdn4s.com/media/logo/logo-kite-350x.png')" />
+    
     <meta property="og:title" content="@yield('og:title','ZICZAC')">
     <meta property="og:description" content="@yield('og:title','ZICZAC')">
     @if(request()->isSecure())
@@ -35,7 +37,6 @@
     <link rel="stylesheet" href="../assets/chosen/chosen.min.css">
     <script src="https://unpkg.com/lightweight-charts@3.4.0/dist/lightweight-charts.standalone.production.js"></script>
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
-
 </head>
 
 <style>
