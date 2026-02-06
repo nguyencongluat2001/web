@@ -46,17 +46,56 @@ html, body {
     opacity: 0.9;
 }
 
+/* MENU BÊN TRÁI */
+.hero-menu {
+    position: absolute;
+    left: 4%;
+    top: 35%;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    z-index: 10;
+}
+
+.hero-menu a {
+    display: inline-block;
+    padding: 12px 26px;
+    background: rgba(0,0,0,0.55);
+    color: #fff;
+    text-decoration: none;
+    font-size: 22px;
+    /* font-family: 'Patrick Hand', cursive; */
+    font-family: 'auto';
+    border-radius: 6px;
+    transition: all 0.3s ease;
+}
+
+/* Hover */
+.hero-menu a:hover {
+    background: rgba(0,0,0,0.85);
+    transform: translateX(6px);
+}
+
+
 </style>
 <div class="hero">
     <img src="../clients/img/home.jpg" alt="Hero Image">
 
+    <!-- MENU BÊN TRÁI -->
+    <div class="hero-menu">
+        <a href="/client/home/about">Giới thiệu</a>
+        <a href="/client/project/index">Dự án</a>
+        <a href="/contact">Liên hệ</a>
+    </div>
+
+    <!-- LOGO -->
     <div class="hero-logo">
         <a href="{{url('/client/home/about')}}" class="hero-logo">
             <h1>ZICZAC</h1>
             <span>ARCHITECTURE</span>
-            <!-- <img src="../clients/img/home.jpg" alt="main_logo" style="width:80%;padding-left:20%"> -->
         </a>
     </div>
 </div>
+
 
 

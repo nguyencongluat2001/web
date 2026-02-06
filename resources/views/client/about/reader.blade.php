@@ -18,6 +18,20 @@
     <meta property="og:image:secure_url" content="'@yield('og:image', 'http://cdn0387.cdn4s.com/media/logo/logo-kite-350x.png')" />
 
 </head>
+<style>
+    .hero-menu a {
+        display: inline-block;
+        padding: 12px 12px;;
+        background: rgba(255, 255, 255, 0.55);
+        color: #000000ff;
+        text-decoration: none;
+        font-size: 22px;
+        /* font-family: 'Patrick Hand', cursive; */
+        font-family: 'auto';
+        border-radius: 6px;
+        transition: all 0.3s ease;
+    }
+</style>
 
 <body>
     <div class="banner-wrapper">
@@ -67,7 +81,13 @@
                                 <span class="visually-hidden">Next</span>
                             </button>
                         </div>
+                        <div class="hero-menu">
+                            <a href="/client/home/about">Giới thiệu</a>
+                            <a href="/client/project/index">Dự án</a>
+                            <a href="/contact">Liên hệ</a>
+                        </div>
                     </div>
+                    
                     <div class="col-lg-3 project-content">
                         <div class="back mb-2">
                             <button onclick="window.history.back()"><i class="fas fa-chevron-left fs-13 pe-2"></i> Back</button>

@@ -459,9 +459,9 @@ if (!empty($cate)) {
                 <div class="col-md-2">
                     <!-- MENU -->
                     <ul class="nav-menu list-unstyled mb-0">
-                        <li><a href="/client/home/about">ABOUT</a></li>
-                        <li><a href="/client/project/index">PROJECTS</a></li>
-                        <li><a href="/contact">CONTACT</a></li>
+                        <li><a href="/client/home/about">Giới thiệu</a></li>
+                        <li><a href="/client/project/index">Dự án</a></li>
+                        <li><a href="/contact">Liên hệ</a></li>
                     </ul>
                 </div>
                 <div class="col-md-2">
