@@ -11,6 +11,7 @@ use Modules\System\Dashboard\Users\Services\UserService;
 use Illuminate\Support\Facades\Hash;
 use Modules\Base\Library;
 use DB;
+use Illuminate\Support\Facades\Http;
 use Str;
 
 class BlogService extends Service
@@ -28,7 +29,7 @@ class BlogService extends Service
         $this->baseDis = public_path("file-image-client/blogs") . "/";
         $this->basePath = url("file-image-client/blogs") . "/";
     }
-    
+
 
     public function repository()
     {
@@ -64,7 +65,7 @@ class BlogService extends Service
             $this->blogRepository->updateOrCreate(['id' => $input['id']], $params);
             $this->blogDetailService->updateOrCreate(['code_blog' => $codeBlog], $params);
             $this->updateOrCreateImages($codeBlog, $file, $input['old_image'] ?? []);
-            $this->updateOrCreateVideos($codeBlog, $file, $input['old_video'] ?? []);
+            $this->updateOrCreateVideos($codeBlog, $input['video'], $input['videoId']);
             DB::commit();
             return true;
         } catch (\Exception $e) {
@@ -111,40 +112,47 @@ class BlogService extends Service
         }
     }
 
-    public function updateOrCreateVideos($codeBlog, $arrFiles, $videoOldIds = [])
+    public function updateOrCreateVideos($codeBlog, $linkVideo, $videoId)
     {
-        if ($videoOldIds !== []) {
-            $oldImages = $this->blogImagesService
+        if ($linkVideo) {
+            $this->blogImagesService
                 ->where('code_blog', $codeBlog)
-                ->whereNotIn('id', $videoOldIds)
-                ->where('type', 'video');
-            foreach ($oldImages->get() as $image) {
-                $old_path = $this->baseDis . $image['name_image'];
-                if (file_exists($old_path)) {
-                    @unlink($old_path);
-                }
-            }
-            $oldImages->delete();
-        }
-        if (empty($arrFiles)) {
-            return;
-        }
-        $videos = $this->formatMultipleFile($arrFiles['videos'] ?? []);
-        if (!empty($videos)) {
-            foreach ($videos as $key => $file) {
-                $upload = $this->uploadFile($file);
-                $paramsImage = [
-                    'id'            => (string) Str::uuid(),
-                    'code_blog'     => $codeBlog,
-                    'name'          => $file['name'],
-                    'name_image'    => $upload ?? null,
-                    'type'          => 'video',
-                    'order_image'   => $key + 1,
-                ];
-                $this->blogImagesService->create($paramsImage);
-            }
+                ->where('type', 'video')->delete();
+            $infoYoutube = $this->getInfo($videoId);
+            $paramsImage = [
+                'id'            => (string) Str::uuid(),
+                'code_blog'     => $codeBlog,
+                'name'          => $infoYoutube['title'] ?? '',
+                'name_image'    => $linkVideo,
+                'type'          => 'video',
+                'order_image'   => 1,
+            ];
+            $this->blogImagesService->create($paramsImage);
         }
     }
+
+    public function getInfo($videoId = '')
+    {
+        $apiKey = env("YOUTUBE_API_KEY", "");
+        $url = "https://www.googleapis.com/youtube/v3/videos";
+
+        $response = Http::get($url, [
+            'part' => 'snippet',
+            'id'   => $videoId,
+            'key'  => $apiKey
+        ]);
+
+        $data = $response->json();
+
+        $snippet = $data['items'][0]['snippet'] ?? [];
+        return [
+            'title'       => $snippet['title'] ?? '',
+            'description' => $snippet['description'] ?? '',
+            'thumbnail'   => $snippet['thumbnails']['high']['url'] ?? '',
+            'channel'     => $snippet['channelTitle'] ?? '',
+        ];
+    }
+
 
     // /**
     //  * Tải ảnh vào thư mục
@@ -170,6 +178,13 @@ class BlogService extends Service
             foreach ($blogImage as $key => $image) {
                 $blogImage[$key]['url_path'] = $this->basePath . $image['name_image'];
             }
+            $video = array_filter($blogImage, fn($i) => $i['type'] === 'video');
+            if (isset($video[0])) {
+                $videoId = !empty($video[0])
+                    ? $this->getYoutubeId($video[0]['name_image'])
+                    : null;
+                $linkIframe = "https://www.youtube.com/embed/$videoId";
+            }
             $arrBlog = [
                 'id'            => $getBlogInfor->id,
                 'code_blog'     => $getBlogInfor->code_blog,
@@ -180,10 +195,20 @@ class BlogService extends Service
                 'decision' => isset($blogDetail->decision) ? $blogDetail->decision : null,
                 'rate'     => isset($blogDetail->rate) ? $blogDetail->rate : 5,
                 'images'   => !empty($blogImage) ? array_values(array_filter($blogImage, fn($i) => $i['type'] === 'file' || $i === null)) : null,
-                'videos'   => !empty($blogImage) ? array_values(array_filter($blogImage, fn($i) => $i['type'] === 'video')) : null
+                'video'   => !empty($video) ? $video[0] : null,
+                'linkIframe' => $linkIframe ?? '',
             ];
         }
         return $arrBlog;
+    }
+    private function getYoutubeId($url)
+    {
+        preg_match(
+            '/(youtu\.be\/|v=|\/v\/|embed\/|shorts\/)([a-zA-Z0-9_-]{11})/',
+            $url,
+            $matches
+        );
+        return $matches[2] ?? null;
     }
     /**
      * Màn hình thông tin bài viết

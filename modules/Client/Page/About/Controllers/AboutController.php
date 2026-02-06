@@ -149,13 +149,31 @@ class AboutController extends Controller
             ->where('id', '!=', $id)
             ->with(['fileBlog'])
             ->get();
+
+        $video = array_values(array_filter($blogs->imageBlog?->toArray(), fn($i) => $i['type'] === 'video' || $i === null));
+        if (isset($video[0])) {
+            $videoId = !empty($video[0])
+                ? $this->getYoutubeId($video[0]['name_image'])
+                : null;
+            $data['video'] = "https://www.youtube.com/embed/$videoId";
+        }
         foreach ($relates as $key => $value) {
-            if(!isset($value->fileBlog[0])) {
+            if (!isset($value->fileBlog[0])) {
                 continue;
             }
             $value->url_path = url("file-image-client/blogs") . "/" . ($value->fileBlog[0]?->name_image ?? '');
         }
         $data['relates'] = $relates;
         return view("client.about.reader", $data)->render();
+    }
+
+    private function getYoutubeId($url)
+    {
+        preg_match(
+            '/(youtu\.be\/|v=|\/v\/|embed\/|shorts\/)([a-zA-Z0-9_-]{11})/',
+            $url,
+            $matches
+        );
+        return $matches[2] ?? null;
     }
 }

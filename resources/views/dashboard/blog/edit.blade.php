@@ -40,7 +40,7 @@
                                     <select name="year" id="year" class="form-control chzn-select">
                                         <option value="">-- Chọn năm --</option>
                                         @for($year = date('Y') + 3; $year >= 2020; $year--)
-                                            <option value="{{ $year }}" {{ (isset($data['year']) && $data['year'] == $year) ? 'selected' : '' }}>{{ $year }}</option>
+                                        <option value="{{ $year }}" {{ (isset($data['year']) && $data['year'] == $year) ? 'selected' : '' }}>{{ $year }}</option>
                                         @endfor
                                     </select>
                                 </div>
@@ -86,21 +86,19 @@
                         </div>
                     </div>
                     <div>
-                        <label class="control-label">Chọn video</label>
-                        <br>
-
-                        <label for="fileVideo" class="label-upload">Chọn video</label>
-                        <input type="file" hidden id="fileVideo" multiple accept="video/*">
-
-                        <div id="fileListVideo" class="preview-grid">
-                            @if(!empty($data['videos']))
-                            @foreach($data['videos'] as $video)
-                            <div class="preview-item-video old-video" data-id="{{ $video['id'] }}">
-                                <video src="{{ $video['url_path'] ?? '' }}" controls></video>
-                                <button type="button" class="btn-remove-video-old">&times;</button>
+                        <label class="control-label">Dán Video</label>
+                        <div id="youtube">
+                            <input type="text" class="form-control" name="linkVideo" id="linkVideo" placeholder="VD: https://www.youtube.com" value="{{ !empty($data['video']['name_image']) ? $data['video']['name_image'] : '' }}">
+                            <div id="fileListVideo" class="preview-grid">
+                                @if(!empty($data['video']))
+                                    <iframe
+                                        width="100%"
+                                        src="{{ $data['linkIframe'] ?? '' }}"
+                                        frameborder="0"
+                                        allowfullscreen>
+                                    </iframe>
+                                @endif
                             </div>
-                            @endforeach
-                            @endif
                         </div>
                     </div>
                 </div>

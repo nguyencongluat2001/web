@@ -5,7 +5,6 @@ function JS_Blogs(baseUrl, module, controller) {
     NclLib.active('.link-blog');
     this.urlPath = baseUrl + '/' + module + '/' + controller;
     this.selectedFiles = []
-    this.selectedVideos = []
 }
 
 /**
@@ -82,6 +81,36 @@ JS_Blogs.prototype.loadevent = function (oForm) {
         );
     })
 
+    $(document).find("#linkVideo").on("change", function () {
+        let url = $(this).val().trim()
+
+        if (!url) {
+            $("#fileListVideo").html("")
+            return
+        }
+
+        let getYoutubeId = JS_Blogs.getYoutubeId(url)
+
+        if (!getYoutubeId) {
+            var nameMessage = 'Link YouTube không hợp lệ';
+            var icon = 'warning';
+            var color = '#344767';
+            NclLib.alerMesage(nameMessage, icon, color);
+            return
+        }
+
+        let embedUrl = `https://www.youtube.com/embed/${getYoutubeId}`
+
+        $("#fileListVideo").html(`
+            <iframe
+                width="100%"
+                src="${embedUrl}"
+                frameborder="0"
+                allowfullscreen>
+            </iframe>
+        `)
+    })
+
     $(document).find("#fileInput").on('change', (e) => {
         const files = Array.from(e.target.files)
 
@@ -99,37 +128,6 @@ JS_Blogs.prototype.loadevent = function (oForm) {
 
         JS_Blogs.renderPreview()
         this.value = ''
-    })
-
-    $(document).find('#fileVideo').on('change', function (e) {
-        const files = Array.from(e.target.files)
-
-        files.forEach(file => {
-            // chỉ nhận video
-            if (!file.type.startsWith('video/')) return
-
-            // check trùng (name + size)
-            const exists = JS_Blogs.selectedVideos.some(v =>
-                v.name === file.name && v.size === file.size
-            )
-
-            if (!exists) {
-                JS_Blogs.selectedVideos.push(file)
-            }
-        })
-
-        JS_Blogs.renderVideoPreview()
-
-        // reset input để chọn lại cùng file vẫn trigger change
-        this.value = ''
-    })
-
-    // xoá preview video mới
-    $(document).on('click', '.btn-remove', function () {
-        const index = $(this).data('index')
-
-        JS_Blogs.selectedVideos.splice(index, 1)
-        JS_Blogs.renderVideoPreview()
     })
 }
 /**
@@ -182,6 +180,8 @@ JS_Blogs.prototype.store = function (oFormCreate) {
     formdata.append('code_blog', $("#code_blog").val());
     formdata.append('title', $("#title").val());
     formdata.append('year', $("#year").val());
+    formdata.append('video', $("#linkVideo").val());
+    formdata.append('videoId', myClass.getYoutubeId($("#linkVideo").val()));
     formdata.append('decision', CKEDITOR.instances.decision.getData());
     formdata.append('status', status);
 
@@ -191,14 +191,6 @@ JS_Blogs.prototype.store = function (oFormCreate) {
 
     $('#fileList .old-image').each(function () {
         formdata.append('old_image[]', $(this).data('id'))
-    })
-
-    myClass.selectedVideos.forEach(file => {
-        formdata.append('videos[]', file)
-    })
-
-    $('#fileListVideo .old-video').each(function () {
-        formdata.append('old_video[]', $(this).data('id'))
     })
 
     $.ajax({
@@ -214,7 +206,6 @@ JS_Blogs.prototype.store = function (oFormCreate) {
                 NclLib.alertMessageBackend('success', 'Thông báo', 'Cập nhật thành công');
                 $('#editmodal').modal('hide');
                 myClass.selectedFiles = []
-                myClass.selectedVideos = []
                 myClass.loadList(oFormCreate);
 
             } else {
@@ -507,6 +498,15 @@ JS_Blogs.prototype.checkValidate = function () {
     }
 }
 
+JS_Blogs.prototype.getYoutubeId = function(url) {
+    let regExp =
+        /^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/
+
+    let match = url.match(regExp)
+
+    return match ? match[2] : null
+}
+
 JS_Blogs.prototype.renderPreview = function () {
     var myClass = this
     const $list = $('#fileList')
@@ -535,22 +535,4 @@ JS_Blogs.prototype.removeFile = function (index) {
     var myClass = this;
     JS_Blogs.selectedFiles.splice(index, 1)
     myClass.renderPreview()
-}
-
-JS_Blogs.prototype.renderVideoPreview = function () {
-    const $list = $('#fileListVideo')
-
-    // chỉ xoá preview video mới, không đụng video cũ
-    $list.find('.new-video').remove()
-
-    JS_Blogs.selectedVideos.forEach((file, index) => {
-        const url = URL.createObjectURL(file)
-
-        $list.append(`
-      <div class="preview-item-video new-video" data-index="${index}">
-        <video src="${url}" controls></video>
-        <button type="button" class="btn-remove" data-index="${index}">&times;</button>
-      </div>
-    `)
-    })
 }

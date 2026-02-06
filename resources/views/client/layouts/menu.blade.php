@@ -345,6 +345,15 @@ if (!empty($cate)) {
         display: none;
     }
 
+    .dropdown-item{
+        display: block;
+  	    display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
 
     /* ===============================
    RESPONSIVE HEADER – ZICZAC
@@ -479,7 +488,7 @@ if (!empty($cate)) {
                             <ul class="dropdown-menu typology" aria-labelledby="dropdownTypology">
                                 @if(isset($typology) && !empty($typology))
                                 @foreach($typology as $val)
-                                <li data-code_category="{{ $val->code_category ?? '' }}"><a class="dropdown-item" href="#{{ $val->code_category }}">{{ $val->name_category }}</a></li>
+                                <li data-code_category="{{ $val->code_category ?? '' }}"><a class="dropdown-item" title="{{ $val->name_category }}" href="#{{ $val->code_category }}">{{ $val->name_category }}</a></li>
                                 @endforeach
                                 @endif
                             </ul>
@@ -491,7 +500,7 @@ if (!empty($cate)) {
 
                             <ul class="dropdown-menu" aria-labelledby="dropdownProject">
                                 @foreach($project as $val)
-                                <li><a class="dropdown-item" href="{{ route('project.reader', ['id' => $val->id]) }}">{{ $val->title }}</a></li>
+                                <li><a class="dropdown-item" title="{{ $val->title }}" href="{{ route('project.reader', ['id' => $val->id]) }}">{{ $val->title }}</a></li>
                                 @endforeach
                             </ul>
                         </div>
@@ -525,7 +534,7 @@ if (!empty($cate)) {
                 <a href="/" class="logo-link" >ZICZAC</a> <br>
                <span style="font-size: 13px;font-family: monospace;">ARCHITECTURE</span>
             </center>
-            
+
         </div>
         <div>
             <a href="/client/home/about" style="font-size: 12px;text-decoration: none;color:#6f6969">Giới thiệu</a>

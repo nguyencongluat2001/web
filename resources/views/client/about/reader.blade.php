@@ -7,6 +7,8 @@
     <title>{{ $datas->detailBlog?->title ?? '' }}</title>
     <link rel="stylesheet" href="{{ url('/clients/fontawesome/css/all.min.css') }}">
     <link rel="stylesheet" href="{{ url('/clients/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.css">
     <link rel="stylesheet" href="{{ url('/clients/css/detail.css') }}">
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
@@ -37,10 +39,10 @@
     <div class="banner-wrapper">
         <div class="banner-wrapper" style="background: white;">
             <div class="project-detail px-2">
-                <div class="row">
+                <div class="row mx-0">
                     <div class="col-lg-9 pr-md-60">
                         <div id="carouselExampleControls" class="carousel slide slick-slider" data-bs-ride="carousel">
-                            
+
                             <div class="carousel-indicators">
                                 @if(isset($datas->imageBlog) && !empty($datas->imageBlog))
                                 @php $k = 1; @endphp
@@ -87,32 +89,15 @@
                             <a href="/contact">Liên hệ</a>
                         </div>
                     </div>
-                    
+
                     <div class="col-lg-3 project-content">
                         <div class="back mb-2">
                             <button onclick="window.history.back()"><i class="fas fa-chevron-left fs-13 pe-2"></i> Back</button>
                         </div>
-                        <div class="project-detail__thumbs">
+                        <div class="project-detail__thumbs bbb_main_container">
                             <div class="project-video" loaded="1">
-                                @if(isset($datas->imageBlog[0]) && !empty($datas->imageBlog))
-                                @php $v = 0; @endphp
-                                @foreach($datas->imageBlog as $value)
-                                @php if($v > 0) continue; @endphp
-                                @if($value->type === 'video')
-                                <video
-                                    width="100%"
-                                    muted
-                                    autoplay
-                                    playsinline
-                                    loop
-                                    preload="metadata"
-                                >
-                                    <source src="{{ url('/file-image-client/blogs/'.$value->name_image) }}" type="video/mp4">
-                                </video>
-
-                                @php $v++; @endphp
-                                @endif
-                                @endforeach
+                                @if(isset($video))
+                                <iframe controls src="{{$video ?? '' }}" frameborder="0"></iframe>
                                 @endif
                             </div>
                             <div class="project-detail_body">
@@ -134,40 +119,26 @@
                                     </div>
                                 </div>
                             </div>
-                            @if(isset($relates) && count($relates) > 0)
-                            <div class="project-relate" style="width: 70%;margin:auto">
-                                <div id="carouselRelates" class="carousel slide" data-bs-ride="carousel">
-                                    <div class="carousel-indicators">
-                                        @if(isset($relates) && !empty($relates))
-                                        @foreach($relates as $key => $value)
-                                        <div data-bs-target="#carouselRelates" data-bs-slide-to="{{ $key }}" class="slick-slide {{ $key == 0 ? 'active' : '' }}" aria-current="{{ $key == 0 ? 'true' : 'false' }}" aria-label="Slide {{ $key + 1 }}"></div>
-                                        @endforeach
-                                        @endif
-                                    </div>
-                                    <div class="carousel-inner">
-                                        @if(isset($relates) && !empty($relates))
-                                        @foreach($relates as $key => $value)
-                                        <a href="{{ route('project.reader', ['id' => $value->id]) }}" class="carousel-item {{ $key == 0 ? 'active' : '' }}">
-                                            <img src="{{ $value?->url_path ?? '' }}" class="d-block w-100" alt="...">
-                                            <div class="carousel-caption d-none d-md-block">
-                                                <h5>{{ $value->title }}</h5>
-                                                <p>{{ $value->description }}</p>
+                            <div class="project-relate">
+                                <div class="bbb_viewed_nav bbb_viewed_prev"><i class="fas fa-chevron-left"></i></div>
+                                <div class="bbb_viewed_nav bbb_viewed_next"><i class="fas fa-chevron-right"></i></div>
+                                <div class="owl-carousel owl-theme bbb_viewed_slider">
+                                    @if(isset($relates) && !empty($relates))
+                                    @foreach($relates as $key => $value)
+                                    <a class="owl-item" href="{{ route('project.reader', ['id' => $value->id]) }}">
+                                        <div class="bbb_viewed_item d-flex flex-column align-items-center justify-content-center text-center">
+                                            <div class="bbb_viewed_image">
+                                                <img
+                                                    src="{{ $value?->url_path ?? '' }}"
+                                                    width="100%"
+                                                    alt="">
                                             </div>
-                                        </a>
-                                        @endforeach
-                                        @endif
-                                    </div>
-                                    <button class="carousel-control-prev" style="background: #000000;color: #ffffff !important;" type="button" data-bs-target="#carouselRelates" data-bs-slide="prev">
-                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                        <span class="visually-hidden">Previous</span>
-                                    </button>
-                                    <button class="carousel-control-next"  style="background: #000000;color: #ffffff !important;" type="button" data-bs-target="#carouselRelates" data-bs-slide="next">
-                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                        <span class="visually-hidden">Next</span>
-                                    </button>
+                                        </div>
+                                    </a>
+                                    @endforeach
+                                    @endif
                                 </div>
                             </div>
-                            @endif
                         </div>
                     </div>
                 </div>
@@ -176,6 +147,7 @@
     </div>
 
     <script src="{{ asset('clients/js/jquery.min.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.1/owl.carousel.js"></script>
     <script>
         $(function() {
             const $carousel = $('#carouselExampleControls')
@@ -214,6 +186,48 @@
         lightbox.init();
     </script>
 
+    <script>
+        $(document).ready(function() {
+            if ($('.bbb_viewed_slider').length) {
+                var viewedSlider = $('.bbb_viewed_slider');
+
+                viewedSlider.owlCarousel({
+                    loop: true,
+                    margin: 5,
+                    autoplay: true,
+                    autoplayTimeout: 3000,
+                    nav: false,
+                    dots: false,
+                    items: 3,
+                    responsive: {
+                        0: {
+                            items: 1
+                        },
+                        480: {
+                            items: 2
+                        },
+                        768: {
+                            items: 3
+                        }
+                    }
+                });
+
+                if ($('.bbb_viewed_prev').length) {
+                    var prev = $('.bbb_viewed_prev');
+                    prev.on('click', function() {
+                        viewedSlider.trigger('prev.owl.carousel');
+                    });
+                }
+
+                if ($('.bbb_viewed_next').length) {
+                    var next = $('.bbb_viewed_next');
+                    next.on('click', function() {
+                        viewedSlider.trigger('next.owl.carousel');
+                    });
+                }
+            }
+        });
+    </script>
 </body>
 
 </html>
