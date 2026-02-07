@@ -101,10 +101,7 @@
                         <div class="project-detail__thumbs bbb_main_container">
                             <div class="project-video" loaded="1">
                                 @if(isset($video))
-                                <iframe controls src="{{$video ?? '' }}" frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen
-            loading="lazy"></iframe>
+                                <iframe controls src="{{$video ?? '' }}" frameborder="0"></iframe>
                                 @endif
                             </div>
                             <div class="project-detail_body">
