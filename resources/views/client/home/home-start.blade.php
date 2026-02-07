@@ -50,7 +50,7 @@
     .hero-menu {
         position: absolute;
         left: 1%;
-        top: 40%;
+        top: 60%;
         display: flex;
         flex-direction: column;
         gap: 18px;
@@ -83,16 +83,16 @@
 
     <!-- MENU BÊN TRÁI -->
     <div class="hero-menu">
-        <a href="/client/home/about">Giới thiệu</a>
-        <a href="/client/project/index">Dự án</a>
-        <a href="/contact">Liên hệ</a>
+        <a href="/client/home/about" style="font-family: sans-serif;">Giới thiệu</a>
+        <a href="/client/project/index" style="font-family: sans-serif;">Dự án</a>
+        <a href="/contact" style="font-family: sans-serif;">Liên hệ</a>
     </div>
 
     <!-- LOGO -->
     <div class="hero-logo">
         <a href="{{url('/client/home/about')}}" class="hero-logo">
-            <h1>ZICZAC</h1>
-            <span>ARCHITECTURE</span>
+            <h1 style="font-family: sans-serif;">ZICZAC</h1>
+            <span style="font-family: sans-serif;">ARCHITECTURE</span>
         </a>
     </div>
 </div>
