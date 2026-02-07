@@ -436,11 +436,13 @@ if (!empty($cate)) {
     }
 
 </style>
-<nav id="main_nav" class="navbar-light bg-white web" style="top:0;padding-top:0px !important;padding-bottom: 0px !important;background:#ffffff!important;width: 100%;z-index: 1000;">
+<nav id="main_nav" class="navbar-light bg-white web " style="top:0;padding-top:0px !important;padding-bottom: 0px !important;background:#ffffff!important;width: 100%;z-index: 1000;">
     <div class="header-main header-project cts-project header-layout-project">
         <!-- PC -->
         <div class="container">
-            <div class="row justify-content-end">
+            
+            <div class="row justify-content-end web-Translate">
+                
                 <div class="col-md-2">
                     <!-- MENU -->
                     <ul class="nav-menu list-unstyled mb-0">
@@ -493,6 +495,11 @@ if (!empty($cate)) {
                         </div>
                     </div>
                 </div>
+                <div style="width:10%;color:#6f6969;margin-left: 8px;padding-top: 10px;">
+                    <span id="google_translate_element"  style="display:none">en</span>
+                    <span class="lang-btn" onclick="setLang('en')">EN</span>
+                    <span class="lang-btn" onclick="setLang('vi')">VI</span>
+                </div>
             </div>
         </div>
     </div>
@@ -503,9 +510,8 @@ if (!empty($cate)) {
     <div class="d-flex">
         <div style="width:10%;color:#6f6969;margin-left: 8px;">
             <span id="google_translate_element"  style="display:none">en</span>
-            <span onclick="setLang('en')">EN</span>
-            <span onclick="setLang('vi')">VI</span>
-
+            <span class="lang-btn" onclick="setLang('en')">EN</span>
+            <span class="lang-btn" onclick="setLang('vi')">VI</span>
         </div>
         <div class="nav-logo" style="width:80%;font-family: auto;">
             <center>
@@ -610,7 +616,18 @@ function setLang(lang) {
 
     select.value = lang;
     select.dispatchEvent(new Event('change'));
+    
 }
+
+document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        const mobile = document.querySelector('.mobile');
+        if (mobile) {
+            mobile.style.paddingTop = '50px';
+        }
+        
+    });
+});
 
 
 </script>

@@ -42,7 +42,11 @@
                 <div class="row mx-0">
                     <div class="col-lg-9 pr-md-60 apad">
                         <div id="carouselExampleControls" class="carousel slide slick-slider" data-bs-ride="carousel">
-
+                            <div style="width:10%;color:#6f6969;margin-left: 8px;padding-top: 10px;">
+                                <span id="google_translate_element"  style="display:none">en</span>
+                                <span class="lang-btn" onclick="setLang('en')">EN</span>
+                                <span class="lang-btn" onclick="setLang('vi')">VI</span>
+                            </div>
                             <div class="carousel-indicators">
                                 @if(isset($datas->imageBlog) && !empty($datas->imageBlog))
                                 @php $k = 1; @endphp
@@ -232,7 +236,39 @@
                 }
             }
         });
+
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement(
+                {
+                pageLanguage: 'vi',
+                includedLanguages: 'en,vi',
+                autoDisplay: false
+                },
+                'google_translate_element'
+            );
+        }
+
+        function setLang(lang) {
+            const select = document.querySelector('.goog-te-combo');
+            if (!select) return;
+
+            select.value = lang;
+            select.dispatchEvent(new Event('change'));
+            
+        }
+
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const mobile = document.querySelector('.mobile');
+                if (mobile) {
+                    mobile.style.paddingTop = '50px';
+                }
+                
+            });
+        });
     </script>
+    <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
 </body>
 
 </html>
