@@ -495,11 +495,11 @@ if (!empty($cate)) {
                         </div>
                     </div>
                 </div>
-                <div style="width:10%;color:#6f6969;margin-left: 8px;padding-top: 10px;">
+                <!-- <div style="width:10%;color:#6f6969;margin-left: 8px;padding-top: 10px;">
                     <span id="google_translate_element"  style="display:none">en</span>
                     <span class="lang-btn" onclick="setLang('en')">EN</span>
                     <span class="lang-btn" onclick="setLang('vi')">VI</span>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>

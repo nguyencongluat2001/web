@@ -105,6 +105,17 @@
         margin-bottom: 12px;
         font-family: Arial, Helvetica, sans-serif;
     }
+    /* -------- Mobile nhỏ -------- */
+    
+    @media (max-width: 1920px and min-width: 1141px) {
+
+        /* .nav-logo-mobile{
+            width: 80%%;
+        } */
+            .container {
+                max-width: 1024px;
+            }
+    }
 </style>
 
 <body>

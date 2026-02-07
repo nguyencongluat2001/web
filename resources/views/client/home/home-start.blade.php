@@ -49,7 +49,7 @@
     /* MENU BÊN TRÁI */
     .hero-menu {
         position: absolute;
-        left: 1%;
+        left: 0%;
         top: 60%;
         display: flex;
         flex-direction: column;
