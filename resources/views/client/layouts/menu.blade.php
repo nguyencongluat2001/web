@@ -490,10 +490,9 @@ if (!empty($cate)) {
 
 <!-- MOBILE -->
 <div class="mobile">
-
     <div class="d-flex">
         <div style="width:10%;color:#6f6969;margin-left: 8px;">
-            <span>en</span>
+            <span id="google_translate_element">en</span>
         </div>
         <div class="nav-logo" style="width:80%;font-family: auto;">
             <center>
@@ -517,19 +516,21 @@ if (!empty($cate)) {
         </center>
         <br>
     </div>
-     <div class="filter-header">
-        <span class="filter-text">FILTER</span>
-        <button id="toggleFilter" class="toggle-btn">+</button>
-    </div>
+    @if (!Request::is('contact'))
+        <div class="filter-header">
+            <span class="filter-text">FILTER</span>
+            <button id="toggleFilter" class="toggle-btn">+</button>
+        </div>
 
-    <div id="filterBox" class="filter-box">
-         <select id="projectSelect">
-            <option>Chọn dự án</option>
-            @foreach($project as $val)
-            <option value="{{ route('project.reader', ['id' => $val->id]) }}">{{ $val->title}}</option>
-            @endforeach
-        </select>
-    </div>
+        <div id="filterBox" class="filter-box">
+            <select id="projectSelect">
+                <option>Chọn dự án</option>
+                @foreach($project as $val)
+                <option value="{{ route('project.reader', ['id' => $val->id]) }}">{{ $val->title}}</option>
+                @endforeach
+            </select>
+        </div>
+    @endif
    </div>
 
 </div>
@@ -573,4 +574,12 @@ if (!empty($cate)) {
             window.location.href = this.value;
         }
     });
+    function googleTranslateElementInit() {
+        new google.translate.TranslateElement(
+            {pageLanguage: 'vi', includedLanguages: 'en,vi'},
+            'google_translate_element'
+        );
+    }
+
 </script>
+<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
