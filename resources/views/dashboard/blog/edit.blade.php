@@ -36,6 +36,12 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
+                                    <label for="example-text-input" class="form-control-label required">Tiêu đề EN</label>
+                                    <input class="form-control" type="text" value="{{!empty($data['title_en'])?$data['title_en']:''}}" name="title_en" id="title_en" placeholder="Enter title..." />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
                                     <label for="example-text-input" class="form-control-label">Năm</label>
                                     <select name="year" id="year" class="form-control chzn-select">
                                         <option value="">-- Chọn năm --</option>
@@ -59,6 +65,12 @@
                                 <div class="form-group">
                                     <label for="example-text-input" class="form-control-label">Nội dung</label>
                                     <textarea class="form-control" type="text" rows="10" cols="30" name="decision" id="decision" placeholder="Nhập nội dung...">{{!empty($data['decision'])?$data['decision']:''}}</textarea>
+                                </div>
+                            </div>
+                             <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="example-text-input" class="form-control-label">Nội dung EN</label>
+                                    <textarea class="form-control" type="text" rows="10" cols="30" name="decision_en" id="decision_en" placeholder="Nhập nội dung...">{{!empty($data['decision_en'])?$data['decision_en']:''}}</textarea>
                                 </div>
                             </div>
                             <div class="modal-footer">
@@ -88,9 +100,9 @@
                     <div>
                         <label class="control-label">Dán Video</label>
                         <div id="youtube">
-                            <input type="text" class="form-control" name="linkVideo" id="linkVideo" placeholder="VD: https://www.youtube.com" value="{{ !empty($data['video']['name_image']) ? $data['video']['name_image'] : '' }}">
-                            <div id="fileListVideo" class="preview-grid">
-                                @if(!empty($data['video']))
+                            <input type="text" class="form-control" name="linkVideo" id="linkVideo" placeholder="VD: https://www.youtube.com" value="{{ !empty($data['linkIframe']) ? $data['linkIframe'] : '' }}">
+                            <!-- <div id="fileListVideo" class="preview-grid">
+                                @if(!empty($data['linkIframe']))
                                     <iframe
                                         width="100%"
                                         src="{{ $data['linkIframe'] ?? '' }}"
@@ -98,7 +110,7 @@
                                         allowfullscreen>
                                     </iframe>
                                 @endif
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>
@@ -109,6 +121,11 @@
 
 <script>
     CKEDITOR.replace('decision', {
+        filebrowserBrowseUrl: 'filemanager/dialog.php?type=2&editor=ckeditor&fldr=',
+        filebrowserUploadUrl: 'filemanager/dialog.php?type=2&editor=ckeditor&fldr=',
+        filebrowserImageBrowseUrl: 'filemanager/dialog.php?type=1&editor=ckeditor&fldr=',
+    });
+    CKEDITOR.replace('decision_en', {
         filebrowserBrowseUrl: 'filemanager/dialog.php?type=2&editor=ckeditor&fldr=',
         filebrowserUploadUrl: 'filemanager/dialog.php?type=2&editor=ckeditor&fldr=',
         filebrowserImageBrowseUrl: 'filemanager/dialog.php?type=1&editor=ckeditor&fldr=',

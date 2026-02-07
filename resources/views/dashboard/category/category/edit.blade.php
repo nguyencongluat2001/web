@@ -43,6 +43,13 @@
                             placeholder="Nhập tên thể loại..." />
                     </div>
                 </div>
+                <div class="row form-group" id="div_hinhthucgiai">
+                    <span class="col-md-3 control-label required">Tên thể loại EN</span>
+                    <div class="col-md-8">
+                        <input class="form-control" type="text" value="{{isset($datas->name_category_en) ? $datas->name_category_en : ''}}" name="name_category_en" id="name_category_en"
+                            placeholder="Name category en..." />
+                    </div>
+                </div>
                 {{--  Mô tả --}}
                 <div class="row form-group" id="div_hinhthucgiai">
                     <span class="col-md-3 control-label">Mô tả</span>

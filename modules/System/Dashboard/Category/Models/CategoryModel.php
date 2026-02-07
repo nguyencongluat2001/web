@@ -16,6 +16,7 @@ class CategoryModel extends Model
         'id',
         'cate',
         'name_category',
+        'name_category_en',
         'code_category',
         'decision',
         'order',

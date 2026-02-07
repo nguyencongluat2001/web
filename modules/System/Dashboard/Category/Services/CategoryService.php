@@ -32,6 +32,7 @@ class CategoryService extends Service
             $arrData = [
                 'cate'=> $input['cate'] ,
                 'name_category'=> $input['name_category'] ,
+                'name_category_en'=> $input['name_category_en'] ,
                 'code_category'=> $input['code_category'] ,
                 'decision'=> $input['decision'] ,
                 'order' => isset($input['order']) && !empty($input['order']) ? trim($input['order']) : count($categories) + 1,
@@ -47,6 +48,7 @@ class CategoryService extends Service
                 'id'=>(string)Str::uuid(),
                 'cate'=> $input['cate'] ,
                 'name_category'=> $input['name_category'] ,
+                'name_category_en'=> $input['name_category_en'] ,
                 'code_category'=> $input['code_category'] ,
                 'decision'=> $input['decision'] ,
                 'order' => isset($input['order']) && !empty($input['order']) ? trim($input['order']) : count($categories) + 1,

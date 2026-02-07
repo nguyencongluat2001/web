@@ -56,11 +56,13 @@ class UserService extends Service
             // array data users
             $arrData = [
                 'name'=> $input['name'],
+                'name_en'=> $input['name_en'],
                 'address'=> $input['address'],
                 'phone'=> $input['phone'],
                 'email'=> $input['email'],
                 'dateBirth'=> $input['dateBirth'],
                 'decision'=> $input['decision'],
+                'decision_en'=> $input['decision_en'],
                 'role'=> isset($input['role']) ? $input['role'] : (isset($user) ? $user->role : 'USERS'),
                 'status' => isset($input['status']) ? 1 : 0,
             ];

@@ -509,9 +509,9 @@ if (!empty($cate)) {
 <div class="mobile">
     <div class="d-flex">
         <div style="width:10%;color:#6f6969;margin-left: 8px;">
-            <span id="google_translate_element"  style="display:none">en</span>
-            <span class="lang-btn" onclick="setLang('en')">EN</span>
-            <span class="lang-btn" onclick="setLang('vi')">VI</span>
+            <span id="google_translate_element" >en</span>
+            <!-- <span class="lang-btn" onclick="setLang('en')">EN</span>
+            <span class="lang-btn" onclick="setLang('vi')">VI</span> -->
         </div>
         <div class="nav-logo" style="width:80%;font-family: auto;">
             <center>

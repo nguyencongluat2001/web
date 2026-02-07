@@ -179,10 +179,12 @@ JS_Blogs.prototype.store = function (oFormCreate) {
     formdata.append('code_category', $("#code_category").val());
     formdata.append('code_blog', $("#code_blog").val());
     formdata.append('title', $("#title").val());
+    formdata.append('title_en', $("#title_en").val());
     formdata.append('year', $("#year").val());
     formdata.append('video', $("#linkVideo").val());
     formdata.append('videoId', myClass.getYoutubeId($("#linkVideo").val()));
     formdata.append('decision', CKEDITOR.instances.decision.getData());
+    formdata.append('decision_en', CKEDITOR.instances.decision_en.getData());
     formdata.append('status', status);
 
     myClass.selectedFiles.forEach(file => {

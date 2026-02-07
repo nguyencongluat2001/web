@@ -1,80 +1,80 @@
 <style>
-html, body {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 100%;
-}
+    html, body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+    }
 
-/* Hero full màn hình */
-.hero {
-    position: relative;
-    width: 100vw;
-    height: 100vh;
-    overflow: hidden;
-}
+    /* Hero full màn hình */
+    .hero {
+        position: relative;
+        width: 100vw;
+        height: 100vh;
+        overflow: hidden;
+    }
 
-/* Ảnh phủ kín */
-.hero img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
+    /* Ảnh phủ kín */
+    .hero img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
 
-/* Logo đè lên ảnh */
-.hero-logo {
-    position: absolute;
-    top: 10%;
-    right: 5%;
-    color: #fff;
-    text-align: right;
-    text-decoration: none;
-}
+    /* Logo đè lên ảnh */
+    .hero-logo {
+        position: absolute;
+        top: 10%;
+        right: 5%;
+        color: #fff;
+        text-align: right;
+        text-decoration: none;
+    }
 
-/* Chữ ZICZAC */
-.hero-logo h1 {
-    font-size: 60px;
-    font-weight: 700;
-    letter-spacing: 10px;
-    margin: 0;
-}
+    /* Chữ ZICZAC */
+    .hero-logo h1 {
+        font-size: 60px;
+        font-weight: 700;
+        letter-spacing: 10px;
+        margin: 0;
+    }
 
-/* ARCHITECTURE */
-.hero-logo span {
-    font-size: 18px;
-    letter-spacing: 13px;
-    opacity: 0.9;
-}
+    /* ARCHITECTURE */
+    .hero-logo span {
+        font-size: 18px;
+        letter-spacing: 13px;
+        opacity: 0.9;
+    }
 
-/* MENU BÊN TRÁI */
-.hero-menu {
-    position: absolute;
-    left: 4%;
-    top: 35%;
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
-    z-index: 10;
-}
+    /* MENU BÊN TRÁI */
+    .hero-menu {
+        position: absolute;
+        left: 1%;
+        top: 40%;
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+        z-index: 10;
+    }
 
-.hero-menu a {
-    display: inline-block;
-    padding: 12px 26px;
-    background: rgba(0,0,0,0.55);
-    color: #fff;
-    text-decoration: none;
-    font-size: 22px;
-    /* font-family: 'Patrick Hand', cursive; */
-    font-family: 'auto';
-    border-radius: 6px;
-    transition: all 0.3s ease;
-}
+    .hero-menu a {
+        display: inline-block;
+        padding: 12px 26px;
+        background: rgba(0,0,0,0.55);
+        color: #fff;
+        text-decoration: none;
+        font-size: 30px;
+        /* font-family: 'Patrick Hand', cursive; */
+        font-family: 'auto';
+        border-radius: 6px;
+        transition: all 0.3s ease;
+    }
 
-/* Hover */
-.hero-menu a:hover {
-    background: rgba(0,0,0,0.85);
-    transform: translateX(6px);
-}
+    /* Hover */
+    .hero-menu a:hover {
+        background: rgba(0,0,0,0.85);
+        transform: translateX(6px);
+    }
 
 
 </style>

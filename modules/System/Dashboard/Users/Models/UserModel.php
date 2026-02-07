@@ -14,6 +14,7 @@ class UserModel extends Model
     protected $fillable = [
         'id',
         'name',
+        'name_en',
         'address',
         'phone',
         'email',
@@ -21,6 +22,7 @@ class UserModel extends Model
         'password',
         'dateBirth',
         'decision',
+        'decision_en',
         'role',
         'status',
         'id_personnel',

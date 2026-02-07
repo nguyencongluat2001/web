@@ -55,7 +55,9 @@ class BlogService extends Service
                 'code_blog'     => $codeBlog,
                 'code_category' => $input['code_category'] ?? null,
                 'title'         => $input['title'] ?? null,
+                'title_en'         => $input['title_en'] ?? null,
                 'decision'      => $input['decision'] ?? null,
+                'decision_en'      => $input['decision_en'] ?? null,
                 'rate'          => 5,
                 'year'          => $input['year'] ?? null,
                 'status'        => isset($input['status']) ? 1 : 0,
@@ -178,24 +180,29 @@ class BlogService extends Service
             foreach ($blogImage as $key => $image) {
                 $blogImage[$key]['url_path'] = $this->basePath . $image['name_image'];
             }
-            $video = array_filter($blogImage, fn($i) => $i['type'] === 'video');
+            $video = $this->blogImagesService->where('code_blog', $getBlogInfor['code_blog'])->where('type', 'video')->get()?->toArray();
+            // $video = array_filter($blogImage, fn($i) => $i['type'] === 'video');
             if (isset($video[0])) {
-                $videoId = !empty($video[0])
-                    ? $this->getYoutubeId($video[0]['name_image'])
-                    : null;
-                $linkIframe = "https://www.youtube.com/embed/$videoId";
+                // $videoId = !empty($video[0])
+                //     ? $this->getYoutubeId($video[0]['name_image'])
+                //     : null;
+                //     dd($video);
+                // $linkIframe = "https://www.youtube.com/embed/$videoId";
+                $linkIframe = $video[0]['name_image'];
             }
             $arrBlog = [
                 'id'            => $getBlogInfor->id,
                 'code_blog'     => $getBlogInfor->code_blog,
                 'code_category' => isset($getBlogInfor->code_category) ? $getBlogInfor->code_category : null,
-                'year'   => $getBlogInfor->year,
+                'year'   => isset($blogDetail->year) ? $blogDetail->year : null,
                 'status'   => $getBlogInfor->status,
                 'title'    => isset($blogDetail->title) ? $blogDetail->title : null,
+                'title_en'    => isset($blogDetail->title_en) ? $blogDetail->title_en : null,
                 'decision' => isset($blogDetail->decision) ? $blogDetail->decision : null,
+                'decision_en' => isset($blogDetail->decision_en) ? $blogDetail->decision_en : null,
                 'rate'     => isset($blogDetail->rate) ? $blogDetail->rate : 5,
                 'images'   => !empty($blogImage) ? array_values(array_filter($blogImage, fn($i) => $i['type'] === 'file' || $i === null)) : null,
-                'video'   => !empty($video) ? $video[0] : null,
+                // 'video'   => !empty($video) ? $video[0] : null,
                 'linkIframe' => $linkIframe ?? '',
             ];
         }
@@ -230,7 +237,10 @@ class BlogService extends Service
             'name_category' => isset($category->name_category) ? $category->name_category : null,
             'status'        => !empty($dataInfor->status == '1') ? 'Hoạt động' : 'Không hoạt động',
             'title'         => isset($blogDetail->title) ? $blogDetail->title : null,
+            'title_en'         => isset($blogDetail->title_en) ? $blogDetail->title_en : null,
+            'year'         => isset($blogDetail->year) ? $blogDetail->year : null,
             'decision'      => isset($blogDetail->decision) ? $blogDetail->decision : null,
+            'decision_en'      => isset($blogDetail->decision_en) ? $blogDetail->decision_en : null,
             'rate'          => isset($blogDetail->rate) ? $blogDetail->rate : 5,
             'image'         => !empty($blogImage) ? $blogImage : null,
             'created_at'    => !empty($blogDetail->created_at) ? $blogDetail->created_at : null

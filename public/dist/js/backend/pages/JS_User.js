@@ -109,6 +109,7 @@ JS_User.prototype.store = function (oFormCreate) {
     formdata.append('_token', $("#_token").val());
     formdata.append('id', $("#id").val());
     formdata.append('name', $("#name").val());
+    formdata.append('name_en', $("#name_en").val());
     formdata.append('email', $("#email").val());
     formdata.append('dateBirth', $("#dateBirth").val());
     formdata.append('phone', $("#phone").val());
@@ -119,6 +120,7 @@ JS_User.prototype.store = function (oFormCreate) {
     formdata.append('id_personnel', $("#id_personnel").val());
     formdata.append('role', $("input[name=role]:checked").val());
     formdata.append('decision', CKEDITOR.instances.decision.getData());
+    formdata.append('decision_en', CKEDITOR.instances.decision_en.getData());
     if($("#frmAdd #status").is(':checked')){
         formdata.append('status', 1);
     }

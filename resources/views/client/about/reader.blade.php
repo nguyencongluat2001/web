@@ -23,8 +23,8 @@
 <style>
     .hero-menu a {
         display: inline-block;
-        padding: 12px 12px;;
-        background: rgba(255, 255, 255, 0.55);
+        padding: 0px 12px;;
+        background: #e9e9e9;
         color: #000000ff;
         text-decoration: none;
         font-size: 22px;
@@ -42,11 +42,11 @@
                 <div class="row mx-0">
                     <div class="col-lg-9 pr-md-60 apad">
                         <div id="carouselExampleControls" class="carousel slide slick-slider" data-bs-ride="carousel">
-                            <div style="width:10%;color:#6f6969;margin-left: 8px;padding-top: 10px;">
+                            <!-- <div style="width:10%;color:#6f6969;margin-left: 8px;padding-top: 10px;">
                                 <span id="google_translate_element"  style="display:none">en</span>
                                 <span class="lang-btn" onclick="setLang('en')">EN</span>
                                 <span class="lang-btn" onclick="setLang('vi')">VI</span>
-                            </div>
+                            </div> -->
                             <div class="carousel-indicators">
                                 @if(isset($datas->imageBlog) && !empty($datas->imageBlog))
                                 @php $k = 1; @endphp
@@ -87,11 +87,11 @@
                                 <span class="visually-hidden">Next</span>
                             </button>
                         </div>
-                        <div class="hero-menu web-nav">
+                        <!-- <div class="hero-menu web-nav">
                             <a href="/client/home/about">Giới thiệu</a>
                             <a href="/client/project/index">Dự án</a>
                             <a href="/contact">Liên hệ</a>
-                        </div>
+                        </div> -->
                     </div>
 
                     <div class="col-lg-3 project-content apad">
@@ -123,7 +123,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="hero-menu mobile-nav">
+                            <div class="hero-menu">
                                 <a href="/client/home/about">Giới thiệu</a>
                                 <a href="/client/project/index">Dự án</a>
                                 <a href="/contact">Liên hệ</a>

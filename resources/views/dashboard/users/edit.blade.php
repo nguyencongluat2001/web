@@ -16,7 +16,14 @@
 					<div class="col-md-6">
 						<div class="form-group">
 							<p for="example-text-input" class="form-control-label required">Tên</p>
-							<input class="form-control" type="text" value="{{!empty($data['name'])?$data['name']:''}}" name="name" id="name" placeholder="Nhập tên người dùng..." />
+							<input class="form-control" type="text" value="{{!empty($data['name'])?$data['name']:''}}" name="name" id="name" placeholder="Nhập tên..." />
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<p for="example-text-input" class="form-control-label required">Tên EN</p>
+							<input class="form-control" type="text" value="{{!empty($data['name_en'])?$data['name_en']:''}}" name="name_en" id="name_en" placeholder="Enter user name
+..." />
 						</div>
 					</div>
 					<div class="col-md-6">
@@ -41,6 +48,12 @@
                         <div class="form-group">
                             <p for="example-text-input" class="form-control-label">Nội dung</p>
                             <textarea class="form-control" type="text" rows="10" cols="30" name="decision" id="decision" placeholder="Nhập nội dung...">{{!empty($data['decision'])?$data['decision']:''}}</textarea>
+                        </div>
+                    </div>
+					<div class="col-md-12">
+                        <div class="form-group">
+                            <p for="example-text-input" class="form-control-label">Nội dung EN</p>
+                            <textarea class="form-control" type="text" rows="10" cols="30" name="decision_en" id="decision_en" placeholder="Nhập nội dung...">{{!empty($data['decision_en'])?$data['decision_en']:''}}</textarea>
                         </div>
                     </div>
 					@if(!empty($data) && $_SESSION["email"] == $data['email'] || $_SESSION["role"] == 'ADMIN')
@@ -183,6 +196,11 @@
 		}
 	}
 	CKEDITOR.replace('decision', {
+        filebrowserBrowseUrl: 'filemanager/dialog.php?type=2&editor=ckeditor&fldr=',
+        filebrowserUploadUrl: 'filemanager/dialog.php?type=2&editor=ckeditor&fldr=',
+        filebrowserImageBrowseUrl: 'filemanager/dialog.php?type=1&editor=ckeditor&fldr=',
+    });
+	CKEDITOR.replace('decision_en', {
         filebrowserBrowseUrl: 'filemanager/dialog.php?type=2&editor=ckeditor&fldr=',
         filebrowserUploadUrl: 'filemanager/dialog.php?type=2&editor=ckeditor&fldr=',
         filebrowserImageBrowseUrl: 'filemanager/dialog.php?type=1&editor=ckeditor&fldr=',

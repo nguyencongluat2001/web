@@ -15,8 +15,10 @@ class BlogDetailModel extends Model
         'id',
         'code_blog',
         'title',
+        'title_en',
         'year',
         'decision', 
+        'decision_en', 
         'rate',
         'created_at',
         'updated_at'
