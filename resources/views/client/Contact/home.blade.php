@@ -1,3 +1,27 @@
+<style>
+    @media only screen 
+        and (min-width: 834px) 
+        and (max-width: 1366px) {
+            
+        .apad{
+            width: 100% !important;
+        }
+        /* .project-detail__thumbs {
+            height: auto;
+        }
+
+        .project-detail_body {
+            height: auto;
+            max-height: 420px;
+        }
+        .project-content{
+            padding-left:0px
+        }
+        .project-detail__content{
+            height: 300px;
+        } */
+    }
+</style>
 <title>Liên hệ</title>
 @extends('client.layouts.index')
 @section('body-client')
@@ -10,7 +34,7 @@
                  <!-- Start Contact -->
                 <section class="container py-5" style="background: #ffffffc4;">
                     <div class="row pb-4">
-                        <div class="col-lg-8">
+                        <div class="col-lg-8 apad">
                             <div class="contact row mb-4">
                                 <div class="team-image">
                                     <img src="{{url('/clients/img/home.jpg')}}" alt="">
@@ -18,7 +42,7 @@
                             </div>
                         </div>
                         <!-- Start Contact Form -->
-                        <div class="col-lg-4 ">
+                        <div class="col-lg-4 apad">
                             <div class="split-content">
                                 <p class="small-text">Please let us know how we can help via:</p>
 

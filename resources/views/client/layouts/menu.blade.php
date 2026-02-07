@@ -394,10 +394,36 @@ if (!empty($cate)) {
         .web {
             display: none !important;
         }
+        .filter-box{
+            padding: 0px 0px 0px 25px;
+        }
 
         /* .nav-logo-mobile{
             width: 80%%;
         } */
+    }
+    @media (max-width: 430px) {
+
+        
+        .filter-box{
+            padding: 0px 0px 0px 0px;
+        }
+
+        /* .nav-logo-mobile{
+            width: 80%%;
+        } */
+    }
+    .hero-menu a {
+        display: inline-block;
+        padding: 0px 12px 0px 12px;
+        background: rgba(255, 255, 255, 0.55);
+        color: #000000ff;
+        text-decoration: none;
+        font-size: 22px;
+        /* font-family: 'Patrick Hand', cursive; */
+        font-family: 'auto';
+        border-radius: 6px;
+        transition: all 0.3s ease;
     }
 </style>
 <nav id="main_nav" class="navbar-light bg-white web" style="top:0;padding-top:0px !important;padding-bottom: 0px !important;background:#ffffff!important;width: 100%;z-index: 1000;">
@@ -481,18 +507,30 @@ if (!empty($cate)) {
         </div>
     </div>
     <div style="width:95%;height:1px;background: #545454;margin: 0 auto;margin:10px"></div>
-    <div class="filter-header">
+    <!-- <div class="filter-header">
         <span class="filter-text">FILTER</span>
         <button id="toggleFilter" class="toggle-btn">+</button>
-    </div>
+    </div> -->
 
-    <div id="filterBox" class="filter-box">
-        <select id="projectSelect">
+    <!-- <div id="filterBox" class="filter-box"> -->
+    <div>
+        <center>
+            <div class="hero-menu mobile-nav">
+                <a href="/client/home/about">Giới thiệu</a>
+                <a href="/client/project/index">Dự án</a>
+                <a href="/contact">Liên hệ</a>
+            </div>
+        </center>
+        
+        <!-- <select id="projectSelect">
             <option>Dự án</option>
             @foreach($project as $val)
             <option value="{{ route('project.reader', ['id' => $val->id]) }}">{{ $val->title}}</option>
             @endforeach
         </select>
+        <div>
+            <a href="/client/home/about" style="font-size: 12px;text-decoration: none;color:#6f6969">Giới thiệu</a> -->
+        </div>
     </div>
 
 </div>

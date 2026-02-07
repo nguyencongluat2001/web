@@ -40,7 +40,7 @@
         <div class="banner-wrapper" style="background: white;">
             <div class="project-detail px-2">
                 <div class="row mx-0">
-                    <div class="col-lg-9 pr-md-60">
+                    <div class="col-lg-9 pr-md-60 apad">
                         <div id="carouselExampleControls" class="carousel slide slick-slider" data-bs-ride="carousel">
 
                             <div class="carousel-indicators">
@@ -90,7 +90,7 @@
                         </div>
                     </div>
 
-                    <div class="col-lg-3 project-content">
+                    <div class="col-lg-3 project-content apad">
                         <div class="back mb-2">
                             <button onclick="window.history.back()"><i class="fas fa-chevron-left fs-13 pe-2"></i> Back</button>
                         </div>
