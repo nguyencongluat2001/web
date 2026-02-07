@@ -686,7 +686,7 @@
     display: inline-block
 }
 
-@media (max-width: 450px) {
+@media (max-width: 768px) {
     .back {
         position: absolute;
         top: 0;
@@ -699,5 +699,6 @@
 
     .project-content {
         padding-left: 12px;
+        position: inherit;
     }
 }
