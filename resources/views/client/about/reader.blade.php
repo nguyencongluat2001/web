@@ -83,7 +83,7 @@
                                 <span class="visually-hidden">Next</span>
                             </button>
                         </div>
-                        <div class="hero-menu">
+                        <div class="hero-menu web-nav">
                             <a href="/client/home/about">Giới thiệu</a>
                             <a href="/client/project/index">Dự án</a>
                             <a href="/contact">Liên hệ</a>
@@ -118,6 +118,11 @@
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+                            <div class="hero-menu mobile-nav">
+                                <a href="/client/home/about">Giới thiệu</a>
+                                <a href="/client/project/index">Dự án</a>
+                                <a href="/contact">Liên hệ</a>
                             </div>
                             <div class="project-relate">
                                 <div class="bbb_viewed_nav bbb_viewed_prev"><i class="fas fa-chevron-left"></i></div>

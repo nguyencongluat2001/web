@@ -359,68 +359,8 @@ if (!empty($cate)) {
    RESPONSIVE HEADER – ZICZAC
    =============================== */
 
-    /* -------- Tablet & Mobile -------- */
-    @media (max-width: 991px) {
-
-        .mobile {
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            pointer-events: auto;
-            display: block !important;
-            background: #ffffff;
-        }
-        .mobile * {
-            pointer-events: auto;
-        }
-
-        .nav-inner {
-            flex-direction: column;
-            align-items: flex-start;
-        }
-
-        .nav-right {
-            flex-direction: column;
-            gap: 20px;
-            width: 100%;
-        }
-
-        /* LOGO */
-        .nav-logo {
-            width: 100%;
-        }
-
-        .nav-logo .logo-link {
-            font-size: 36px;
-            letter-spacing: 10px;
-        }
-
-        /* MENU */
-        .nav-menu {
-            padding-left: 0;
-        }
-
-        .nav-menu li {
-            margin-bottom: 6px;
-        }
-
-        .nav-menu a {
-            font-size: 13px;
-        }
-
-        /* FILTER */
-        .nav-filter {
-            width: 100%;
-            max-width: 260px;
-        }
-
-        .filter-title {
-            text-align: left;
-        }
-    }
-
     /* -------- Mobile nhỏ -------- */
-    @media (max-width: 768px) {
+    @media (max-width: 1024px) {
 
         .mobile {
             position: sticky;

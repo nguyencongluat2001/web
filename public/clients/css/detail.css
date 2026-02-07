@@ -685,6 +685,12 @@
 .bbb_viewed_item.is_new .item_new {
     display: inline-block
 }
+.web-nav {
+    display: block;
+}
+.mobile-nav {
+    display: none;
+}
 
 @media (max-width: 768px) {
     .back {
@@ -700,5 +706,11 @@
     .project-content {
         padding-left: 12px;
         position: inherit;
+    }
+    .mobile-nav {
+        display: block !important;
+    }
+    .web-nav {
+        display: none;
     }
 }
