@@ -492,27 +492,21 @@ if (!empty($cate)) {
 <div class="mobile">
 
     <div class="d-flex">
-        <div style="width:20%;color:#6f6969;margin-left: 8px;">
+        <div style="width:10%;color:#6f6969;margin-left: 8px;">
             <span>en</span>
         </div>
-        <div class="nav-logo" style="width:60%;font-family: auto;">
+        <div class="nav-logo" style="width:80%;font-family: auto;">
             <center>
                 <a href="/" class="logo-link" >ZICZAC</a> <br>
                <span style="font-size: 13px;font-family: monospace;">ARCHITECTURE</span>
             </center>
-
         </div>
-        <div>
+        <!-- <div>
             <a href="/client/home/about" style="font-size: 12px;text-decoration: none;color:#6f6969">Giới thiệu</a>
-        </div>
+        </div> -->
     </div>
     <div style="width:95%;height:1px;background: #545454;margin: 0 auto;margin:10px"></div>
-    <!-- <div class="filter-header">
-        <span class="filter-text">FILTER</span>
-        <button id="toggleFilter" class="toggle-btn">+</button>
-    </div> -->
-
-    <!-- <div id="filterBox" class="filter-box"> -->
+   
     <div>
         <center>
             <div class="hero-menu mobile-nav">
@@ -521,17 +515,22 @@ if (!empty($cate)) {
                 <a href="/contact">Liên hệ</a>
             </div>
         </center>
-        
-        <!-- <select id="projectSelect">
-            <option>Dự án</option>
+        <br>
+    </div>
+     <div class="filter-header">
+        <span class="filter-text">FILTER</span>
+        <button id="toggleFilter" class="toggle-btn">+</button>
+    </div>
+
+    <div id="filterBox" class="filter-box">
+         <select id="projectSelect">
+            <option>Chọn dự án</option>
             @foreach($project as $val)
             <option value="{{ route('project.reader', ['id' => $val->id]) }}">{{ $val->title}}</option>
             @endforeach
         </select>
-        <div>
-            <a href="/client/home/about" style="font-size: 12px;text-decoration: none;color:#6f6969">Giới thiệu</a> -->
-        </div>
     </div>
+   </div>
 
 </div>
 
