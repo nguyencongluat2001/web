@@ -457,8 +457,7 @@
 
 .carousel-indicators {
     gap: 5px;
-    bottom: 30px !important;
-    background: #00000042;
+    bottom: 20px !important;
 }
 
 .project-detail__thumbs-number {
