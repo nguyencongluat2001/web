@@ -23,9 +23,9 @@
 <style>
     .hero-menu a {
         display: inline-block;
-        padding: 0px 12px;;
-        background: #e9e9e9;
-        color: #000000ff;
+        padding: 0px 12px 12px 0px;
+        /* background: #e9e9e9; */
+        color: #050505ff;
         text-decoration: none;
         font-size: 22px;
         /* font-family: 'Patrick Hand', cursive; */
@@ -40,7 +40,7 @@
         <div class="banner-wrapper" style="background: white;">
             <div class="project-detail px-2">
                 <div class="row mx-0">
-                    <div class="col-lg-9 pr-md-60 apad">
+                    <div class="col-lg-8 pr-md-60 apad">
                         <div id="carouselExampleControls" class="carousel slide slick-slider" data-bs-ride="carousel">
                             <!-- <div style="width:10%;color:#6f6969;margin-left: 8px;padding-top: 10px;">
                                 <span id="google_translate_element"  style="display:none">en</span>
@@ -94,7 +94,7 @@
                         </div> -->
                     </div>
 
-                    <div class="col-lg-3 project-content apad">
+                    <div class="col-lg-4 project-content apad">
                         <div class="back mb-2">
                             <button onclick="window.history.back()"><i class="fas fa-chevron-left fs-13 pe-2"></i> Back</button>
                         </div>
