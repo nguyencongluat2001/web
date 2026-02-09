@@ -479,7 +479,7 @@
 }
 .project-detail__thumbs .project-video,
 .project-detail__thumbs .project-detail_body {
-    margin-bottom: 2rem;
+    /* margin-bottom: 2rem; */
     display: block;
     width: 100%;
 }

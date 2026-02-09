@@ -123,12 +123,14 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="hero-menu">
-                                <a href="/client/home/about">Giới thiệu</a>
-                                <a href="/client/project/index">Dự án</a>
-                                <a href="/contact">Liên hệ</a>
-                            </div>
+                            <div style="width:100%;height:1px;background: #545454;margin: 0 auto;margin:10px 0px 10px 0px"></div>
+                            
                             <div class="project-relate">
+                                <div class="hero-menu">
+                                    <a href="/client/home/about">Giới thiệu</a>
+                                    <a href="/client/project/index">Dự án</a>
+                                    <a href="/contact">Liên hệ</a>
+                                </div>
                                 <div class="bbb_viewed_nav bbb_viewed_prev"><i class="fas fa-chevron-left"></i></div>
                                 <div class="bbb_viewed_nav bbb_viewed_next"><i class="fas fa-chevron-right"></i></div>
                                 <div class="owl-carousel owl-theme bbb_viewed_slider">
