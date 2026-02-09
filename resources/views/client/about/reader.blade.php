@@ -27,7 +27,7 @@
         /* background: #e9e9e9; */
         color: #050505ff;
         text-decoration: none;
-        font-size: 22px;
+        font-size: 17px;
         /* font-family: 'Patrick Hand', cursive; */
         font-family: 'auto';
         border-radius: 6px;
@@ -95,7 +95,7 @@
                     </div>
 
                     <div class="col-lg-4 project-content apad">
-                        <div class="back mb-2">
+                        <div class="back">
                             <button onclick="window.history.back()"><i class="fas fa-chevron-left fs-13 pe-2"></i> Back</button>
                         </div>
                         <div class="project-detail__thumbs bbb_main_container">
@@ -107,7 +107,7 @@
                             <div class="project-detail_body">
                                 <h2 class="project-detail__title">{{ $datas->detailBlog?->title ?? '' }}</h2>
                                 <div class="project-detail__content">
-                                    <p class="date_status">{{ $datas?->year ?? '' }}</p>
+                                    <p class="date_status">{{ $datas?->year ?? '' }} / IN PROGRESS</p>
                                     <div class="text">
                                         <div class="longer-text ps ps--active-y">
                                             <div class="page" title="Page 2">
