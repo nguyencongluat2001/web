@@ -513,7 +513,7 @@ if (!empty($cate)) {
             <!-- <span class="lang-btn" onclick="setLang('en')">EN</span>
             <span class="lang-btn" onclick="setLang('vi')">VI</span> -->
         </div>
-        <div class="nav-logo" style="width:80%;font-family: auto;">
+        <div class="nav-logo" style="width:80%;">
             <center>
                 <a href="/" class="logo-link" >ZICZAC</a> <br>
                <span style="font-size: 13px;font-family: monospace;">ARCHITECTURE</span>
