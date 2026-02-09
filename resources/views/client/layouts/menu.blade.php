@@ -534,7 +534,7 @@ $language = app()->getLocale();
         <div class="google_translate_element" style="width:10%;color:#6f6969;margin-left: 8px;">
             <span data-active-language="{{ $language ?? '' }}">{{ $language ? $language === 'en' ? 'vi' : 'en' : '' }}</span>
         </div>
-        <div class="nav-logo" style="width:80%;font-family: auto;">
+        <div class="nav-logo" style="width:80%;">
             <center>
                 <a href="/" class="logo-link">ZICZAC</a> <br>
                 <span style="font-size: 13px;font-family: monospace;">ARCHITECTURE</span>
