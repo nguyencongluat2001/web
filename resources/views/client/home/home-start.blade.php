@@ -41,8 +41,8 @@
 
     /* ARCHITECTURE */
     .hero-logo span {
-        font-size: 18px;
-        letter-spacing: 13px;
+        font-size: 15px;
+        letter-spacing: 5px;
         opacity: 0.9;
     }
 
@@ -92,7 +92,9 @@
     <div class="hero-logo">
         <a href="{{url('/client/home/about')}}" class="hero-logo">
             <h1 style="font-family: sans-serif;">ZICZAC</h1>
-            <span style="font-family: sans-serif;">ARCHITECTURE</span>
+            <center>
+                <span style="font-family: sans-serif;">ARCHITECTURE</span>
+            </center>
         </a>
     </div>
 </div>
