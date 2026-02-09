@@ -36,6 +36,7 @@
 </style>
 
 <body>
+    @php $locale = app()->getLocale(); @endphp
     <div class="banner-wrapper">
         <div class="banner-wrapper" style="background: white;">
             <div class="project-detail px-2">
@@ -69,9 +70,9 @@
                                         data-pswp-width="2400"
                                         data-pswp-height="1600"
                                         target="_blank">
-                                            <img src="{{ url('/file-image-client/blogs/'.$value->name_image) }}"
-                                                class="d-block w-100 img-fluid"
-                                                style="cursor: zoom-in;">
+                                        <img src="{{ url('/file-image-client/blogs/'.$value->name_image) }}"
+                                            class="d-block w-100 img-fluid"
+                                            style="cursor: zoom-in;">
                                     </a>
 
                                 </div>
@@ -95,26 +96,31 @@
                     </div>
 
                     <div class="col-lg-3 project-content apad">
-                        <div class="back">
-                            <button onclick="window.history.back()"><i class="fas fa-chevron-left fs-13 pe-2"></i> Back</button>
+                        <div class="reader-header d-flex justify-content-between">
+                            <div class="back">
+                                <button onclick="window.history.back()"><i class="fas fa-chevron-left fs-13 pe-2"></i> Back</button>
+                            </div>
+                            <div class="box-language" style="cursor: pointer">
+                                <span data-active-language="{{ $locale ?? '' }}">{{ $locale ? $locale === 'en' ? 'vi' : 'en' : '' }}</span>
+                            </div>
                         </div>
                         <div class="project-detail__thumbs bbb_main_container">
+                            @if(isset($video))
                             <div class="project-video" loaded="1">
-                                @if(isset($video))
                                 <iframe controls src="{{$video ?? '' }}" frameborder="0"></iframe>
-                                @endif
                             </div>
+                            @endif
                             <div class="project-detail_body">
-                                <h2 class="project-detail__title">{{ $datas->detailBlog?->title ?? '' }}</h2>
+                                <h2 class="project-detail__title">{{ $datas->detailBlog?->title && $locale === 'en' ? $datas->detailBlog?->title_en : $datas->detailBlog?->title ?? '' }}</h2>
                                 <div class="project-detail__content">
-                                    <p class="date_status">{{ $datas?->year ?? '' }} / IN PROGRESS</p>
+                                    <p class="date_status text-uppercase">{{ $datas?->detailBlog?->year ?? '' }} / {{ __('client.reader.in_progress') }}</p>
                                     <div class="text">
                                         <div class="longer-text ps ps--active-y">
                                             <div class="page" title="Page 2">
                                                 <div class="section">
                                                     <div class="layoutArea">
                                                         <div class="column">
-                                                            {!! $datas->detailBlog?->decision ?? '' !!}
+                                                            {!! $datas->detailBlog?->decision && $locale === 'en' ? $datas->detailBlog?->decision_en : $datas->detailBlog?->decision ?? '' !!}
                                                         </div>
                                                     </div>
                                                 </div>
@@ -124,12 +130,12 @@
                                 </div>
                             </div>
                             <div style="width:100%;height:1px;background: #545454;margin: 0 auto;margin:10px 0px 10px 0px"></div>
-                            
+
                             <div class="project-relate">
                                 <div class="hero-menu">
-                                    <a href="/client/home/about">Giới thiệu</a>
-                                    <a href="/client/project/index">Dự án</a>
-                                    <a href="/contact">Liên hệ</a>
+                                    <a href="/client/home/about">{{ __('client.header.menu.about') }}</a>
+                                    <a href="/client/project/index">{{ __('client.header.menu.project') }}</a>
+                                    <a href="/contact">{{ __('client.header.menu.contact') }}</a>
                                 </div>
                                 <div class="bbb_viewed_nav bbb_viewed_prev"><i class="fas fa-chevron-left"></i></div>
                                 <div class="bbb_viewed_nav bbb_viewed_next"><i class="fas fa-chevron-right"></i></div>
@@ -240,11 +246,10 @@
         });
 
         function googleTranslateElementInit() {
-            new google.translate.TranslateElement(
-                {
-                pageLanguage: 'vi',
-                includedLanguages: 'en,vi',
-                autoDisplay: false
+            new google.translate.TranslateElement({
+                    pageLanguage: 'vi',
+                    includedLanguages: 'en,vi',
+                    autoDisplay: false
                 },
                 'google_translate_element'
             );
@@ -256,7 +261,7 @@
 
             select.value = lang;
             select.dispatchEvent(new Event('change'));
-            
+
         }
 
         document.querySelectorAll('.lang-btn').forEach(btn => {
@@ -265,11 +270,19 @@
                 if (mobile) {
                     mobile.style.paddingTop = '50px';
                 }
-                
+
             });
         });
     </script>
     <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <script>
+        $(document).on("click", ".box-language, .google_translate_element", function() {
+            let current = $(this).find('span').data('active-language');
+            let lang = current === 'vi' ? 'en' : 'vi';
+
+            window.location.href = '/change-language/' + lang;
+        });
+    </script>
 
 </body>
 

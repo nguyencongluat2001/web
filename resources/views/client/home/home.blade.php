@@ -121,41 +121,6 @@
     border-color: #ffd52d;
     box-shadow: none;
 }
-#overSearch{
-    background-color: #fff;
-    position: absolute;
-    width: 100%;
-}
-#overSearch.closed{
-    display: none;
-}
-#overSearch ul{
-    padding-left: 0;
-    margin-bottom: 0;
-    max-height: 45vh;
-    overflow-y: scroll;
-}
-#overSearch ul::-webkit-scrollbar {
-    width: 0.4rem;
-}
-#overSearch ul::-webkit-scrollbar-thumb {
-    background: #ffd52d;
-    border-radius: 0.2rem;
-}
-#overSearch .dropdown-item:active{
-    background-color: #fff;
-}
-#overSearch ul li{
-    list-style: none;
-    line-height: 40px;
-}
-#overSearch ul a{
-    color: #000;
-    text-decoration: none;
-}
-#overSearch ul a:hover li{
-    text-decoration: underline;
-}
 .form-search{
     position: relative;
 }
@@ -780,29 +745,6 @@ new Chart("myChart", {
     $(document).ready(function($) {
         JS_Home.loadIndex(baseUrl);
     })
-    document.addEventListener('click', closeOnClickOutside);
-    function closeOnClickOutside(e) {
-    if(!$("#overSearch").hasClass('closed')){
-            if (!e.target.matches('#myInput')) {
-                $("#overSearch").addClass('closed');
-            }
-        }
-    }
-    function filterSearch(){
-        let input = document.getElementById('myInput');
-        let dropdown = document.getElementById('overSearch');
-        input.addEventListener('input', function () {
-        let dropdown_items = dropdown.querySelectorAll('.dropdown-item');
-        if (!dropdown_items)
-            return false;
-        for (let i=0; i<dropdown_items.length; i++) {
-            if (dropdown_items[i].innerHTML.toUpperCase().includes(input.value.toUpperCase()))
-                dropdown_items[i].style.display = 'block';
-            else
-                dropdown_items[i].style.display = 'none';
-            }
-        });
-    }
 </script>
 <script  type="text/javascript">
     $(document).ready(function() {

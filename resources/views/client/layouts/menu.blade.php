@@ -3,14 +3,16 @@
 use Illuminate\Support\Facades\DB;
 
 $project = DB::table('blogs')->join('blogs_details', 'blogs.code_blog', '=', 'blogs_details.code_blog')
-                                ->where('status', 1)
-                                ->orderBy('blogs_details.year','DESC')
-                                ->orderBy('blogs.created_at', 'DESC')
-                                ->get();
+    ->where('status', 1)
+    ->orderBy('blogs_details.year', 'DESC')
+    ->orderBy('blogs.created_at', 'DESC')
+    ->get();
 $cate = DB::table('cates')->where('code_cate', 'product')->first();
 if (!empty($cate)) {
-    $typology = DB::table('categorys')->select('code_category', 'name_category')->where('cate', $cate->code_cate)->get()->toArray();
+    $typology = DB::table('categorys')->select('code_category', 'name_category', 'name_category_en')->where('cate', $cate->code_cate)->get()->toArray();
 }
+
+$language = app()->getLocale();
 ?>
 <style>
     #main_nav {
@@ -218,6 +220,14 @@ if (!empty($cate)) {
         font-weight: 600;
     }
 
+    .nav-menu a.active::before {
+        content: '';
+        display: inline-block;
+        border-bottom: 1px solid #000;
+        width: 15px;
+        margin-right: 5px;
+    }
+
     .nav-menu .active a {
         position: relative;
         padding-left: 16px;
@@ -345,9 +355,9 @@ if (!empty($cate)) {
         display: none;
     }
 
-    .dropdown-item{
+    .dropdown-item {
         display: block;
-  	    display: -webkit-box;
+        display: -webkit-box;
         -webkit-line-clamp: 1;
         -webkit-box-orient: vertical;
         overflow: hidden;
@@ -370,6 +380,7 @@ if (!empty($cate)) {
             display: block !important;
             background: #ffffff;
         }
+
         .mobile * {
             pointer-events: auto;
         }
@@ -394,7 +405,8 @@ if (!empty($cate)) {
         .web {
             display: none !important;
         }
-        .filter-box{
+
+        .filter-box {
             padding: 0px 0px 0px 25px;
         }
 
@@ -402,10 +414,11 @@ if (!empty($cate)) {
             width: 80%%;
         } */
     }
+
     @media (max-width: 430px) {
 
-        
-        .filter-box{
+
+        .filter-box {
             padding: 0px 0px 0px 0px;
         }
 
@@ -413,6 +426,7 @@ if (!empty($cate)) {
             width: 80%%;
         } */
     }
+
     .hero-menu a {
         display: inline-block;
         padding: 0px 12px 0px 12px;
@@ -425,6 +439,7 @@ if (!empty($cate)) {
         border-radius: 6px;
         transition: all 0.3s ease;
     }
+
     .goog-te-banner-frame,
     .goog-te-gadget,
     .goog-logo-link {
@@ -435,20 +450,28 @@ if (!empty($cate)) {
         top: 0 !important;
     }
 
+    .box-language {
+        position: absolute;
+        right: 1rem;
+        cursor: pointer;
+    }
 </style>
 <nav id="main_nav" class="navbar-light bg-white web " style="top:0;padding-top:0px !important;padding-bottom: 0px !important;background:#ffffff!important;width: 100%;z-index: 1000;">
+    <div class="box-language">
+        <span data-active-language="{{ $language ?? '' }}">{{ $language ? $language === 'en' ? 'vi' : 'en' : '' }}</span>
+    </div>
     <div class="header-main header-project cts-project header-layout-project">
         <!-- PC -->
         <div class="container">
-            
+
             <div class="row justify-content-end web-Translate">
-                
+
                 <div class="col-md-2">
                     <!-- MENU -->
                     <ul class="nav-menu list-unstyled mb-0">
-                        <li><a href="/client/home/about">Giới thiệu</a></li>
-                        <li><a href="/client/project/index">Dự án</a></li>
-                        <li><a href="/contact">Liên hệ</a></li>
+                        <li class="text-uppercase"><a href="/client/home/about" class="{{ request()->is('client/home/about') ? 'active' : '' }}">{{ __('client.header.menu.about') }}</a></li>
+                        <li class="text-uppercase"><a href="/client/project/index" class="{{ request()->is('client/project/index') ? 'active' : '' }}">{{ __('client.header.menu.project') }}</a></li>
+                        <li class="text-uppercase"><a href="/contact" class="{{ request()->is('contact') ? 'active' : '' }}">{{ __('client.header.menu.contact') }}</a></li>
                     </ul>
                 </div>
                 <div class="col-md-2">
@@ -457,23 +480,23 @@ if (!empty($cate)) {
                     </div>
                     <!-- SEARCH / FILTER -->
                     <div class="nav-filter" @if(!isset($showFilter) || !$showFilter) style="display: none;" @endif>
-                        <div class="filter-title">SEARCH</div>
+                        <div class="filter-title">{{ __('client.header.search.title')}}</div>
                         <div class="dropdown">
                             <a class="dropdown-toggle" href="#" role="button" id="dropdownTypology" data-bs-toggle="dropdown" aria-expanded="false">
-                                typology
+                                {{ __('client.header.search.typology')}}
                             </a>
 
                             <ul class="dropdown-menu typology" aria-labelledby="dropdownTypology">
                                 @if(isset($typology) && !empty($typology))
                                 @foreach($typology as $val)
-                                <li data-code_category="{{ $val->code_category ?? '' }}"><a class="dropdown-item" title="{{ $val->name_category }}" href="#{{ $val->code_category }}">{{ $val->name_category }}</a></li>
+                                <li data-code_category="{{ $val->code_category ?? '' }}"><a class="dropdown-item" title="{{ $language === 'en' ? $val->name_category_en : $val->name_category }}" href="#{{ $val->code_category }}">{{ $language === 'en' ? $val->name_category_en : $val->name_category }}</a></li>
                                 @endforeach
                                 @endif
                             </ul>
                         </div>
                         <div class="dropdown">
                             <a class="dropdown-toggle" href="#" role="button" id="dropdownProject" data-bs-toggle="dropdown" aria-expanded="false">
-                                projects
+                                {{ __('client.header.search.projects')}}
                             </a>
 
                             <ul class="dropdown-menu" aria-labelledby="dropdownProject">
@@ -484,7 +507,7 @@ if (!empty($cate)) {
                         </div>
                         <div class="dropdown">
                             <a class="dropdown-toggle" href="#" role="button" id="dropdownYear" data-bs-toggle="dropdown" aria-expanded="false">
-                                year
+                                {{ __('client.header.search.year')}}
                             </a>
 
                             <ul class="dropdown-menu year" aria-labelledby="dropdownYear">
@@ -508,15 +531,13 @@ if (!empty($cate)) {
 <!-- MOBILE -->
 <div class="mobile">
     <div class="d-flex">
-        <div style="width:10%;color:#6f6969;margin-left: 8px;">
-            <span id="google_translate_element" >en</span>
-            <!-- <span class="lang-btn" onclick="setLang('en')">EN</span>
-            <span class="lang-btn" onclick="setLang('vi')">VI</span> -->
+        <div class="google_translate_element" style="width:10%;color:#6f6969;margin-left: 8px;">
+            <span data-active-language="{{ $language ?? '' }}">{{ $language ? $language === 'en' ? 'vi' : 'en' : '' }}</span>
         </div>
         <div class="nav-logo" style="width:80%;font-family: auto;">
             <center>
-                <a href="/" class="logo-link" >ZICZAC</a> <br>
-               <span style="font-size: 13px;font-family: monospace;">ARCHITECTURE</span>
+                <a href="/" class="logo-link">ZICZAC</a> <br>
+                <span style="font-size: 13px;font-family: monospace;">ARCHITECTURE</span>
             </center>
         </div>
         <!-- <div>
@@ -524,33 +545,33 @@ if (!empty($cate)) {
         </div> -->
     </div>
     <div style="width:95%;height:1px;background: #545454;margin: 0 auto;margin:10px"></div>
-   
+
     <div>
         <center>
             <div class="hero-menu mobile-nav">
-                <a href="/client/home/about">Giới thiệu</a>
-                <a href="/client/project/index">Dự án</a>
-                <a href="/contact">Liên hệ</a>
+                <a href="/client/home/about">{{ __('client.header.menu.about') }}</a>
+                <a href="/client/project/index">{{ __('client.header.menu.project') }}</a>
+                <a href="/contact">{{ __('client.header.menu.contact') }}</a>
             </div>
         </center>
         <br>
     </div>
     @if (!Request::is('contact'))
-        <div class="filter-header">
-            <span class="filter-text">FILTER</span>
-            <button id="toggleFilter" class="toggle-btn">+</button>
-        </div>
+    <div class="filter-header">
+        <span class="filter-text">FILTER</span>
+        <button id="toggleFilter" class="toggle-btn">+</button>
+    </div>
 
-        <div id="filterBox" class="filter-box">
-            <select id="projectSelect">
-                <option>Chọn dự án</option>
-                @foreach($project as $val)
-                <option value="{{ route('project.reader', ['id' => $val->id]) }}">{{ $val->title}}</option>
-                @endforeach
-            </select>
-        </div>
+    <div id="filterBox" class="filter-box">
+        <select id="projectSelect">
+            <option>{{ __('client.header.search.projects') }}</option>
+            @foreach($project as $val)
+            <option value="{{ route('project.reader', ['id' => $val->id]) }}">{{ $val->title}}</option>
+            @endforeach
+        </select>
+    </div>
     @endif
-   </div>
+</div>
 
 </div>
 
@@ -580,55 +601,64 @@ if (!empty($cate)) {
     const btn = document.getElementById("toggleFilter");
     const box = document.getElementById("filterBox");
 
-    btn.addEventListener("click", () => {
-        const isOpen = box.style.display === "block";
+    if (btn) {
+        btn.addEventListener("click", () => {
+            const isOpen = box.style.display === "block";
 
-        box.style.display = isOpen ? "none" : "block";
-        btn.textContent = isOpen ? "+" : "×";
-    });
+            box.style.display = isOpen ? "none" : "block";
+            btn.textContent = isOpen ? "+" : "×";
+        });
+    }
 
     // click sang dự án
-    document.getElementById('projectSelect').addEventListener('change', function() {
-        if (this.value) {
-            window.location.href = this.value;
-        }
-    });
+    const projectSelect = document.getElementById('projectSelect');
+    if (projectSelect) {
+        projectSelect.addEventListener('change', function() {
+            if (this.value) {
+                window.location.href = this.value;
+            }
+        });
+    }
     // function googleTranslateElementInit() {
     //     new google.translate.TranslateElement(
     //         {pageLanguage: 'vi', includedLanguages: 'en,vi'},
     //         'google_translate_element'
     //     );
     // }
-function googleTranslateElementInit() {
-  new google.translate.TranslateElement(
-    {
-      pageLanguage: 'vi',
-      includedLanguages: 'en,vi',
-      autoDisplay: false
-    },
-    'google_translate_element'
-  );
-}
+    function googleTranslateElementInit() {
+        new google.translate.TranslateElement({
+                pageLanguage: 'vi',
+                includedLanguages: 'en,vi',
+                autoDisplay: false
+            },
+            'google_translate_element'
+        );
+    }
 
-function setLang(lang) {
-    const select = document.querySelector('.goog-te-combo');
-    if (!select) return;
+    function setLang(lang) {
+        const select = document.querySelector('.goog-te-combo');
+        if (!select) return;
 
-    select.value = lang;
-    select.dispatchEvent(new Event('change'));
-    
-}
+        select.value = lang;
+        select.dispatchEvent(new Event('change'));
 
-document.querySelectorAll('.lang-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-        const mobile = document.querySelector('.mobile');
-        if (mobile) {
-            mobile.style.paddingTop = '50px';
-        }
-        
+    }
+
+    $(document).on("click", ".box-language, .google_translate_element", function() {
+        let current = $(this).find('span').data('active-language');
+        let lang = current === 'vi' ? 'en' : 'vi';
+
+        window.location.href = '/change-language/' + lang;
     });
-});
 
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const mobile = document.querySelector('.mobile');
+            if (mobile) {
+                mobile.style.paddingTop = '50px';
+            }
 
+        });
+    });
 </script>
 <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>

@@ -78,22 +78,20 @@ class BlogService extends Service
 
     public function updateOrCreateImages($codeBlog, $arrFiles, $imageOldIds = [])
     {
-        if ($imageOldIds !== []) {
-            $oldImages = $this->blogImagesService
-                ->where('code_blog', $codeBlog)
-                ->whereNotIn('id', $imageOldIds)
-                ->where(function ($query) {
-                    $query->where('type', 'file')
-                        ->orWhereNull('type');
-                });
-            foreach ($oldImages->get() as $image) {
-                $old_path = $this->baseDis . $image['name_image'];
-                if (file_exists($old_path)) {
-                    @unlink($old_path);
-                }
+        $oldImages = $this->blogImagesService
+            ->where('code_blog', $codeBlog)
+            ->whereNotIn('id', $imageOldIds)
+            ->where(function ($query) {
+                $query->where('type', 'file')
+                    ->orWhereNull('type');
+            });
+        foreach ($oldImages->get() as $image) {
+            $old_path = $this->baseDis . $image['name_image'];
+            if (file_exists($old_path)) {
+                @unlink($old_path);
             }
-            $oldImages->delete();
         }
+        $oldImages->delete();
         if (empty($arrFiles)) {
             return;
         }

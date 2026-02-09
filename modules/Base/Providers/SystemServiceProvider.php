@@ -27,5 +27,6 @@ class SystemServiceProvider extends ServiceProvider
             session_destroy();
             session_start(); 
         }
+        $this->loadTranslationsFrom(resource_path('Lang'), 'client');
     }
 }

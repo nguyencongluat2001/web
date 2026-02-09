@@ -49,6 +49,16 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::post('register/send-otp/sent_OTP', [UserController::class, 'sent_OTP']);
 Route::get('/home', [App\Http\Controllers\ClientHomeController::class, 'index'])->name('home');
 Route::get('/', [ClientHomeController::class, 'index']);
+// routes/web.php
+Route::get('/change-language/{locale}', function ($locale) {
+    if (!in_array($locale, ['en', 'vi'])) {
+        abort(400);
+    }
+
+    session(['locale' => $locale]);
+
+    return redirect()->back();
+})->name('change.language');
 
 // Auth::routes();
 Route::prefix('register')->group(function () {

@@ -694,10 +694,10 @@
 .mobile-nav {
     display: none;
 }
-@media only screen 
-  and (min-width: 834px) 
+@media only screen
+  and (min-width: 834px)
   and (max-width: 1366px) {
-    
+
   /* .apad{
     width: 100% !important;
   } */
@@ -737,29 +737,14 @@
         position: absolute;
         top: 0;
         font-size: 11px;
+        left: 20px;
     }
 
-    .project-detail .slick-slider {
-        margin-top: 30px;
-    }
-
-    .project-content {
-        padding-left: 12px;
-        position: inherit;
-    }
-    .mobile-nav {
-        display: block !important;
-    }
-    .web-nav {
-        display: none;
-    }
-}
-
-@media (max-width: 820px) {
-    .back {
+    .box-language {
         position: absolute;
         top: 0;
         font-size: 11px;
+        right: 20px;
     }
 
     .project-detail .slick-slider {
@@ -780,12 +765,12 @@
 /* @media (min-width: 1025px) and (max-width: 1365px) {
 
     .container {
-        max-width: 1100px; 
+        max-width: 1100px;
     }
 
     .team-image {
-        height: 280px;   
-        aspect-ratio: unset; 
+        height: 280px;
+        aspect-ratio: unset;
     }
 
     .team-image img {

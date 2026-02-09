@@ -105,16 +105,17 @@
         margin-bottom: 12px;
         font-family: Arial, Helvetica, sans-serif;
     }
+
     /* -------- Mobile nhỏ -------- */
-    
+
     @media (max-width: 1920px and min-width: 1141px) {
 
         /* .nav-logo-mobile{
             width: 80%%;
         } */
-            .container {
-                max-width: 1024px;
-            }
+        .container {
+            max-width: 1024px;
+        }
     }
 </style>
 
@@ -129,11 +130,11 @@
             <div class="row d-flex align-items-center py-5">
                 <!-- section -->
                 <section class="about">
-                    <h2>ABOUT</h2>
+                    <h2>{{ __('client.about.title') }}</h2>
 
                     <div class="about-info">
                         <h3>ZICZAC Architecture</h3>
-                        <p>64 Ngo Quyen, Ha Dong District, Hanoi, Vietnam</p>
+                        <p>{{ __('client.about.about_info.address') }}</p>
                         <p>(+84) 982179361</p>
                         <p>
                             <a href="mailto:hoangducanh84@gmail.com">
@@ -143,35 +144,15 @@
                     </div>
 
                     <div class="about-content">
-                        <h4><strong>About us</strong></h4>
-                        <p>
-                            ZICZAC Architecture was founded by four Architects with the same passion
-                            and architectural ideas.
-                        </p>
-                        <p>
-                            ZICZAC - “The ZICZAC flying in the wind” - A symbol of softness, peace but
-                            full of intense energy, of the aspiration to freedom but still held on
-                            by the standards and standards.
-                        </p>
-                        <p>
-                            That balance is the spirit of ZICZAC Architecture on the goal towards a
-                            harmonizing people with nature in the continuous movement of life.
-                        </p>
+                        <h4><strong>{{ __('client.about.about_us.title') }}</strong></h4>
+                        <p>{!! __('client.about.about_us.segment_1') !!}</p>
+                        <p>{!! __('client.about.about_us.segment_2') !!}</p>
+                        <p>{!! __('client.about.about_us.segment_3') !!}</p>
 
-                        <h4><strong>Philosophy</strong></h4>
-                        <p>
-                            The ability to adapt and balance itself with the living environment is
-                            the decisive factor for the existence and development of everything in
-                            nature, including man.
-                        </p>
-                        <p>
-                            Design philosophy of ZICZAC Architecture:
-                            <em>“Balanced architecture to adapt to nature”.</em>
-                        </p>
-                        <p>
-                            ZICZAC Architecture pursues energy sustainability and green standards to
-                            solve the problems of Tropical Architecture.
-                        </p>
+                        <h4><strong>{{ __('client.about.philosophy.title') }}</strong></h4>
+                        <p>{!! __('client.about.philosophy.segment_1') !!}</p>
+                        <p>{!! __('client.about.philosophy.segment_2') !!}</p>
+                        <p>{!! __('client.about.philosophy.segment_3') !!}</p>
                     </div>
                 </section>
                 <!-- section -->

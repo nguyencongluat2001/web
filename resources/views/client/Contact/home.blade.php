@@ -44,14 +44,13 @@
                         <!-- Start Contact Form -->
                         <div class="col-lg-5 apad">
                             <div class="split-content">
-                                <p class="small-text">Please let us know how we can help via:</p>
+                                <p class="small-text">{{ __('client.contact.help_text') }}</p>
 
-                                <h3>ZICZAC Architecture</h3>
+                                <h3>{{ __('client.contact.company_name') }}</h3>
 
-                                <p>
-                                64 Ngo Quyen, Ha Dong District, Hanoi, Vietnam<br>
+                                <p>{{ __('client.contact.address') }}<br>
                                 (+84) 982 179 361<br>
-                                <a href="mailto:phamhoangson@gmail.com">phamhoangson@gmail.com</a>
+                                <a href="mailto:{{ __('client.contact.email') }}">{{ __('client.contact.email') }}</a>
                                 </p>
                             </div>
                         </div>
@@ -84,15 +83,7 @@ function myFunction() {
   }
 }
 </script>
-<script type="text/javascript" src="{{ URL::asset('dist/js/backend/client/JS_Contact.js') }}"></script>
 <script src='../assets/js/jquery.js'></script>
-<script type="text/javascript">
-    var baseUrl = "{{ url('') }}";
-    var JS_Contact = new JS_Contact(baseUrl, 'client', 'contact');
-    $(document).ready(function($) {
-        JS_Contact.loadIndex(baseUrl);
-    })
-</script>
 <!-- <script type="text/javascript" src="{{ URL::asset('dist\js\backend\pages\JS_System_Security.js') }}"></script>
 <script>
       var JS_System_Security = new JS_System_Security();
