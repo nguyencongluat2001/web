@@ -32,7 +32,7 @@
         <div class="banner-wrapper" >
             <!-- <div class="banner-vertical-center-index" style="background:#163048d4"> -->
                  <!-- Start Contact -->
-                <section class="container py-5" style="background: #ffffffc4;">
+                <section class="container py-5" style="background: #ffffffc4;width: 80%;">
                     <div class="row pb-4">
                         <div class="col-lg-7 apad">
                             <div class="contact row mb-4">
