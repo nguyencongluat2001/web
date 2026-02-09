@@ -63,6 +63,7 @@ class HomeController extends Controller
         $objResult = DB::table('users')->where('status',1)->where('role','CTV')->get()->take(6);
         $datas['datas']= $objResult;
         $datas['Specialty']= [];
+        // dd($datas['datas']);
         return view('client.home.about',$datas);
     }
 

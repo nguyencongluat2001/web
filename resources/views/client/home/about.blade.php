@@ -182,7 +182,7 @@
                         <div class="col-md-4 mb-4">
                             <div class="team-card">
                                 <div class="team-image">
-                                    <img src="{{url('/clients/img/home.jpg')}}" alt="{{ $data->name }}">
+                                    <img src="{{ url('/file-image/avatar/'.$data->avatar) }}" alt="{{ $data->name }}">
                                 </div>
 
                                 <div class="team-info text-center">
