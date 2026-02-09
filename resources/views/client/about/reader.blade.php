@@ -58,7 +58,7 @@
                                 @endforeach
                                 @endif
                             </div>
-                            <div class="carousel-inner project-detail__image pswp-gallery" id="gallery">
+                            <div class="carousel-inner project-detail__image pswp-gallery" id="gallery" style="padding: 20px;">
                                 @if(isset($datas->imageBlog) && !empty($datas->imageBlog))
                                 @php $i = 1; @endphp
                                 @foreach($datas->imageBlog as $value)
