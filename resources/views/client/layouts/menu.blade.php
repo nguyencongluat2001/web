@@ -557,7 +557,7 @@ $language = app()->getLocale();
         </center>
         <br>
     </div>
-    @if (!Request::is('contact') && !Request::is('about'))
+    @if (!Request::is('contact') && !Request::is('client/home/about'))
     <div class="filter-header">
         <span class="filter-text">FILTER</span>
         <button id="toggleFilter" class="toggle-btn">+</button>
