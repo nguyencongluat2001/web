@@ -557,7 +557,7 @@ $language = app()->getLocale();
         </center>
         <br>
     </div>
-    @if (!Request::is('contact'))
+    <!-- @if (!Request::is('contact'))
     <div class="filter-header">
         <span class="filter-text">FILTER</span>
         <button id="toggleFilter" class="toggle-btn">+</button>
@@ -571,7 +571,7 @@ $language = app()->getLocale();
             @endforeach
         </select>
     </div>
-    @endif
+    @endif -->
 </div>
 
 </div>
