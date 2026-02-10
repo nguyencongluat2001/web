@@ -22,6 +22,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-       Schema::dropIfExists('blogs_image');
+        Schema::table('blogs_image', function (Blueprint $table) {
+            //z
+        });
     }
 };
