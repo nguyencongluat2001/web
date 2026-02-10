@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('blogs_image', function (Blueprint $table) {
-            $table->string('name',1000)->nullable();
+            $table->string('name',2000)->nullable();
             $table->string('name_image',2000)->nullable();
         });
     }
@@ -23,7 +23,8 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('blogs_image', function (Blueprint $table) {
-            //z
+            $table->dropIfExists('name');
+            $table->dropIfExists('name_image');
         });
     }
 };
