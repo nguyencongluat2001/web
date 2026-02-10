@@ -434,6 +434,7 @@ $language = app()->getLocale();
         color: #000000ff;
         text-decoration: none;
         font-size: 22px;
+        font-family: sans-serif !important;
         /* font-family: 'Patrick Hand', cursive; */
         font-family: 'auto';
         border-radius: 6px;

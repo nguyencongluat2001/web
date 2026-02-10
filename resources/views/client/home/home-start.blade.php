@@ -64,6 +64,7 @@
         color: #fff;
         text-decoration: none;
         font-size: 30px;
+        font-family: sans-serif !important;
         /* font-family: 'Patrick Hand', cursive; */
         font-family: 'auto';
         border-radius: 6px;
