@@ -33,6 +33,11 @@
         border-radius: 6px;
         transition: all 0.3s ease;
     }
+
+    .pswp__img {
+        object-fit: contain;
+        height: 100vh !important;
+    }
 </style>
 
 <body>
