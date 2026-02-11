@@ -34,9 +34,18 @@
         transition: all 0.3s ease;
     }
 
-    .pswp__img {
-        object-fit: contain;
-        height: 100vh !important;
+    @media (min-width: 768px) {
+        .pswp__img {
+            object-fit: contain;
+            height: 100vh !important;
+        }
+    }
+
+    @media (max-width: 450px) {
+        .pswp__img {
+            object-fit: contain;
+            width: 100vw !important;
+        }
     }
 </style>
 
