@@ -51,6 +51,14 @@
                                     </select>
                                 </div>
                             </div>
+                             {{--  Số thứ tự --}}
+                             <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="example-text-input" class="form-control-label">Số thứ tự</label>
+                                    <input class="form-control" type="number" value="{{isset($data['order']) ? $data['order'] : ''}}" name="order" id="order"
+                                        placeholder="Nhập Số thứ tự" />
+                                </div>
+                            </div>
                             {{-- trạng thái --}}
                             <div class="col-md-6">
                                 <div class="row form-group" id="div_hinhthucgiai">

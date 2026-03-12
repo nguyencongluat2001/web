@@ -2,8 +2,9 @@
 <style>
     #form_chat {
         position: fixed;
-        right: 0;
+        right: 10px;
         bottom: 90px;
+        
     }
 
     #customerCare {
@@ -18,30 +19,30 @@
     }
 </style>
 <div>
-    <div id="form_chat">
+    <div id="form_chat" style="padding-right: 10px !important;">
         <input type="hidden" name="_token" id="_token" value="{{ csrf_token() }}">
         <section class="">
             <div id="chatMesss">
                     <a href="tel:02439935556">
                         <img width="" height="50px" style="background-color: none"
-                         src="../clients/img/phone.png" alt=""
+                         src="{{url('/clients/img/phone.png')}}" alt=""
                     ></a>
             </div>
             <br>
             <div id="chatZalo" class="chatZaloClose">
                 <label for="checkbox1">
                 <img width="" height="50px" style="background-color: none"
-                    src="../clients/img/zalo.png" alt="">
+                    src="{{url('/clients/img/zalo.png')}}" alt="">
                 </label>
             </div>
             <br>
             <div id="chatMesss" onclick="openMessage()">
                 <img width="" height="50px" style="background-color: none"
-                    src="../clients/img/icon_messager.jpg" alt="">
+                    src="{{url('/clients/img/icon_messager.jpg')}}" alt="">
                 </label>
             </div>
         </section>
-        <section class="avenue-messenger chatZalo transform" id="pDetails">
+        <!-- <section class="avenue-messenger chatZalo transform" id="pDetails">
             <div class="menu">
                 <div class="button" style="padding-right: 15px;padding-top: 5px;">
                     <div>
@@ -52,7 +53,7 @@
                 </div>
                 <div class="agent-face">
                     <div class="half">
-                        <img class="agent circle" src="../clients/img/support.jpg" alt="Jesse Tino">
+                        <img class="agent circle" src="{{url('/clients/img/support.jpg')}}" alt="Jesse Tino">
                     </div>
                 </div>
             </div>
@@ -78,7 +79,7 @@
                 <span id="message-infor"></span>
             </div>
 
-        </section>
+        </section> -->
     </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>

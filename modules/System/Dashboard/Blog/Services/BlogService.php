@@ -61,6 +61,7 @@ class BlogService extends Service
                 'rate'          => 5,
                 'year'          => $input['year'] ?? null,
                 'status'        => isset($input['status']) ? 1 : 0,
+                'order'         => $input['order'] ?? null,
             ];
             $params['created_at'] = empty($input['id']) ? now() : ($created_at ?? null);
             $params['updated_at'] = $updated_at ?? null;
@@ -194,6 +195,7 @@ class BlogService extends Service
                 'code_category' => isset($getBlogInfor->code_category) ? $getBlogInfor->code_category : null,
                 'year'   => isset($blogDetail->year) ? $blogDetail->year : null,
                 'status'   => $getBlogInfor->status,
+                'order'    => $getBlogInfor->order,
                 'title'    => isset($blogDetail->title) ? $blogDetail->title : null,
                 'title_en'    => isset($blogDetail->title_en) ? $blogDetail->title_en : null,
                 'decision' => isset($blogDetail->decision) ? $blogDetail->decision : null,
@@ -234,6 +236,7 @@ class BlogService extends Service
             'code_blog'     => $dataInfor->code_blog,
             'name_category' => isset($category->name_category) ? $category->name_category : null,
             'status'        => !empty($dataInfor->status == '1') ? 'Hoạt động' : 'Không hoạt động',
+            'order'         => $dataInfor->order,
             'title'         => isset($blogDetail->title) ? $blogDetail->title : null,
             'title_en'         => isset($blogDetail->title_en) ? $blogDetail->title_en : null,
             'year'         => isset($blogDetail->year) ? $blogDetail->year : null,

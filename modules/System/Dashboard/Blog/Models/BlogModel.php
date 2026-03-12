@@ -19,6 +19,7 @@ class BlogModel extends Model
         'user_id',
         'code_category',
         'status',
+        'order',
         'created_at',
         'updated_at'
     ];

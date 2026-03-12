@@ -186,6 +186,7 @@ JS_Blogs.prototype.store = function (oFormCreate) {
     formdata.append('decision', CKEDITOR.instances.decision.getData());
     formdata.append('decision_en', CKEDITOR.instances.decision_en.getData());
     formdata.append('status', status);
+    formdata.append('order', $("#order").val());
 
     myClass.selectedFiles.forEach(file => {
         formdata.append('files[]', file)

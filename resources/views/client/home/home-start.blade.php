@@ -24,8 +24,8 @@
     /* Logo đè lên ảnh */
     .hero-logo {
         position: absolute;
-        top: 10%;
-        right: 5%;
+        top: 1%;
+        right: 2%;
         color: #fff;
         text-align: right;
         text-decoration: none;
@@ -33,7 +33,7 @@
 
     /* Chữ ZICZAC */
     .hero-logo h1 {
-        font-size: 60px;
+        font-size: 70px;
         font-weight: 700;
         letter-spacing: 10px;
         margin: 0;
@@ -84,9 +84,9 @@
 
     <!-- MENU BÊN TRÁI -->
     <div class="hero-menu">
-        <a href="/client/home/about" style="font-family: sans-serif;">Giới thiệu</a>
-        <a href="/client/project/index" style="font-family: sans-serif;">Dự án</a>
-        <a href="/contact" style="font-family: sans-serif;">Liên hệ</a>
+        <a href="/client/home/about" style="font-family: sans-serif;">GIỚI THIỆU</a>
+        <a href="/client/project/index" style="font-family: sans-serif;">DỰ ÁN</a>
+        <a href="/contact" style="font-family: sans-serif;">LIÊN HỆ</a>
     </div>
 
     <!-- LOGO -->

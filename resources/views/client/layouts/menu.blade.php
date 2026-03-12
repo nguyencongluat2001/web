@@ -426,19 +426,27 @@ $language = app()->getLocale();
             width: 80%%;
         } */
     }
+    .hero-menu{
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        gap:14px;
+        flex-wrap:wrap;
+    }
 
-    .hero-menu a {
-        display: inline-block;
-        padding: 0px 12px 0px 12px;
-        background: rgba(255, 255, 255, 0.55);
-        color: #000000ff;
-        text-decoration: none;
-        font-size: 22px;
-        font-family: sans-serif !important;
-        /* font-family: 'Patrick Hand', cursive; */
-        font-family: 'auto';
-        border-radius: 6px;
-        transition: all 0.3s ease;
+    .hero-menu a{
+        padding:4px 6px;
+        text-decoration:none;
+        color:#000;
+        font-size:15px;
+        letter-spacing:1px;
+    }
+
+    .hero-menu select{
+        font-size:13px;
+        padding:4px 6px;
+        border:1px solid #000;
+        background:#fff;
     }
 
     .goog-te-banner-frame,
@@ -455,6 +463,22 @@ $language = app()->getLocale();
         position: absolute;
         right: 1rem;
         cursor: pointer;
+    }
+
+    @media (max-width:430px){
+
+    .hero-menu{
+        gap:10px;
+    }
+
+    .hero-menu a{
+        font-size:14px;
+    }
+
+    .hero-menu select{
+        width:120px;
+    }
+
     }
 </style>
 <nav id="main_nav" class="navbar-light bg-white web " style="top:0;padding-top:0px !important;padding-bottom: 0px !important;background:#ffffff!important;width: 100%;z-index: 1000;">
@@ -528,6 +552,7 @@ $language = app()->getLocale();
         </div>
     </div>
 </nav>
+    @include('client.layouts.chatZalo')
 
 <!-- MOBILE -->
 <div class="mobile">
@@ -548,16 +573,33 @@ $language = app()->getLocale();
     <div style="width:95%;height:1px;background: #545454;margin: 0 auto;margin:10px"></div>
 
     <div>
-        <center>
+        <!-- <center> -->
             <div class="hero-menu mobile-nav">
                 <a href="/client/home/about">{{ __('client.header.menu.about') }}</a>
                 <a href="/client/project/index">{{ __('client.header.menu.project') }}</a>
                 <a href="/contact">{{ __('client.header.menu.contact') }}</a>
+                @if (!Request::is('contact') && !Request::is('client/home/about'))
+                    <!-- <div class="filter-header">
+                        <span class="filter-text">FILTER</span>
+                        <button id="toggleFilter" class="toggle-btn">+</button>
+                    </div>
+
+                    <div id="filterBox" class="filter-box"> -->
+                        <select id="projectSelect">
+                            <option>{{ __('client.header.search.projects') }}</option>
+                            @foreach($project as $val)
+                            <option value="{{ route('project.reader', ['id' => $val->id]) }}">
+                                {{ $val->title}}
+                            </option>
+                            @endforeach
+                        </select>
+                    <!-- </div> -->
+                    @endif
             </div>
-        </center>
+        <!-- </center> -->
         <br>
     </div>
-    @if (!Request::is('contact') && !Request::is('client/home/about'))
+    <!-- @if (!Request::is('contact') && !Request::is('client/home/about'))
     <div class="filter-header">
         <span class="filter-text">FILTER</span>
         <button id="toggleFilter" class="toggle-btn">+</button>
@@ -571,7 +613,7 @@ $language = app()->getLocale();
             @endforeach
         </select>
     </div>
-    @endif
+    @endif -->
 </div>
 
 </div>
