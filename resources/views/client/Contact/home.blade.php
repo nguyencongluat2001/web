@@ -45,7 +45,7 @@
                         <!-- Start Contact Form -->
                         <div class="col-lg-5 apad">
                             <div class="split-content">
-                               <div>{!! $datas->decision && $locale === 'en' ? $datas->decision_en : $datas->decision ?? '' !!}</div>
+                               <div>{!! $datas?->decision && $locale === 'en' ? $datas?->decision_en : $datas?->decision ?? '' !!}</div>
 
                                 <!-- <p class="small-text">{{ __('client.contact.help_text') }}</p>
 
