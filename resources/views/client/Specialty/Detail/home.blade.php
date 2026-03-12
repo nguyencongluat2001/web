@@ -74,7 +74,7 @@
         @foreach ($hospital as $key => $data)
             <div class="col-md-6 mb-4">
                 <a  href="{{url('/schedule')}}/{{$datas['code']}},{{$data['code']}}" class=" card border-0 shadow-lg overflow-hidden">
-                    <img class="recent-work-img card-img" style="height: 250px;object-fit: cover;" src="{{url('/file-image-client/avatar-abount/')}}/{{ !empty($data['avatar'])?$data['avatar']:'' }}" alt="Card image">
+                    <img class="recent-work-img card-img" style="height: 250px;object-fit: cover;" src="{{url('/file-image-client/avatar-hospital/')}}/{{ !empty($data['avatar'])?$data['avatar']:'' }}" alt="Card image">
                     <div class="recent-work-vertical card-img-overlay d-flex align-items-end">
                         <div style="background:#f5f6ffe3;border-radius: 5px" class="recent-work-content text-start mb-3 ml-3 text-dark">
                            <span style="padding:10px">
@@ -110,7 +110,7 @@
                 <div class="team-member col-md-12 d-lg-flex mt-3 pb-3" style="background: white;">
                     <div class="col-md-3">
                         <center>
-                        <img style="width:200px;height:200px;object-fit: cover;" class="team-member-img img-fluid rounded-circle p-4" src="{{url('/file-image-client/avatar-abount/')}}/{{ !empty($data['image'])?$data['image']:'' }}" alt="Card image">
+                        <img style="width:200px;height:200px;object-fit: cover;" class="team-member-img img-fluid rounded-circle p-4" src="{{url('/file-image-client/avatar-hospital/')}}/{{ !empty($data['image'])?$data['image']:'' }}" alt="Card image">
                         </center>
                     </div>
                     <div class="col-md-8">

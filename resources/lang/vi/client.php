@@ -3,9 +3,9 @@
 return [
     'header' => [
         'menu' => [
-            'about' => 'Giới thiệu',
-            'project' => 'Dự án',
-            'contact' => 'Liên hệ',
+            'about' => 'GIỚI THIỆU',
+            'project' => 'DỰ ÁN',
+            'contact' => 'LIÊN HỆ',
         ],
         'search' => [
             'search' => 'Tìm kiếm',

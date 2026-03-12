@@ -44,8 +44,8 @@
     ])
     <!-- Start Banner Hero -->
     <section class="w-100 section-project">
-        <div class="row d-flex align-items-center py-5">
-            <div class="col-lg-12 text-start mt-5 px-4">
+        <div class="row d-flex align-items-center">
+            <div class="col-lg-12 text-start px-4">
                 @if(isset($blogs) && count($blogs) > 0)
                 <div class="row">
                     @php

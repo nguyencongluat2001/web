@@ -19,7 +19,7 @@
     }
 </style>
 <div>
-    <div id="form_chat" style="padding-right: 10px !important;">
+    <div id="form_chat" style="padding-right: 10px !important;z-index: 999 !important;">
         <input type="hidden" name="_token" id="_token" value="{{ csrf_token() }}">
         <section class="">
             <div id="chatMesss">
@@ -29,17 +29,29 @@
                     ></a>
             </div>
             <br>
-            <div id="chatZalo" class="chatZaloClose">
+            <!-- <div id="chatZalo" class="chatZaloClose">
                 <label for="checkbox1">
                 <img width="" height="50px" style="background-color: none"
                     src="{{url('/clients/img/zalo.png')}}" alt="">
                 </label>
+            </div> -->
+            <div id="chatZalo">
+                <a href="https://zalo.me/0912345678" target="_blank">
+                    <img height="50px"
+                        src="{{url('/clients/img/zalo.png')}}" alt="">
+                </a>
             </div>
             <br>
             <div id="chatMesss" onclick="openMessage()">
                 <img width="" height="50px" style="background-color: none"
                     src="{{url('/clients/img/icon_messager.jpg')}}" alt="">
                 </label>
+            </div>
+            <br>
+            <div id="chatTiktok" onclick="openTiktok()">
+                <img height="50px"
+                    src="{{url('/clients/img/tiktok.jpg')}}" 
+                    alt="tiktok">
             </div>
         </section>
         <!-- <section class="avenue-messenger chatZalo transform" id="pDetails">
@@ -86,12 +98,16 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pusher/8.2.0/pusher.min.js"></script>
 <script>
      function openMessage(){
-        var url = 'https://www.facebook.com/profile.php?id=100094072423686&mibextid=LQQJ4d';
+        var url = 'https://www.facebook.com/share/17QNHEKUpU/?mibextid=wwXIfr';
         window.open(url, '_blank');
     }
      function openPhone(){
         var phone = 'tel:02439935556';
         window.open(phone,'_blank');
+    }
+    function openTiktok(){
+        var url = 'https://www.tiktok.com/@your_account';
+        window.open(url, '_blank');
     }
     function showMessage(phone){
         $.ajax({

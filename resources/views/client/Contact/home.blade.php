@@ -23,6 +23,7 @@
     }
 </style>
 <title>Liên hệ</title>
+@php $locale = app()->getLocale(); @endphp
 @extends('client.layouts.index')
 @section('body-client')
 <link rel="stylesheet" href="../clients/css/style.css">
@@ -37,21 +38,23 @@
                         <div class="col-lg-7 apad">
                             <div class="contact row mb-4">
                                 <div class="team-image">
-                                    <img src="{{url('/clients/img/home.jpg')}}" alt="">
+                                    <img src="{{url('/file-image-client/avatar-abount/')}}/{{$datas->avatar}}" alt="{{ $datas->avatar }}">
                                 </div>
                             </div>
                         </div>
                         <!-- Start Contact Form -->
                         <div class="col-lg-5 apad">
                             <div class="split-content">
-                                <p class="small-text">{{ __('client.contact.help_text') }}</p>
+                               <div>{!! $datas->decision && $locale === 'en' ? $datas->decision_en : $datas->decision ?? '' !!}</div>
+
+                                <!-- <p class="small-text">{{ __('client.contact.help_text') }}</p>
 
                                 <h3>{{ __('client.contact.company_name') }}</h3>
 
                                 <p>{{ __('client.contact.address') }}<br>
                                 (+84) 982 179 361<br>
                                 <a href="mailto:{{ __('client.contact.email') }}">{{ __('client.contact.email') }}</a>
-                                </p>
+                                </p> -->
                             </div>
                         </div>
                         <!-- End Contact Form -->

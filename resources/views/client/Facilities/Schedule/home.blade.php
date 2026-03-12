@@ -90,7 +90,7 @@
                                                 <a class="col-sm-6 col-lg-12 text-decoration-none text-light">
                                                     <div class="d-lg-flex gx-5">
                                                         <div class="col-lg-3">
-                                                            <img class="card-img-top" src="{{url('/file-image-client/avatar-abount/')}}/{{ !empty($datas->avatar)?$datas->avatar:'' }}" style="object-fit: cover;height:150px" alt="...">
+                                                            <img class="card-img-top" src="{{url('/file-image-client/avatar-hospital/')}}/{{ !empty($datas->avatar)?$datas->avatar:'' }}" style="object-fit: cover;height:150px" alt="...">
                                                         </div>
                                                         <div class="col-lg-1 "></div>
                                                         <div class="col-lg-8 ">
@@ -138,7 +138,7 @@
                                                     <div class="team-member col-md-12 d-lg-flex mt-3 pb-3" style="background: white;">
                                                         <div class="col-md-3">
                                                             <center>
-                                                            <img style="width:200px;height:200px;object-fit: cover;" class="team-member-img img-fluid rounded-circle p-4" src="{{url('/file-image-client/avatar-abount/')}}/{{ !empty($physician['image'])?$physician['image']:'' }}" alt="Card image">
+                                                            <img style="width:200px;height:200px;object-fit: cover;" class="team-member-img img-fluid rounded-circle p-4" src="{{url('/file-image-client/avatar-hospital/')}}/{{ !empty($physician['image'])?$physician['image']:'' }}" alt="Card image">
                                                             </center>
                                                         </div>
                                                         <div class="col-md-8" style="padding: 15px;">

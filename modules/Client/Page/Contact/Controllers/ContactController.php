@@ -45,8 +45,8 @@ class ContactController extends Controller
      */
     public function index(Request $request)
     {
-        $objResult = $this->hospitalService->where('current_status','1')->get();
-        $data['datas'] = $objResult;
+        $contact = DB::table('abount')->select('*')->where('code','CONTACT')->first();
+        $data['datas'] = $contact;
         return view('client.Contact.home',$data)->render();
     }
      /**

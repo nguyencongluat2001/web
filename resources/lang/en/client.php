@@ -3,9 +3,9 @@
 return [
     'header' => [
         'menu' => [
-            'about' => 'About',
-            'project' => 'Project',
-            'contact' => 'Contact',
+            'about' => 'ABOUNT',
+            'project' => 'PROJECT',
+            'contact' => 'CONTACT',
         ],
         'search' => [
             'title' => 'Search',

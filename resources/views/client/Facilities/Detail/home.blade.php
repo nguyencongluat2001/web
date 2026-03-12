@@ -29,7 +29,7 @@
                                                     <div  class="col-sm-6 col-lg-12 text-decoration-none">
                                                         <div class="pb-3 d-lg-flex gx-5">
                                                             <div class="col-lg-4 ">
-                                                                <img class="card-img-top" src="{{url('/file-image-client/avatar-abount/')}}/{{ !empty($datas->avatar)?$datas->avatar:'' }}" style="height: 150px;object-fit: cover;" alt="...">
+                                                                <img class="card-img-top" src="{{url('/file-image-client/avatar-hospital/')}}/{{ !empty($datas->avatar)?$datas->avatar:'' }}" style="height: 150px;object-fit: cover;" alt="...">
                                                             </div>
                                                             <div class="col-lg-1 "></div>
                                                             <div class="col-lg-7 ">
@@ -66,7 +66,7 @@
                 <div class="team-member col-md-12 d-lg-flex mt-3 pb-3" style="background: white;">
                     <div class="col-md-3">
                         <center>
-                        <img style="width:200px;height:200px;object-fit: cover;" class="team-member-img img-fluid rounded-circle p-4" src="{{url('/file-image-client/avatar-abount/')}}/{{ !empty($data['image'])?$data['image']:'' }}" alt="Card image">
+                        <img style="width:200px;height:200px;object-fit: cover;" class="team-member-img img-fluid rounded-circle p-4" src="{{url('/file-image-client/avatar-hospital/')}}/{{ !empty($data['image'])?$data['image']:'' }}" alt="Card image">
                         </center>
                     </div>
                     <div class="col-md-8">

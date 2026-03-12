@@ -23,7 +23,7 @@
                                                     <div  class="col-sm-6 col-lg-12 text-decoration-none">
                                                         <div class="pb-3 d-lg-flex gx-5">
                                                             <div class="col-lg-4 ">
-                                                                <img class="card-img-top" src="{{url('/file-image-client/avatar-abount/')}}/{{ !empty($datas->avatar)?$datas->avatar:'' }}" style="height: 150px;object-fit: cover;" alt="...">
+                                                                <img class="card-img-top" src="{{url('/file-image-client/avatar-hospital/')}}/{{ !empty($datas->avatar)?$datas->avatar:'' }}" style="height: 150px;object-fit: cover;" alt="...">
                                                             </div>
                                                             <div class="col-lg-1 "></div>
                                                             <div class="col-lg-7 ">

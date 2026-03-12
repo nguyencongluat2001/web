@@ -230,6 +230,7 @@ JS_Hospital.prototype.edit = function (oForm) {
         NclLib.alerMesage(nameMessage,icon,color);
         return false;
     }
+    console.log(data)
     $.ajax({
         url: url,
         type: "POST",

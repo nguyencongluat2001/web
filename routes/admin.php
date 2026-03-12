@@ -8,7 +8,7 @@ use Modules\System\Dashboard\Dashboards\Controllers\DashboardController;
 use Modules\System\Dashboard\Blog\Controllers\BlogController;
 use Modules\System\Dashboard\Abount\Controllers\AbountController;
 use Modules\System\Dashboard\Category\Controllers\CateController;
-use Modules\System\Dashboard\Category\Controllers\CategoryController;
+use Modules\System\Dashboardabount\Category\Controllers\CategoryController;
 use Modules\System\Dashboard\CustomerCare\Controllers\CustomerCareController;
 use Modules\System\Dashboard\DataFinancial\Controllers\DataFinancialController;
 use Modules\System\Dashboard\Effective\Controllers\EffectiveController;

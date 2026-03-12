@@ -66,6 +66,7 @@ class HospitalService extends Service
     }
     public function edit($arrInput){
         $data = $this->AbountService->where('id',$arrInput['chk_item_id'])->first()->toArray();
+    //    dd( $data);
         return $data;
     }
       // /**

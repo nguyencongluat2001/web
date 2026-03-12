@@ -1,11 +1,11 @@
 <form id="frmAdd"  role="form" action="" method="POST" enctype="multipart/form-data">
     @csrf
     <input type="hidden" name="_token" value="{{ csrf_token() }}">
-    <input type="hidden" name="id" id="id" value="{{!empty($data['detail']['id'])?$data['detail']['id']:''}}">
+    <input type="hidden" name="id" id="id" value="{{!empty($data['id'])?$data['id']:''}}">
     <div class="modal-dialog modal-lg">
         <div class="modal-content card">
             <div class="modal-header">
-                <h5 class="modal-title">Thêm abount, contact</h5>
+                <h5 class="modal-title">Thêm About, Contact</h5>
                 <button type="button" class="btn btn-sm" data-bs-dismiss="modal">
                     X
                 </button>
@@ -19,7 +19,7 @@
                             id="code">
                             <option value=''>-- Chọn loại --</option>
                             <option @if(isset($data['code']) && $data['code'] == 'ABOUNT') selected @endif 
-                             value='ABOUNT'>Abount
+                             value='ABOUNT'>About
                             </option>
                             <option @if(isset($data['code']) && $data['code'] == 'CONTACT') selected @endif 
                              value='CONTACT'>Contact</option>
@@ -44,8 +44,8 @@
                     <label for="upload_image" class="label-upload">Chọn ảnh</label>
                     <input type="file" hidden name="upload_image" id="upload_image" onchange="readURL(this)">
                     <br>
-                    @if(!empty($data['image']))
-                    <img id="show_img" src="{{url('/file-image-client/blogs/')}}/{{$data['image'][0]->name_image}}" alt="Image" style="width:150px">
+                    @if(!empty($data['avatar']))
+                    <img id="show_img" src="{{url('/file-image-client/avatar-abount/')}}/{{$data['avatar']}}" alt="Image" style="width:150px">
                     @else
                     <img id="show_img" hidden alt="Image" style="width:150px">
                     @endif

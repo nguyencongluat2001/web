@@ -120,6 +120,7 @@
 </style>
 
 <body>
+@php $locale = app()->getLocale(); @endphp
     @include('client.layouts.menu', [
     'menuActive' => 'about',
     'showFilter' => false
@@ -127,24 +128,13 @@
     <!-- Start Banner Hero -->
     <section class="w-100">
         <div class="container">
-            <div class="row d-flex align-items-center py-5">
+            <div class="row d-flex align-items-center">
                 <!-- section -->
                 <section class="about">
                     <h2>{{ __('client.about.title') }}</h2>
-
-                    <div class="about-info">
-                        <h3>ZICZAC Architecture</h3>
-                        <p>{{ __('client.about.about_info.address') }}</p>
-                        <p>(+84) 982179361</p>
-                        <p>
-                            <a href="mailto:hoangducanh84@gmail.com">
-                                hoangducanh84@gmail.com
-                            </a>
-                        </p>
-                    </div>
-
                     <div class="about-content">
-                        <h4><strong>{{ __('client.about.about_us.title') }}</strong></h4>
+                       <div>{!! $abouts->decision && $locale === 'en' ? $abouts->decision_en : $abouts->decision ?? '' !!}</div>
+                        <!-- <h4><strong>{{ __('client.about.about_us.title') }}</strong></h4>
                         <p>{!! __('client.about.about_us.segment_1') !!}</p>
                         <p>{!! __('client.about.about_us.segment_2') !!}</p>
                         <p>{!! __('client.about.about_us.segment_3') !!}</p>
@@ -152,7 +142,7 @@
                         <h4><strong>{{ __('client.about.philosophy.title') }}</strong></h4>
                         <p>{!! __('client.about.philosophy.segment_1') !!}</p>
                         <p>{!! __('client.about.philosophy.segment_2') !!}</p>
-                        <p>{!! __('client.about.philosophy.segment_3') !!}</p>
+                        <p>{!! __('client.about.philosophy.segment_3') !!}</p> -->
                     </div>
                 </section>
                 <!-- section -->
@@ -167,11 +157,10 @@
                                 </div>
 
                                 <div class="team-info text-center">
-                                    <h4 class="team-name">{{ $data->name }}</h4>
-                                    <div class="team-role">CO-FOUNDER</div>
-                                    <div class="team-role">LEAD ARCHITECT</div>
+                                    <h4 class="team-name">{{ $data->name && $locale === 'en' ? $data->name_en : $data->name ?? '' }}</h4>
+                                    <div class="team-role">{{ $data->position }}</div>
                                 </div>
-                                <div>{!! $data->decision !!}</div>
+                                <div>{!! $data->decision && $locale === 'en' ? $data->decision_en : $data->decision ?? '' !!}</div>
                             </div>
                         </div>
                         @endforeach

@@ -28,7 +28,7 @@ return [
         'href' => '/system/blog/index',
     ],
      'hospital' => [
-        'name' => 'Quản trị abount, contact',
+        'name' => 'Quản trị about, contact',
         'icon' => 'far fa-calendar-alt',
         'a'    => 'nav-link link-hospital',
         'href' => '/system/hospital/index',
