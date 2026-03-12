@@ -38,7 +38,7 @@
                         <div class="col-lg-7 apad">
                             <div class="contact row mb-4">
                                 <div class="team-image">
-                                <img src="{{ url('/file-image-client/avatar-abount/') . '/' . ($datas?->avatar ?? 'default.png') }}"alt="avatar">
+                                <img style="width: 100%;aspect-ratio: 16 / 9;object-fit: cover;" src="{{ url('/file-image-client/avatar-abount/') . '/' . ($datas?->avatar ?? 'default.png') }}"alt="avatar">
                                 </div>
                             </div>
                         </div>
