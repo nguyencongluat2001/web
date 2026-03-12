@@ -2,8 +2,8 @@
 <style>
     #form_chat {
         position: fixed;
-        right: 10px;
-        bottom: 90px;
+        right: 5px;
+        bottom: 30px;
         
     }
 
