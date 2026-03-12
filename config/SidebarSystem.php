@@ -32,7 +32,7 @@ return [
         'icon' => 'far fa-calendar-alt',
         'a'    => 'nav-link link-hospital',
         'href' => '/system/hospital/index',
-    ],
+    ], 
     //  'hospital' => [
     //     'name' => 'Bệnh viện, phòng khám',
     //     'icon' => 'fas fa-university',
