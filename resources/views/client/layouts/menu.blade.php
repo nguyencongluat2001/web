@@ -579,23 +579,28 @@ $language = app()->getLocale();
                 <a href="/client/project/index">{{ __('client.header.menu.project') }}</a>
                 <a href="/contact">{{ __('client.header.menu.contact') }}</a>
                 @if (!Request::is('contact') && !Request::is('client/home/about'))
-                    <!-- <div class="filter-header">
-                        <span class="filter-text">FILTER</span>
-                        <button id="toggleFilter" class="toggle-btn">+</button>
-                    </div>
+                <div class="dropdown">
+                            <a class="dropdown-toggle" href="#" role="button" id="dropdownTypology" data-bs-toggle="dropdown" aria-expanded="false">
+                                {{ __('client.header.search.typology')}}
+                            </a>
 
-                    <div id="filterBox" class="filter-box"> -->
-                        <select id="projectSelect">
-                            <option>{{ __('client.header.search.projects') }}</option>
-                            @foreach($project as $val)
-                            <option value="{{ route('project.reader', ['id' => $val->id]) }}">
-                                {{ $val->title}}
-                            </option>
-                            @endforeach
-                        </select>
-                    <!-- </div> -->
-                    @endif
+                            <ul class="dropdown-menu typology" aria-labelledby="dropdownTypology">
+                                @if(isset($typology) && !empty($typology))
+                                <li>
+                                    <button class="dropdown-item" onclick="location.reload()" style="padding-left: 3%;">
+                                        Tất cả
+                                    </button>
+                                </li>
+                                @foreach($typology as $val)
+                                <li data-code_category="{{ $val->code_category ?? '' }}"><a class="dropdown-item" title="{{ $language === 'en' ? $val->name_category_en : $val->name_category }}" href="#{{ $val->code_category }}">{{ $language === 'en' ? $val->name_category_en : $val->name_category }}</a></li>
+                                @endforeach
+                                @endif
+                            </ul>
+                        </div>
+                    
+                @endif
             </div>
+            
         <!-- </center> -->
         <br>
     </div>

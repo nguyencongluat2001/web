@@ -10,9 +10,9 @@ return [
         'search' => [
             'title' => 'Search',
             'filter' => 'Filter',
-            'typology' => 'Typology',
-            'projects' => 'Projects',
-            'year' => 'Year',
+            'typology' => 'TYPOLOGY',
+            'projects' => 'PROJECT',
+            'year' => 'YEAR',
         ],
     ],
 

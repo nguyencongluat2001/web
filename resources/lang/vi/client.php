@@ -10,9 +10,9 @@ return [
         'search' => [
             'search' => 'Tìm kiếm',
             'filter' => 'Filter',
-            'typology' => 'Phân loại',
-            'projects' => 'Dự án',
-            'year' => 'Năm',
+            'typology' => 'PHÂN LOẠI',
+            'projects' => 'DỰ ÁN',
+            'year' => 'NĂM',
         ],
     ],
 
