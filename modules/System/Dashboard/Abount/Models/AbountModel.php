@@ -1,21 +1,25 @@
 <?php
 
-namespace Modules\System\Dashboard\Specialty\Models;
+namespace Modules\System\Dashboard\Abount\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class SpecialtyModel extends Model
+class AbountModel extends Model
 {
     protected $table = 'abount';
     public $incrementing = false;
     public $timestamps = false;
+    public $sortable = ['created_at'];
 
     protected $fillable = [
         'id',
         'code',
         'decision',
+        'decision_en',
         'avatar',
-        'order',
+        'status',
+        'created_at',
+        'updated_at'
     ];
 
     public function filter($query, $param, $value)
@@ -25,14 +29,14 @@ class SpecialtyModel extends Model
                 $this->value = $value;
                 // dd($this->value);
                 // return $query->where(function ($query) {
-                //     $query->where('name_specialty', 'like', '%' . $this->value . '%');
+                //     $query->whereRelation('detailAbount', 'title', $this->value)
+                //         ->orWhere('code_Abount', 'like', '%' . $this->value . '%');
                 // });
-                // return $query;
-            // case 'cate':
-            //     $query->where('category_Specialty', $value);
+            // case 'category':
+            //     $query->where('code_category', $value);
             //     return $query;
             default:
-                return $query;
+                return $query->where('status', 1);
         }
     }
 }

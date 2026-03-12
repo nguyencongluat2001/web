@@ -18,17 +18,11 @@
                                 <div class="col-md-5">
                                     <div class="breadcrumb-input-right">
                                         <button class="btn btn-success shadow-sm" id="btn_add" type="button"data-toggle="tooltip"
-                                            data-original-title="Thêm bệnh viện"><i class="fas fa-plus"></i></button>
+                                            data-original-title="Thêm"><i class="fas fa-plus"></i></button>
                                         <button class="btn btn-warning shadow-sm" id="btn_edit" type="button"data-toggle="tooltip"
-                                            data-original-title="Sửa bệnh viện"><i class="far fa-edit"></i></button>
-                                        <button class="btn btn-info shadow-sm" id="btn_money_package" type="button"data-toggle="tooltip"
-                                            data-original-title="Cấu hình giá khám"><i class="fas fa-file-invoice-dollar"></i></button>
+                                            data-original-title="Sửa"><i class="far fa-edit"></i></button>
                                         <button class="btn btn-danger shadow-sm" id="btn_delete" type="button"data-toggle="tooltip"
-                                            data-original-title="Xóa bệnh viện"><i class="fas fa-trash-alt"></i></button>
-                                        <button class="btn btn-info shadow-sm" id="btn_stage" type="button"data-toggle="tooltip"
-                                            data-original-title="Cấu hình bác sĩ">
-                                            <i class="fas fa-tools"></i>
-                                        </button>
+                                            data-original-title="Xóa"><i class="fas fa-trash-alt"></i></button>
                                     </div>
                                 </div>
                                

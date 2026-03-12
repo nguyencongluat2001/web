@@ -27,6 +27,18 @@ return [
         'a'    => 'nav-link link-blog',
         'href' => '/system/blog/index',
     ],
+     'hospital' => [
+        'name' => 'Quản trị hospital, contact',
+        'icon' => 'far fa-calendar-alt',
+        'a'    => 'nav-link link-hospital',
+        'href' => '/system/hospital/index',
+    ],
+     'hospital' => [
+        'name' => 'Bệnh viện, phòng khám',
+        'icon' => 'fas fa-university',
+        'a'    => 'nav-link link-hospital',
+        'href' => '/system/hospital/index',
+    ],
     'sql' => [
         'name' => 'Quản trị DATA',
         'icon' => 'fas fa-hand-holding-usd',

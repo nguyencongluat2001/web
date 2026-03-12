@@ -7,6 +7,7 @@ use Modules\Base\Service;
 use Modules\System\Dashboard\Hospital\Repositories\HospitalRepository;
 use Modules\System\Dashboard\Hospital\Services\MoneySpecialtyService;
 use Modules\System\Dashboard\Hospital\Services\SystemClinicsService;
+use Modules\System\Dashboard\Abount\Services\AbountService;
 use Str;
 use Modules\Base\Library;
 
@@ -17,12 +18,14 @@ class HospitalService extends Service
     public function __construct(
         SystemClinicsService $SystemClinicsService,
         MoneySpecialtyService $moneySpecialtyService,
-        HospitalRepository $HospitalRepository
+        HospitalRepository $HospitalRepository,
+        AbountService $AbountService
         )
     {
         $this->SystemClinicsService  = $SystemClinicsService;
         $this->moneySpecialtyService = $moneySpecialtyService;
         $this->HospitalRepository = $HospitalRepository;
+        $this->AbountService = $AbountService;
         $this->baseDis = public_path("file-image-client/avatar-hospital") . "/";
         parent::__construct();
     }
@@ -37,36 +40,32 @@ class HospitalService extends Service
         $random = Library::_get_randon_number();
         $image_old = null;
         if($input['id'] != ''){
-            $hospital = $this->HospitalRepository->where('id',$input['id'])->first();
+            $hospital = $this->AbountService->where('id',$input['id'])->first();
             $image_old = !empty($hospital->avatar)?$hospital->avatar:'';
         }
         if(isset($file) && $file != []){
             $arrFile = $this->uploadFile($input,$file,$image_old);
         }
         $arrData = [
-            'name_hospital'=>$input['name_hospital'],
             'code'=>$input['code'],
             'decision'=>$input['decision'],
-            'type'=>$input['type'],
-            'address'=>$input['address'],
-            'code_specialty' => $input['code_specialty'],
-            'current_status'=> !empty($input['is_checkbox_status'])?$input['is_checkbox_status']:0,
+            'decision_en'=>$input['decision_en'],
+            'status' => !empty($input['status'])?$input['status']:1,
         ];
         if(isset($arrFile[0])){
             $arrData['avatar'] = $arrFile[0];
         }
         if($input['id'] != ''){
-            $create = $this->HospitalRepository->where('id',$input['id'])->update($arrData);
+            $create = $this->AbountService->where('id',$input['id'])->update($arrData);
         }else{
             $arrData['id'] = (string)Str::uuid();
-            $create = $this->HospitalRepository->create($arrData);
+            $create = $this->AbountService->create($arrData);
         }
         
         return $create;
     }
     public function edit($arrInput){
-        $data = $this->repository->where('id',$arrInput['chk_item_id'])->first()->toArray();
-        $data['arrSpecialty'] = explode(',',$data['code_specialty']);
+        $data = $this->AbountService->where('id',$arrInput['chk_item_id'])->first()->toArray();
         return $data;
     }
       // /**
@@ -89,75 +88,5 @@ class HospitalService extends Service
                 $arrImage[] =  $sFullFileName;
             }
             return $arrImage;
-    }
-    //Cấu hình giá tiền
-    public function createMoneyPackage($input){
-        $hospital = $this->HospitalRepository->where('id',$input['id'])->first();
-        foreach($input as $key=>$value){
-            if($key != '_token' &&  $key != 'id'){
-                if($value == '' && $value == null){
-                    return array('success' => false, 'message' => 'Giá khám các khoa không được để trống!');
-                }
-                
-            }
-        }
-        $delete = $this->moneySpecialtyService->where('code_hospital',$hospital->code)->delete();
-        foreach($input as $key=>$value){
-            if($key != '_token' &&  $key != 'id'){
-                if(isset($hospital)){
-                    $arrData = [
-                        'code_hospital' => $hospital->code,
-                        'code_specialty' => $key,
-                        'money' => $value,
-                        'created_at' => date("Y/m/d H:i:s"),
-                        'updated_at' => date("Y/m/d H:i:s")
-                    ];
-                    $arrData['id'] = (string)Str::uuid();
-                    $create = $this->moneySpecialtyService->create($arrData);
-                }else{
-                    return array('success' => false, 'message' => 'Không tồn tại bệnh viện!');
-                }
-            }
-        }
-        return array('success' => true, 'message' => 'Cập nhật thành công!');
-    }
-    //
-    public function storeStage($input,$file){
-        //lấy mã bài viết
-        $random = Library::_get_randon_number();
-        $image_old = null;
-        if($input['id'] != ''){
-            $hospital = $this->SystemClinicsService->where('id',$input['id'])->first();
-            $image_old = !empty($hospital->avatar)?$hospital->avatar:'';
-        }
-        if(isset($file) && $file != []){
-            $arrFile = $this->uploadFile($input,$file,$image_old);
-        }
-        $arrData = [
-            'code_hospital'=> $input['code_hospital'], // mã bệnh viện phòng khám
-            'code'=> $input['code'],
-            'name'=> $input['name'],
-            'time'=> $input['time'],
-            'specialtys'=> $input['specialtys'], //chuyên khoa
-            'money'=> $input['money'], //phí khám
-            'profile'=> $input['profile'], //tiểu sử
-            'order'=> $input['order'],
-        ];
-        if(isset($arrFile[0])){
-            $arrData['image'] = $arrFile[0];
-        }
-        if($input['id'] != ''){
-            $create = $this->SystemClinicsService->where('id',$input['id'])->update($arrData);
-        }else{
-            $arrData['id'] = (string)Str::uuid();
-            $create = $this->SystemClinicsService->create($arrData);
-        }
-        
-        return $create;
-    }
-    // cập nhật bác sĩ phòng khám
-    public function editStage($arrInput){
-        $data = $this->SystemClinicsService->where('id',$arrInput['chk_item_id'])->first();
-        return $data;
     }
 }

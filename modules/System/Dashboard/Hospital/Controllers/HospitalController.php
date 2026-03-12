@@ -10,6 +10,7 @@ use Modules\System\Dashboard\Category\Services\CategoryService;
 use Modules\System\Dashboard\Specialty\Services\SpecialtyService;
 use Modules\System\Dashboard\Hospital\Services\MoneySpecialtyService;
 use Modules\System\Dashboard\Hospital\Services\SystemClinicsService;
+use Modules\System\Dashboard\Abount\Services\AbountService;
 use DB;
 
 /**
@@ -25,13 +26,15 @@ class HospitalController extends Controller
         MoneySpecialtyService $moneySpecialtyService,
         SpecialtyService $SpecialtyService,
         HospitalService $HospitalService,
-        CategoryService $categoryService
+        CategoryService $categoryService,
+        AbountService $AbountService
     ){
         $this->SystemClinicsService  = $SystemClinicsService;
         $this->moneySpecialtyService = $moneySpecialtyService;
         $this->SpecialtyService = $SpecialtyService;
         $this->HospitalService = $HospitalService;
         $this->categoryService = $categoryService;
+        $this->AbountService = $AbountService;
     }
 
     /**
@@ -55,15 +58,11 @@ class HospitalController extends Controller
     public function loadList(Request $request)
     { 
         $arrInput = $request->input();
-        // if($arrInput['cate'] == null || $arrInput['cate'] == ''){
-        //     unset($arrInput['cate']);
-        // }
         $data = array();
         $param = $arrInput;
-        $objResult = $this->HospitalService->filter($param);
+        $objResult = $this->AbountService->filter($param);
         $data['datas'] = $objResult;
         $data['param'] = $param;
-        // $data['pagination'] = $data['datas']->links('pagination.default');
         return view("dashboard.hospital.loadlist", $data)->render();
     }
      /**
@@ -76,15 +75,15 @@ class HospitalController extends Controller
     public function createForm(Request $request)
     {
         $input = $request->all();
-        $Specialty = $this->SpecialtyService->where('current_status',1)->get();
-        foreach($Specialty as $value){
-            $arrSpecialty[] = [
-                'code' =>  $value['code'],
-                'name' =>  $value['name_specialty'],
-                'status' =>  0
-            ];
-        }
-        $data['arrSpecialty_list'] = $arrSpecialty;
+        // $Specialty = $this->SpecialtyService->where('current_status',1)->get();
+        // foreach($Specialty as $value){
+        //     $arrSpecialty[] = [
+        //         'code' =>  $value['code'],
+        //         'name' =>  $value['name_specialty'],
+        //         'status' =>  0
+        //     ];
+        // }
+        $data['arrSpecialty_list'] = [];
         return view('dashboard.hospital.edit',compact('data'));
     }
     /**
@@ -111,24 +110,7 @@ class HospitalController extends Controller
     public function edit(Request $request)
     {
         $input = $request->all();
-        $data['detail'] = $this->HospitalService->edit($input);
-        $Specialty = $this->SpecialtyService->where('current_status',1)->get();
-        foreach($Specialty as $value){
-            if(in_array($value['code'],$data['detail']['arrSpecialty'])){
-                $arrSpecialty[] = [
-                    'code' =>  $value['code'],
-                    'name' =>  $value['name_specialty'],
-                    'status' =>  1
-                ];
-            }else{
-                $arrSpecialty[] = [
-                    'code' =>  $value['code'],
-                    'name' =>  $value['name_specialty'],
-                    'status' =>  0
-                ];
-            }
-        }
-        $data['arrSpecialty_list'] = $arrSpecialty;
+        $data = $this->HospitalService->edit($input);
         return view('dashboard.hospital.edit',compact('data'));
     }
 
@@ -146,7 +128,7 @@ class HospitalController extends Controller
         $ids = explode(",", $listids);
         foreach ($ids as $id) {
             if ($id) {
-                $this->HospitalService->where('id',$id)->delete();
+                $this->AbountService->where('id',$id)->delete();
             }
         }
         return array('success' => true, 'message' => 'Xóa thành công');
@@ -251,15 +233,16 @@ class HospitalController extends Controller
     public function createFormStage(Request $request)
     {
         $input = $request->all();
-        $Specialty = $this->SpecialtyService->where('current_status',1)->get();
-        foreach($Specialty as $value){
-            $arrSpecialty[] = [
-                'code' =>  $value['code'],
-                'name' =>  $value['name_specialty'],
-                'status' =>  0
-            ];
-        }
-        $data['arrSpecialty_list'] = $arrSpecialty;
+        // $Specialty = $this->SpecialtyService->where('current_status',1)->get();
+        // foreach($Specialty as $value){
+        //     $arrSpecialty[] = [
+        //         'code' =>  $value['code'],
+        //         'name' =>  $value['name_specialty'],
+        //         'status' =>  0
+        //     ];
+        // }
+        // $data['arrSpecialty_list'] = $arrSpecialty;
+        $data = [];
         return view('dashboard.hospital.SystemClinics.edit',compact('data'));
     }
      /**

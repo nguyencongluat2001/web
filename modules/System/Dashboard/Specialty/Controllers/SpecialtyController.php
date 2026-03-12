@@ -122,6 +122,7 @@ class SpecialtyController extends Controller
     public function createForm(Request $request)
     {
         $input = $request->all();
+        dd(1);
         return view('dashboard.specialty.edit');
     }
     /**

@@ -43,7 +43,7 @@ class SpecialtyService extends Service
             'code'=>$input['code'],
             'decision'=>$input['decision'],
             'order'=>$input['order'],
-            'current_status'=> !empty($input['is_checkbox_status'])?$input['is_checkbox_status']:0,
+            // 'current_status'=> !empty($input['is_checkbox_status'])?$input['is_checkbox_status']:0,
         ];
         if(isset($arrFile[0])){
             $arrData['avatar'] = $arrFile[0];

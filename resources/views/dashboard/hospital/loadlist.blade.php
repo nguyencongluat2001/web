@@ -34,9 +34,7 @@ use Modules\System\Recordtype\Helpers\WorkflowHelper;
                 <td align="center"><input type="checkbox" name="chk_all_item_id"
                         onclick="checkbox_all_item_id(document.forms[0].chk_item_id);"></td>
                 <td align="center"><b>STT</b></td>
-                <td align="center"><b>Mã bệnh viện</b></td>
-                <td align="center"><b>Tên bệnh viện</b></td>
-                <td align="center"><b>Địa chỉ</b></td>
+                <td align="center"><b>Mã</b></td>
                 <td align="center"><b>Avatar</b></td>
             </tr>
         </thead>
@@ -49,12 +47,6 @@ use Modules\System\Recordtype\Helpers\WorkflowHelper;
                     <td style="padding-top: 20px;vertical-align: middle;"align="center">{{ $key + 1 }}
                     <td style="padding-top: 20px;white-space: inherit;vertical-align: middle;" ondblclick="" onclick="{select_row(this);}">
                        {{$data->code}}
-                    </td>
-                    <td style="padding-top: 20px;white-space: inherit;vertical-align: middle;" ondblclick="" onclick="{select_row(this);}">
-                       {{$data->name_hospital}}
-                    </td>
-                    <td style="padding-top: 20px;white-space: inherit;vertical-align: middle;" ondblclick="" onclick="{select_row(this);}">
-                       {{$data->address}}
                     </td>
                     <td style="width:20%;vertical-align: middle;" align="center"><img  src="{{url('/file-image-client/avatar-hospital/')}}/{{ !empty($data->avatar)?$data->avatar:'' }}" alt="Image" style="height: 150px;width: 150px;object-fit: cover;"></td>
                 </tr>

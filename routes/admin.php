@@ -6,6 +6,7 @@ use Modules\Client\Page\Chat\Controllers\ChatAdminController;
 use Modules\System\Dashboard\ApprovePayment\Controllers\ApprovePaymentController;
 use Modules\System\Dashboard\Dashboards\Controllers\DashboardController;
 use Modules\System\Dashboard\Blog\Controllers\BlogController;
+use Modules\System\Dashboard\Abount\Controllers\AbountController;
 use Modules\System\Dashboard\Category\Controllers\CateController;
 use Modules\System\Dashboard\Category\Controllers\CategoryController;
 use Modules\System\Dashboard\CustomerCare\Controllers\CustomerCareController;
@@ -75,6 +76,16 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
                 Route::post('/create', [BlogController::class,'create']);
                 Route::post('/delete', [BlogController::class,'delete']);
                 Route::get('/infor',[BlogController::class,'infor']);
+
+            });
+            Route::prefix('/abount')->group(function () {
+                Route::get('/index', [AbountController::class, 'index']);
+                Route::get('/loadList',[AbountController::class,'loadList']);
+                Route::post('/edit', [AbountController::class,'edit']);
+                Route::post('/createForm', [AbountController::class,'createForm']);
+                Route::post('/create', [AbountController::class,'create']);
+                Route::post('/delete', [AbountController::class,'delete']);
+                Route::get('/infor',[AbountController::class,'infor']);
 
             });
             //

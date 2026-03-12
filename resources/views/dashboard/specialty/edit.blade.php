@@ -59,13 +59,8 @@
                 <div class="row form-group" id="div_hinhthucgiai">
                     <span class="col-md-3 control-label">Trạng thái</span>
                     <div class="col-md-8">
-                        @if(!empty($data['detail']['current_status']))
-                        <input type="checkbox" value="1" name="is_checkbox_status" id="c" {{($data['detail']['current_status'] == '1') ? 'checked' : ''}}/>
-                        <span for="is_checkbox_status">Hoạt động</span> <br>
-                        @else
                         <input type="checkbox" value="1" name="is_checkbox_status" id="is_checkbox_status"/>
                         <span for="is_checkbox_status">Hoạt động</span> <br>
-                        @endif
                     </div>
                 </div>
                 <div class="modal-footer">
