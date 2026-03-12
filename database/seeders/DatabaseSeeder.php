@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
         $item = [
             'id'=> (string)\Str::uuid(),
             'name' => 'Nguyễn Công Luật',
+            'name_en' => 'NGUYEN CONG LUAT',
             'email' => 'nguyencongluat092001@gmail.com',
             'password'=> Hash::make('123'),
             'role'=> 'ADMIN'

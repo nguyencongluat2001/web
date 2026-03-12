@@ -48,7 +48,7 @@ use Modules\System\Recordtype\Helpers\WorkflowHelper;
                     <td style="padding-top: 20px;white-space: inherit;vertical-align: middle;" ondblclick="" onclick="{select_row(this);}">
                        {{$data->code}}
                     </td>
-                    <td style="width:20%;vertical-align: middle;" align="center"><img  src="{{url('/file-image-client/avatar-hospital/')}}/{{ !empty($data->avatar)?$data->avatar:'' }}" alt="Image" style="height: 150px;width: 150px;object-fit: cover;"></td>
+                    <td style="width:20%;vertical-align: middle;" align="center"><img  src="{{url('/file-image-client/avatar-abount/')}}/{{ !empty($data->avatar)?$data->avatar:'' }}" alt="Image" style="height: 150px;width: 150px;object-fit: cover;"></td>
                 </tr>
             @endforeach
         </tbody>

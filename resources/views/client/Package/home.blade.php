@@ -69,7 +69,7 @@
                                                         <tr>
                                                             <td style="background: #ffffffeb;width:30%;vertical-align: middle;" align="center">
                                                                 <a class="pb-5" style="text-decoration: none" href="{{url('/facilities')}}/{{$data->code}}">
-                                                                    <img  src="{{url('/file-image-client/avatar-hospital/')}}/{{ !empty($data->avatar)?$data->avatar:'' }}" alt="Image" style="height: 150px;width: 250px;object-fit: cover;">
+                                                                    <img  src="{{url('/file-image-client/avatar-abount/')}}/{{ !empty($data->avatar)?$data->avatar:'' }}" alt="Image" style="height: 150px;width: 250px;object-fit: cover;">
                                                                     <span style="padding-left:10px;font-size: 30px;font-family: -webkit-body;color: #1d3952;">{{ $key + 1 }}.&nbsp;{{$data->name_hospital}}</span>
                                                                     <span style="padding-left:10px;font-size: 18px;font-family: -webkit-body;color: #ff0000;">({{$data->address}})</span><br>
                                                                 </a>

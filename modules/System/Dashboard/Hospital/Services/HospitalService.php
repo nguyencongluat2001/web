@@ -26,7 +26,7 @@ class HospitalService extends Service
         $this->moneySpecialtyService = $moneySpecialtyService;
         $this->HospitalRepository = $HospitalRepository;
         $this->AbountService = $AbountService;
-        $this->baseDis = public_path("file-image-client/avatar-hospital") . "/";
+        $this->baseDis = public_path("file-image-client/avatar-abount") . "/";
         parent::__construct();
     }
 
