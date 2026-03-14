@@ -90,7 +90,7 @@
                             </div>
                             <!-- <div class="inner-content"> -->
                                 <div>
-                                <h4 class="product-title" style="color: #ffffff !important;position: absolute;bottom: 0;font-size: 14px;background: #0707074d;right: 0;text-align: right;border-radius: 20px;padding: 5px;">{{ $blog->detailBlog?->title }}</h4>
+                                <h4 class="product-title" style="color: #ffffff !important;position: absolute;bottom: 0;font-size: 14px;background: #0707077a;right: 0;text-align: right;border-radius: 20px;padding: 5px;">{{ $blog->detailBlog?->title }}</h4>
 
                                 </div>
                             <!-- </div> -->
