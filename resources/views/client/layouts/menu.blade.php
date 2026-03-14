@@ -552,8 +552,9 @@ $language = app()->getLocale();
         </div>
     </div>
 </nav>
+@if (!Request::is('client/project/index'))
     @include('client.layouts.chatZalo')
-
+@endif
 <!-- MOBILE -->
 <div class="mobile">
     <div class="d-flex">

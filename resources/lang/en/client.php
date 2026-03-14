@@ -3,7 +3,7 @@
 return [
     'header' => [
         'menu' => [
-            'about' => 'ABOUNT',
+            'about' => 'ABOUT',
             'project' => 'PROJECT',
             'contact' => 'CONTACT',
         ],

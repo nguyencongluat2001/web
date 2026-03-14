@@ -43,9 +43,9 @@
     'showFilter' => true
     ])
     <!-- Start Banner Hero -->
-    <section class="w-100 section-project">
-        <div class="row d-flex align-items-center">
-            <div class="col-lg-12 text-start px-4">
+    <section class="w-100 section-project web-product">
+        <div class="row d-flex align-items-center py-5">
+            <div class="col-lg-12 text-start mt-5 px-4">
                 @if(isset($blogs) && count($blogs) > 0)
                 <div class="row">
                     @php
@@ -60,6 +60,34 @@
                             <div class="inner-content">
                                 <h4 class="product-title">{{ $blog->detailBlog?->title }}</h4>
                             </div>
+                        </a>
+                    </div>
+                    @endforeach
+                </div>
+                @else
+                <p>Không có dữ liệu nào.</p>
+                @endif
+            </div>
+        </div>
+    </section>
+
+    <section class="w-100 section-project mobile-product">
+        <div class="row d-flex align-items-center">
+            <div class="col-lg-12 text-start px-4">
+                @if(isset($blogs) && count($blogs) > 0)
+                <div class="row">
+                    @php
+                    $basePath = url("file-image-client/blogs") . "/";
+                    @endphp
+                    @foreach($blogs as $blog)
+                    <div class="product-item mb-4" data-code_category="{{ $blog->code_category ?? '' }}"  data-year="{{ $blog->detailBlog?->year ?? '' }}">
+                        <a href="{{ route('project.reader', ['id' => $blog->id]) }}" class="image-link" style="position: relative;">
+                            <div class="inner-image">
+                                <img src="{{ $basePath . ($blog->fileBlog[0]?->name_image ?? '') }}" alt="{{ $blog->detailBlog?->title }}" class="img-fluid mb-3">
+                            </div>
+                            <!-- <div class="inner-content"> -->
+                                <h4 class="product-title" style="color: #ffffff !important;position: absolute;bottom: 0;font-size: 15px;background: #0707074d;">{{ $blog->detailBlog?->title }}</h4>
+                            <!-- </div> -->
                         </a>
                     </div>
                     @endforeach

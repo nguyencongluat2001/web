@@ -123,3 +123,27 @@ https://templatemo.com/tm-561-purple-buzz
         font-size: 15px;
     }
 }
+
+.web-product {
+    display: block;
+}
+.mobile-product {
+    display: none;
+}
+@media (max-width: 909px) {
+    .web-product {
+        display: none !important;
+    }
+    .mobile-product {
+        display: block !important;
+    }
+
+    .product-item .inner-image {
+        position: static;
+        margin-bottom: 0;
+        overflow: hidden;
+        display: block;
+        width: 100%;
+        aspect-ratio: 1 / 1;
+    }
+}
