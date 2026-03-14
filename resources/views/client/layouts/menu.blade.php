@@ -571,7 +571,7 @@ $language = app()->getLocale();
             <a href="/client/home/about" style="font-size: 12px;text-decoration: none;color:#6f6969">Giới thiệu</a>
         </div> -->
     </div>
-    <div style="width:95%;height:1px;background: #545454;margin: 0 auto;margin:10px"></div>
+    <div style="width:95%;height:1px;background: #545454;margin: 0 auto;margin:10px;"></div>
 
     <div>
         <!-- <center> -->
