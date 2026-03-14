@@ -164,7 +164,7 @@
                             </div>
                             @endif
                             <div class="project-detail_body">
-                                <h2 class="project-detail__title">{{ $datas->detailBlog?->title && $locale === 'en' ? $datas->detailBlog?->title_en : $datas->detailBlog?->title ?? '' }}</h2>
+                                <h2 class="project-detail__title pt-2">{{ $datas->detailBlog?->title && $locale === 'en' ? $datas->detailBlog?->title_en : $datas->detailBlog?->title ?? '' }}</h2>
                                 <div class="project-detail__content">
                                     <p class="date_status text-uppercase">{{ $datas?->detailBlog?->year ?? '' }} / {{ __('client.reader.in_progress') }}</p>
                                     <div class="text">
