@@ -35,6 +35,9 @@
         letter-spacing: 1px;
         transition: opacity 3000ms linear 0s;
     }
+    html, body {
+        overflow-x: hidden;
+    }
 </style>
 
 <body>
