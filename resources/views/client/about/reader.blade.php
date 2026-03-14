@@ -151,7 +151,10 @@
                     <div class="col-lg-3 project-content apad">
                         <div class="reader-header d-flex justify-content-between">
                             <div class="back">
-                                <button onclick="window.history.back()"><i class="fas fa-chevron-left fs-13 pe-2"></i> Back</button>
+                            <button onclick="window.location.href='{{ url('/client/project/index') }}'">
+                                <i class="fas fa-chevron-left fs-13 pe-2"></i> Back
+                            </button>
+                                <!-- <button onclick="window.history.back()"><i class="fas fa-chevron-left fs-13 pe-2"></i> Back</button> -->
                             </div>
                             <div class="box-language" style="cursor: pointer">
                                 <span data-active-language="{{ $locale ?? '' }}">{{ $locale ? $locale === 'en' ? 'vi' : 'en' : '' }}</span>
