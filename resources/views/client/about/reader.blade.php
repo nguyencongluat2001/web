@@ -47,6 +47,45 @@
             width: 100vw !important;
         }
     }
+    /* css phân trang */
+    .carousel-indicators{
+    position:absolute;
+    bottom:10px;
+    left:0;
+    right:0;
+    display:flex;
+    justify-content:center;
+    gap:6px;
+    margin:0;
+    padding:0;
+}
+
+.project-detail__thumbs-number{
+    width:28px;
+    height:28px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:rgba(0,0,0,0.55);
+    color:#fff;
+    font-size:12px;
+    border-radius:4px;
+    cursor:pointer;
+    transition:all .25s ease;
+}
+
+/* hover */
+.project-detail__thumbs-number:hover{
+    background:#ffffff;
+    color:#000;
+}
+
+/* active */
+.project-detail__thumbs-number.active{
+    background:#ffffff;
+    color:#000;
+    font-weight:600;
+}
 </style>
 
 <body>
