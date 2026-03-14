@@ -483,7 +483,7 @@ $language = app()->getLocale();
 </style>
 <nav id="main_nav" class="navbar-light bg-white web " style="top:0;padding-top:0px !important;padding-bottom: 0px !important;background:#ffffff!important;width: 100%;z-index: 1000;">
     <div class="box-language">
-        <span data-active-language="{{ $language ?? '' }}">{{ $language ? $language === 'vi' ? 'en' : 'vi' : '' }}</span>
+        <span data-active-language="{{ $language ?? '' }}">{{ $language ? $language === 'en' ? 'vi' : 'en' : '' }}</span>
     </div>
     <div class="header-main header-project cts-project header-layout-project">
         <!-- PC -->
