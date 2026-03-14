@@ -32,7 +32,7 @@ class AboutController extends Controller
     public function index(Request $request)
     {
         $data['categories'] = [];
-        $data['blogs'] = $this->blogService->select('*')->where('status', 1)->with(['detailBlog', 'fileBlog'])->get();
+        $data['blogs'] = $this->blogService->select('*')->where('status', 1)->with(['detailBlog', 'fileBlog'])->orderBy('order','ASC')->get();
         return view('client.about.home', $data);
     }
     /**

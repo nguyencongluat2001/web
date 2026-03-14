@@ -26,7 +26,7 @@ use Modules\System\Dashboard\Blog\Models\BlogImagesModel;
                 <tr>
                     <td style="width:5% ;vertical-align: middle;" align="center"><input type="checkbox" name="chk_item_id"
                             value="{{ $data['id'] }}"></td>
-                    <td style="width:5% ;vertical-align: middle;" align="center">{{ $key + 1 }}</td>
+                    <td style="width:5% ;vertical-align: middle;" align="center">{{ $data['order']}}</td>
                     <td style="width:5% ;vertical-align: middle;" align="center">{{ $data['created_at']}}</td>
                     <td style="width:20% ;white-space: inherit;vertical-align: middle;">{{ $data->detailBlog->title }}</td>
                     <td style="width:20%;vertical-align: middle;" align="center"><img  src="{{url('/file-image-client/blogs/')}}/{{ !empty($data->fileBlog[0]->name_image)?$data->fileBlog[0]->name_image:'' }}" alt="Image" style="height: 150px;width: 150px;object-fit: cover;"></td>

@@ -483,7 +483,7 @@ $language = app()->getLocale();
 </style>
 <nav id="main_nav" class="navbar-light bg-white web " style="top:0;padding-top:0px !important;padding-bottom: 0px !important;background:#ffffff!important;width: 100%;z-index: 1000;">
     <div class="box-language">
-        <span data-active-language="{{ $language ?? '' }}">{{ $language ? $language === 'en' ? 'vi' : 'en' : '' }}</span>
+        <span data-active-language="{{ $language ?? '' }}">{{ $language ? $language === 'vi' ? 'en' : 'vi' : '' }}</span>
     </div>
     <div class="header-main header-project cts-project header-layout-project">
         <!-- PC -->
@@ -571,7 +571,7 @@ $language = app()->getLocale();
             <a href="/client/home/about" style="font-size: 12px;text-decoration: none;color:#6f6969">Giới thiệu</a>
         </div> -->
     </div>
-    <div style="width:95%;height:1px;background: #545454;margin: 0 auto;margin:10px;"></div>
+    <div style="width:95%;height:1px;background: #545454;margin: 0 auto;margin:10px"></div>
 
     <div>
         <!-- <center> -->
