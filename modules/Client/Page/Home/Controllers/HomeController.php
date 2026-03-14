@@ -74,7 +74,7 @@ class HomeController extends Controller
         ->take(6)
         ->get();
         $datas['datas']= $objResult;
-        $datas['abouts'] = DB::table('abount')->select('*')->where('code','ABOUNT')->first();
+        $datas['abouts'] = DB::table('abount')->select('*')->where('code','ABOUT')->first();
         // dd($datas['datas']);
         return view('client.home.about',$datas);
     }

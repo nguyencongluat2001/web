@@ -18,8 +18,8 @@
                         <select class="form-control input-sm chzn-select" name="code"
                             id="code">
                             <option value=''>-- Chọn loại --</option>
-                            <option @if(isset($data['code']) && $data['code'] == 'ABOUNT') selected @endif 
-                             value='ABOUNT'>About
+                            <option @if(isset($data['code']) && $data['code'] == 'ABOUT') selected @endif 
+                             value='ABOUT'>About
                             </option>
                             <option @if(isset($data['code']) && $data['code'] == 'CONTACT') selected @endif 
                              value='CONTACT'>Contact</option>
