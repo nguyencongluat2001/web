@@ -86,7 +86,7 @@
                                 <img src="{{ $basePath . ($blog->fileBlog[0]?->name_image ?? '') }}" alt="{{ $blog->detailBlog?->title }}" class="img-fluid mb-3">
                             </div>
                             <!-- <div class="inner-content"> -->
-                                <h4 class="product-title" style="color: #ffffff !important;position: absolute;bottom: 0;font-size: 15px;background: #0707074d;right: 0;text-align: right;">{{ $blog->detailBlog?->title }}</h4>
+                                <h4 class="product-title" style="color: #ffffff !important;position: absolute;bottom: 0;font-size: 15px;background: #0707074d;right: 0;text-align: right;border-radius: 20px;">{{ $blog->detailBlog?->title }}</h4>
                             <!-- </div> -->
                         </a>
                     </div>
