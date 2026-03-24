@@ -36,7 +36,7 @@
                 </label>
             </div> -->
             <div id="chatZalo">
-                <a href="https://zalo.me/0912345678" target="_blank">
+                <a href="https://zalo.me/0984161892" target="_blank">
                     <img height="50px"
                         src="{{url('/clients/img/zalo.png')}}" alt="">
                 </a>
@@ -106,7 +106,7 @@
         window.open(phone,'_blank');
     }
     function openTiktok(){
-        var url = 'https://www.tiktok.com/@your_account';
+        var url = 'https://www.tiktok.com/@kientruc_ziczac?_r=1&_t=ZS-94ww2DCu8Ky';
         window.open(url, '_blank');
     }
     function showMessage(phone){
